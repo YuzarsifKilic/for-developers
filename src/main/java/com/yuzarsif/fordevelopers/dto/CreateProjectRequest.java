@@ -16,8 +16,7 @@ public class CreateProjectRequest {
 
     private String projectName;
     private String projectDescription;
-    private Date startYear;
-    private Date endYear;
-    private String projectUrl;
+    private String startDate;
+    private String endDate;
     private String employeeId;
 }

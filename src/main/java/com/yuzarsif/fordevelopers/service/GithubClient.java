@@ -1,11 +1,15 @@
 package com.yuzarsif.fordevelopers.service;
 
 import com.yuzarsif.fordevelopers.config.GithubProperties;
+import com.yuzarsif.fordevelopers.exception.GithubValidateException;
+import com.yuzarsif.fordevelopers.exception.GlobalExceptionHandler;
 import com.yuzarsif.fordevelopers.service.models.GithubAccessTokenRequest;
 import com.yuzarsif.fordevelopers.service.models.GithubAccessTokenResponse;
 import com.yuzarsif.fordevelopers.service.models.GithubProjectResponse;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Objects;
@@ -37,14 +41,35 @@ public class GithubClient {
         return Objects.requireNonNull(exchange.getBody()).getAccessToken();
     }
 
-    public boolean validateProjectUrl(String githubUsername, String project) {
-        String projectUrl = String.format("%s/%s/%s", githubProperties.getHtmlUrl(), githubUsername, project);
+    public void validateUser(String githubUsername) {
+        String userUrl = String.format("%s/users/%s", githubProperties.getApiUrl(), githubUsername);
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", "token " + githubProperties.getToken());
         HttpEntity request = new HttpEntity(httpHeaders);
 
-        ResponseEntity<GithubProjectResponse> response = restTemplate.exchange(projectUrl, HttpMethod.GET, request, GithubProjectResponse.class);
-        return response.getStatusCode().isSameCodeAs(HttpStatus.OK);
+        try {
+            ResponseEntity<String> response = restTemplate.exchange(userUrl, HttpMethod.GET, request, String.class);
+        } catch (HttpClientErrorException e) {
+            throw new GithubValidateException(String.format("User %s not found", githubUsername));
+        }
+    }
+
+    public void validateProjectUrl(String githubUsername, String project) {
+        String projectUrl = getProjectUrl(githubUsername, project);
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Authorization", "token " + githubProperties.getToken());
+        HttpEntity request = new HttpEntity(httpHeaders);
+
+        try {
+            ResponseEntity<String> response = restTemplate.exchange(projectUrl, HttpMethod.GET, request, String.class);
+        } catch (HttpClientErrorException e) {
+            throw new GithubValidateException(String.format("Project %s not found", project));
+        }
+    }
+
+    public String getProjectUrl(String githubUsername, String project) {
+        return String.format("%s/%s/%s", githubProperties.getHtmlUrl(), githubUsername, project);
     }
 }

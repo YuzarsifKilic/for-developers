@@ -22,4 +22,6 @@ public class Employee extends BaseUser {
     private Set<Project> projects;
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE})
     private Set<SocialMedia> socialMedia;
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE})
+    private Set<Education> educations;
 }

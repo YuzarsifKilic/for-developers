@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
+import { RegistrationComponent } from './auth/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { EmployeeDetailsComponent } from './employee-details/employee-details.co
     SignInComponent,
     GithubCallbackComponent,
     EmployeeDetailsComponent,
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,

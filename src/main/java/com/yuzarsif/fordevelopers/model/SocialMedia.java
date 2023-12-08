@@ -19,6 +19,6 @@ public class SocialMedia {
     private SocialMedias socialMedia;
     private String url;
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "employee_id")
     private Employee employee;
 }

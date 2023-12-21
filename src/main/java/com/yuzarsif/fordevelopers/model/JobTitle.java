@@ -1,2 +1,17 @@
-package com.yuzarsif.fordevelopers.model;public enum JobTitle {
+package com.yuzarsif.fordevelopers.model;
+
+public enum JobTitle {
+
+    BACKEND_DEVELOPER,
+    FRONTEND_DEVELOPER,
+    FULL_STACK_DEVELOPER,
+    MOBILE_APP_DEVELOPER,
+    ANDROID_DEVELOPER,
+    IOS_DEVELOPER,
+    DATA_SCIENCE,
+    DATA_ANALYST,
+    DATA_ENGINEER,
+    DATA_ARCHITECT,
+    DATA_SCIENTIST
+
 }

@@ -12,6 +12,7 @@ import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
+import { DemoComponent } from './demo/demo.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { RegistrationComponent } from './auth/registration/registration.componen
     GithubCallbackComponent,
     EmployeeDetailsComponent,
     RegistrationComponent,
+    DemoComponent,
   ],
   imports: [
     BrowserModule,

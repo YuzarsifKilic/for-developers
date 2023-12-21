@@ -1,2 +1,11 @@
-package com.yuzarsif.fordevelopers.repository;public interface ExperienceRepository {
+package com.yuzarsif.fordevelopers.repository;
+
+import com.yuzarsif.fordevelopers.model.Experience;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface ExperienceRepository extends JpaRepository<Experience, Long> {
+
+    List<Experience> findAllByEmployeeId(String employeeId);
 }

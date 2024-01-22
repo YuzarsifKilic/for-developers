@@ -21,11 +21,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .message(e.getMessage())
                 .timestamp(LocalDateTime.now())
                 .build();
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(HttpClientErrorException.class)
-    public ResponseEntity<ErrorResponse> handleHttpClientErrorExceptionException(HttpClientErrorException e, HttpServletResponse response) {
+    @ExceptionHandler(AdvertisementNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleAdvertisementNotFoundException(AdvertisementNotFoundException e, HttpServletResponse response) {
         ErrorResponse errorResponse = ErrorResponse
                 .builder()
                 .message(e.getMessage())
@@ -34,5 +34,73 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(CompanyNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleCompanyNotFoundException(CompanyNotFoundException e, HttpServletResponse response) {
+        ErrorResponse errorResponse = ErrorResponse
+                .builder()
+                .message(e.getMessage())
+                .timestamp(LocalDateTime.now())
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
 
+    @ExceptionHandler(CourseNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleCourseNotFoundException(CourseNotFoundException e, HttpServletResponse response) {
+        ErrorResponse errorResponse = ErrorResponse
+                .builder()
+                .message(e.getMessage())
+                .timestamp(LocalDateTime.now())
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(DateConvertException.class)
+    public ResponseEntity<ErrorResponse> handleDateConvertException(DateConvertException e, HttpServletResponse response) {
+        ErrorResponse errorResponse = ErrorResponse
+                .builder()
+                .message(e.getMessage())
+                .timestamp(LocalDateTime.now())
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(EmployeeNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleEmployeeNotFoundException(EmployeeNotFoundException e, HttpServletResponse response) {
+        ErrorResponse errorResponse = ErrorResponse
+                .builder()
+                .message(e.getMessage())
+                .timestamp(LocalDateTime.now())
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(UniversityNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleUniversityNotFoundException(UniversityNotFoundException e, HttpServletResponse response) {
+        ErrorResponse errorResponse = ErrorResponse
+                .builder()
+                .message(e.getMessage())
+                .timestamp(LocalDateTime.now())
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ProjectNotExistsException.class)
+    public ResponseEntity<ErrorResponse> handleProjectNotExistsException(ProjectNotExistsException e, HttpServletResponse response) {
+        ErrorResponse errorResponse = ErrorResponse
+                .builder()
+                .message(e.getMessage())
+                .timestamp(LocalDateTime.now())
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(HttpClientErrorException.class)
+    public ResponseEntity<ErrorResponse> handleHttpClientErrorException(HttpClientErrorException e, HttpServletResponse response) {
+        ErrorResponse errorResponse = ErrorResponse
+                .builder()
+                .message(e.getMessage())
+                .timestamp(LocalDateTime.now())
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
 }

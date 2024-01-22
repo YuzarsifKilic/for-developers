@@ -101,6 +101,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .message(e.getMessage())
                 .timestamp(LocalDateTime.now())
                 .build();
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 }

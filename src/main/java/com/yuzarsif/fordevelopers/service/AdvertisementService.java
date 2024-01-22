@@ -1,11 +1,17 @@
 package com.yuzarsif.fordevelopers.service;
 
+import com.yuzarsif.fordevelopers.dto.AdvertisementDto;
 import com.yuzarsif.fordevelopers.dto.request.CreateAdvertisementRequest;
 import com.yuzarsif.fordevelopers.exception.AdvertisementNotFoundException;
+import com.yuzarsif.fordevelopers.mapper.AdvertisementDtoMapper;
 import com.yuzarsif.fordevelopers.model.Advertisement;
 import com.yuzarsif.fordevelopers.model.Company;
 import com.yuzarsif.fordevelopers.repository.AdvertisementRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AdvertisementService {
@@ -31,6 +37,23 @@ public class AdvertisementService {
                 .build();
 
         repository.save(advertisement);
+    }
+
+    public List<AdvertisementDto> findAllByCompanyId(String companyId) {
+        return repository.findAllByCompany_Id(companyId)
+                .stream()
+                .map(AdvertisementDtoMapper.MAPPER::mapToAdvertisementDto)
+                .collect(Collectors.toList());
+    }
+
+    public AdvertisementDto findByAdvertisementId(Long advertisementId) {
+        return AdvertisementDtoMapper.MAPPER.mapToAdvertisementDto(findById(advertisementId));
+    }
+
+    @Transactional
+    public void deleteById(Long id) {
+        findById(id);
+        repository.deleteById(id);
     }
 
     protected Advertisement findById(Long id) {

@@ -16,7 +16,7 @@ public class Company extends BaseUser {
     private String companyName;
     private String phoneNumber;
     private String city;
-    @ManyToOne
+    @OneToOne(cascade = {CascadeType.REMOVE})
     @JoinColumn(name = "location_id")
     private Location location;
     @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE})

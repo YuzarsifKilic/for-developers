@@ -1,6 +1,6 @@
 package com.yuzarsif.fordevelopers.service;
 
-import com.yuzarsif.fordevelopers.dto.CreateExperienceRequest;
+import com.yuzarsif.fordevelopers.dto.request.CreateExperienceRequest;
 import com.yuzarsif.fordevelopers.dto.ExperienceDto;
 import com.yuzarsif.fordevelopers.mapper.ExperienceDtoMapper;
 import com.yuzarsif.fordevelopers.model.Employee;
@@ -24,7 +24,7 @@ public class ExperienceService {
     }
 
     private void saveExperience(CreateExperienceRequest request) {
-        Employee employee = employeeService.findById(request.employeeId());
+        Employee employee = employeeService.getById(request.employeeId());
 
         Experience experience = Experience
                 .builder()

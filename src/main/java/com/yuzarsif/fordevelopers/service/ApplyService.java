@@ -1,7 +1,7 @@
 package com.yuzarsif.fordevelopers.service;
 
 import com.yuzarsif.fordevelopers.dto.CompanyApplyDto;
-import com.yuzarsif.fordevelopers.dto.CreateApplyRequest;
+import com.yuzarsif.fordevelopers.dto.request.CreateApplyRequest;
 import com.yuzarsif.fordevelopers.dto.EmployeeApplyDto;
 import com.yuzarsif.fordevelopers.mapper.CompanyApplyDtoMapper;
 import com.yuzarsif.fordevelopers.mapper.EmployeeApplyDtoMapper;
@@ -29,7 +29,7 @@ public class ApplyService {
 
     public void saveApply(CreateApplyRequest request) {
         Advertisement advertisement = advertisementService.findById(request.advertisementId());
-        Employee employee = employeeService.findById(request.employeeId());
+        Employee employee = employeeService.getById(request.employeeId());
         Apply apply = Apply
                 .builder()
                 .advertisement(advertisement)
@@ -40,7 +40,7 @@ public class ApplyService {
     }
 
     public List<EmployeeApplyDto> findAllByEmployeeId(String employeeId) {
-        employeeService.findById(employeeId);
+        employeeService.getById(employeeId);
         return repository.findAllByEmployeeId(employeeId)
                 .stream()
                 .map(EmployeeApplyDtoMapper.MAPPER::mapToEmployeeApplyDto)

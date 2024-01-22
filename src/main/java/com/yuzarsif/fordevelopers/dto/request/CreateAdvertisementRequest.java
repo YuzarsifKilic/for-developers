@@ -1,4 +1,4 @@
-package com.yuzarsif.fordevelopers.dto;
+package com.yuzarsif.fordevelopers.dto.request;
 
 import com.yuzarsif.fordevelopers.model.JobTitle;
 import com.yuzarsif.fordevelopers.model.WorkType;

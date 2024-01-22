@@ -1,7 +1,7 @@
 package com.yuzarsif.fordevelopers.service;
 
 import com.yuzarsif.fordevelopers.dto.EducationDto;
-import com.yuzarsif.fordevelopers.dto.SaveEducationRequest;
+import com.yuzarsif.fordevelopers.dto.request.SaveEducationRequest;
 import com.yuzarsif.fordevelopers.mapper.EducationDtoMapper;
 import com.yuzarsif.fordevelopers.model.Education;
 import com.yuzarsif.fordevelopers.model.Employee;
@@ -28,7 +28,7 @@ public class EducationService {
 
     public void saveEducation(SaveEducationRequest request) {
         University university = universityService.findById(request.universityId());
-        Employee employee = employeeService.findById(request.employeeId());
+        Employee employee = employeeService.getById(request.employeeId());
 
         Education education = Education
                 .builder()

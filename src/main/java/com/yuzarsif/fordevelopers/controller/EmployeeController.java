@@ -1,13 +1,11 @@
 package com.yuzarsif.fordevelopers.controller;
 
-import com.yuzarsif.fordevelopers.dto.CreateEmployeeRequest;
+import com.yuzarsif.fordevelopers.dto.request.CreateEmployeeRequest;
+import com.yuzarsif.fordevelopers.dto.EmployeeDto;
 import com.yuzarsif.fordevelopers.dto.SavedEmployeeDto;
 import com.yuzarsif.fordevelopers.service.EmployeeService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/employees")
@@ -22,5 +20,10 @@ public class EmployeeController {
     @PostMapping
     public ResponseEntity<SavedEmployeeDto> createEmployee(@RequestBody CreateEmployeeRequest request) {
         return ResponseEntity.ok(employeeService.createEmployee(request));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<EmployeeDto> findEmployeeById(@PathVariable String id) {
+        return ResponseEntity.ok(employeeService.findEmployeeById(id));
     }
 }

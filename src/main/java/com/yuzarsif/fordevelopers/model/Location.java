@@ -20,6 +20,6 @@ public class Location {
     private Integer id;
     private String cityName;
     private String districtName;
-    @OneToMany(mappedBy = "location", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private Set<Employee> employees;
+    @OneToOne(mappedBy = "location")
+    private Company company;
 }

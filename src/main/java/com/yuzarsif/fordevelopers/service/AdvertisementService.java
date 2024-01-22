@@ -1,6 +1,6 @@
 package com.yuzarsif.fordevelopers.service;
 
-import com.yuzarsif.fordevelopers.dto.CreateAdvertisementRequest;
+import com.yuzarsif.fordevelopers.dto.request.CreateAdvertisementRequest;
 import com.yuzarsif.fordevelopers.exception.AdvertisementNotFoundException;
 import com.yuzarsif.fordevelopers.model.Advertisement;
 import com.yuzarsif.fordevelopers.model.Company;
@@ -19,7 +19,7 @@ public class AdvertisementService {
     }
 
     public void saveAdvertisement(CreateAdvertisementRequest request) {
-        Company company = companyService.findById(request.companyId());
+        Company company = companyService.getById(request.companyId());
 
         Advertisement advertisement = Advertisement
                 .builder()
@@ -35,6 +35,6 @@ public class AdvertisementService {
 
     protected Advertisement findById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new AdvertisementNotFoundException(id));
+                .orElseThrow(() -> new AdvertisementNotFoundException(String.format("Advertisement not found with id: %s", id)));
     }
 }

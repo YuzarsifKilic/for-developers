@@ -1,4 +1,4 @@
-package com.yuzarsif.fordevelopers.dto;
+package com.yuzarsif.fordevelopers.dto.request;
 
 import com.yuzarsif.fordevelopers.model.Employee;
 import jakarta.persistence.JoinColumn;

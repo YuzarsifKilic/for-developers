@@ -1,6 +1,6 @@
 package com.yuzarsif.fordevelopers.service;
 
-import com.yuzarsif.fordevelopers.dto.CreateProjectRequest;
+import com.yuzarsif.fordevelopers.dto.request.CreateProjectRequest;
 import com.yuzarsif.fordevelopers.dto.ProjectDto;
 import com.yuzarsif.fordevelopers.exception.ProjectNotExistsException;
 import com.yuzarsif.fordevelopers.model.Employee;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 @Service
 public class ProjectService {
@@ -27,7 +26,7 @@ public class ProjectService {
     }
 
     public ProjectDto saveProject(CreateProjectRequest request) {
-        Employee employee = employeeService.findById(request.getEmployeeId());
+        Employee employee = employeeService.getById(request.getEmployeeId());
         githubClient.validateProjectUrl(employee.getGithubUsername(), request.getProjectName());
 
         Project project = Project

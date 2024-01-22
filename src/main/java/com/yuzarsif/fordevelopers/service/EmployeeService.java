@@ -1,8 +1,10 @@
 package com.yuzarsif.fordevelopers.service;
 
-import com.yuzarsif.fordevelopers.dto.CreateEmployeeRequest;
+import com.yuzarsif.fordevelopers.dto.request.CreateEmployeeRequest;
+import com.yuzarsif.fordevelopers.dto.EmployeeDto;
 import com.yuzarsif.fordevelopers.dto.SavedEmployeeDto;
 import com.yuzarsif.fordevelopers.exception.EmployeeNotFoundException;
+import com.yuzarsif.fordevelopers.mapper.EmployeeDtoMapper;
 import com.yuzarsif.fordevelopers.mapper.SavedEmployeeMapper;
 import com.yuzarsif.fordevelopers.model.Employee;
 import com.yuzarsif.fordevelopers.model.Roles;
@@ -38,7 +40,12 @@ public class EmployeeService {
         return SavedEmployeeMapper.MAPPER.mapToSavedEmployeeDto(repository.save(employee));
     }
 
-    protected Employee findById(String id) {
+    public EmployeeDto findEmployeeById(String id) {
+        Employee employee = getById(id);
+        return EmployeeDtoMapper.MAPPER.mapToEmployeeDto(employee);
+    }
+
+    protected Employee getById(String id) {
         return repository.findById(id)
                 .orElseThrow(() -> new EmployeeNotFoundException(id));
     }

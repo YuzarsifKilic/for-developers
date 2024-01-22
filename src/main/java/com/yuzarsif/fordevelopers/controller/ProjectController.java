@@ -1,6 +1,6 @@
 package com.yuzarsif.fordevelopers.controller;
 
-import com.yuzarsif.fordevelopers.dto.CreateProjectRequest;
+import com.yuzarsif.fordevelopers.dto.request.CreateProjectRequest;
 import com.yuzarsif.fordevelopers.dto.ProjectDto;
 import com.yuzarsif.fordevelopers.service.ProjectService;
 import org.springframework.http.ResponseEntity;

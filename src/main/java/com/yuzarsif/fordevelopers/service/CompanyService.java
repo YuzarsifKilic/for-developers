@@ -34,6 +34,11 @@ public class CompanyService {
         return CompanyDtoMapper.MAPPER.mapToCompanyDto(company);
     }
 
+    public void deleteById(String id) {
+        getById(id);
+        repository.deleteById(id);
+    }
+
     protected Company getById(String id) {
         return repository.findById(id)
                 .orElseThrow(() -> new CompanyNotFoundException(id));

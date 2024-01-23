@@ -17,9 +17,12 @@ public class Education {
     private Integer startYear;
     private Integer endYear;
     private float gnp;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "university_id")
     private University university;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "course_id")
+    private Course course;
     @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;

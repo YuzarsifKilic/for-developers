@@ -26,4 +26,10 @@ public class CompanyController {
     public ResponseEntity<CompanyDto> findCompanyById(@PathVariable String id) {
         return ResponseEntity.ok(companyService.findCompanyById(id));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable String id) {
+        companyService.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
 }

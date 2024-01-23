@@ -5,7 +5,6 @@ import java.util.Set;
 
 public record UniversityDto(
         Integer id,
-        String universityName,
-        List<CourseDto> courses
+        String universityName
 ) {
 }

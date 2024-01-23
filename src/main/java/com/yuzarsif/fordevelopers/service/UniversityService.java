@@ -1,6 +1,7 @@
 package com.yuzarsif.fordevelopers.service;
 
 import com.yuzarsif.fordevelopers.dto.UniversityDto;
+import com.yuzarsif.fordevelopers.dto.request.CreateUniversityRequest;
 import com.yuzarsif.fordevelopers.exception.UniversityNotFoundException;
 import com.yuzarsif.fordevelopers.mapper.UniversityDtoMapper;
 import com.yuzarsif.fordevelopers.model.University;
@@ -29,5 +30,17 @@ public class UniversityService {
                 .stream()
                 .map(UniversityDtoMapper.MAPPER::mapToUniversityDto)
                 .toList();
+    }
+
+    public void saveUniversity(CreateUniversityRequest request) {
+        University university = University.builder()
+                .universityName(request.universityName())
+                .build();
+
+        repository.save(university);
+    }
+
+    public void updateUniversity(University university) {
+        repository.save(university);
     }
 }

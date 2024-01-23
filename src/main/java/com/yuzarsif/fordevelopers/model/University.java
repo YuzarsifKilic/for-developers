@@ -26,6 +26,4 @@ public class University {
     private Set<Course> courses;
     @OneToMany(mappedBy = "university", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE})
     private Set<Education> educations;
-
-
 }

@@ -41,6 +41,15 @@ public class SocialMediaService {
         repository.save(socialMedia);
     }
 
+    public void deleteById(Long id) {
+        getById(id);
+        repository.deleteById(id);
+    }
+
+    private void getById(Long id) {
+        repository.findById(id).orElseThrow(() -> new GithubValidateException("Social media not found by id : " + id));
+    }
+
     public List<SocialMediaDto> findAllByEmployeeId(String employeeId) {
         return repository.findAllByEmployeeId(employeeId)
                 .stream()

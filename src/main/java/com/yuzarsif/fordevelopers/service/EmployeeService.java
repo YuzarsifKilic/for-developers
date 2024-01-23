@@ -45,6 +45,11 @@ public class EmployeeService {
         return EmployeeDtoMapper.MAPPER.mapToEmployeeDto(employee);
     }
 
+    public void deleteById(String id) {
+        getById(id);
+        repository.deleteById(id);
+    }
+
     protected Employee getById(String id) {
         return repository.findById(id)
                 .orElseThrow(() -> new EmployeeNotFoundException(id));

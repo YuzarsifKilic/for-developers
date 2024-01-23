@@ -3,6 +3,7 @@ package com.yuzarsif.fordevelopers.service;
 import com.yuzarsif.fordevelopers.dto.request.CreateProjectRequest;
 import com.yuzarsif.fordevelopers.dto.ProjectDto;
 import com.yuzarsif.fordevelopers.exception.ProjectNotExistsException;
+import com.yuzarsif.fordevelopers.mapper.ProjectDtoMapper;
 import com.yuzarsif.fordevelopers.model.Employee;
 import com.yuzarsif.fordevelopers.model.Project;
 import com.yuzarsif.fordevelopers.repository.ProjectRepository;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProjectService {
@@ -48,6 +51,28 @@ public class ProjectService {
                 .endDate(savedProject.getEndYear().toString())
                 .projectUrl(githubClient.getProjectUrl(savedProject.getEmployee().getGithubUsername(), savedProject.getProjectName()))
                 .build();
+    }
+
+    public List<ProjectDto> findAllByEmployeeId(String employeeId) {
+        return repository.findByEmployee_Id(employeeId)
+                .stream()
+                .map(ProjectDtoMapper.MAPPER::mapToProjectDto)
+                .collect(Collectors.toList());
+    }
+
+    public ProjectDto findProjectById(Long id) {
+        return ProjectDtoMapper.MAPPER.mapToProjectDto(getById(id));
+    }
+
+    public void deleteById(Long id) {
+        getById(id);
+        repository.deleteById(id);
+    }
+
+    private Project getById(Long id) {
+        return repository.findById(id).orElseThrow(
+                () -> new ProjectNotExistsException("Project not found by id : " + id)
+        );
     }
 
     private Date convertToDate(String date) {

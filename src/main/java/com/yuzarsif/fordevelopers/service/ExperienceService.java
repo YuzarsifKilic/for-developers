@@ -2,6 +2,7 @@ package com.yuzarsif.fordevelopers.service;
 
 import com.yuzarsif.fordevelopers.dto.request.CreateExperienceRequest;
 import com.yuzarsif.fordevelopers.dto.ExperienceDto;
+import com.yuzarsif.fordevelopers.exception.ExperienceNotFoundException;
 import com.yuzarsif.fordevelopers.mapper.ExperienceDtoMapper;
 import com.yuzarsif.fordevelopers.model.Employee;
 import com.yuzarsif.fordevelopers.model.Experience;
@@ -43,6 +44,20 @@ public class ExperienceService {
                 .stream()
                 .map(ExperienceDtoMapper.MAPPER::mapToExperienceDto)
                 .collect(Collectors.toList());
+    }
 
+    public ExperienceDto findExperienceById(Long id) {
+        return ExperienceDtoMapper.MAPPER.mapToExperienceDto(getById(id));
+    }
+
+    public void deleteById(Long id) {
+        getById(id);
+        repository.deleteById(id);
+    }
+
+    private Experience getById(Long id) {
+        return repository.findById(id).orElseThrow(
+                () -> new ExperienceNotFoundException("Experience not found by id : " + id)
+        );
     }
 }

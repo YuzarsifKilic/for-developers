@@ -15,7 +15,6 @@ public class Company extends BaseUser {
 
     private String companyName;
     private String phoneNumber;
-    private String city;
     @OneToOne(cascade = {CascadeType.REMOVE})
     @JoinColumn(name = "location_id")
     private Location location;

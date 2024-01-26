@@ -24,6 +24,12 @@ public class AdvertisementController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/increment-view-count/{id}")
+    public ResponseEntity<Void> incrementViewCount(@PathVariable Long id) {
+        advertisementService.incrementViewCount(id);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<AdvertisementDto> findAdvertisementById(@PathVariable Long id) {
         return ResponseEntity.ok(advertisementService.findByAdvertisementId(id));
@@ -32,6 +38,11 @@ public class AdvertisementController {
     @GetMapping("/company/{id}")
     public ResponseEntity<List<AdvertisementDto>> findAllByCompanyId(@PathVariable String id) {
         return ResponseEntity.ok(advertisementService.findAllByCompanyId(id));
+    }
+
+    @GetMapping("/most-popular")
+    public ResponseEntity<List<AdvertisementDto>> findMostPopularAdvertisements() {
+        return ResponseEntity.ok(advertisementService.findMostPopularAdvertisements());
     }
 
     @DeleteMapping("/{id}")

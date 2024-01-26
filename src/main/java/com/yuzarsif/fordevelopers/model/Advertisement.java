@@ -23,6 +23,7 @@ public class Advertisement {
     private Company company;
     private String advertisementTitle;
     private String advertisementContent;
+    private int viewCount;
     @Enumerated(EnumType.STRING)
     private WorkType workType;
     @Enumerated(EnumType.STRING)

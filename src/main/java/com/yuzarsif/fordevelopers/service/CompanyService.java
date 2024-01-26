@@ -21,7 +21,6 @@ public class CompanyService {
         Company company = Company
                 .builder()
                 .companyName(request.getCompanyName())
-                .city(request.getCity())
                 .email(request.getEmail())
                 .phoneNumber(request.getPhoneNumber())
                 .build();

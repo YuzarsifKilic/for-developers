@@ -32,6 +32,7 @@ public class AdvertisementService {
                 .company(company)
                 .advertisementTitle(request.advertisementTitle())
                 .advertisementContent(request.advertisementContent())
+                .viewCount(0)
                 .workType(request.workType())
                 .jobTitle(request.jobTitle())
                 .build();
@@ -48,6 +49,19 @@ public class AdvertisementService {
 
     public AdvertisementDto findByAdvertisementId(Long advertisementId) {
         return AdvertisementDtoMapper.MAPPER.mapToAdvertisementDto(findById(advertisementId));
+    }
+
+    public void incrementViewCount(Long advertisementId) {
+        Advertisement advertisement = findById(advertisementId);
+        advertisement.setViewCount(advertisement.getViewCount() + 1);
+        repository.save(advertisement);
+    }
+
+    public List<AdvertisementDto> findMostPopularAdvertisements() {
+        return repository.findTop20ByOrderByViewCountDesc()
+                .stream()
+                .map(AdvertisementDtoMapper.MAPPER::mapToAdvertisementDto)
+                .collect(Collectors.toList());
     }
 
     @Transactional

@@ -6,17 +6,25 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { AdvertisementsComponent } from './advertisements/advertisements.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { AdvertisementComponent } from './advertisement/advertisement.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    SignInComponent
+    SignInComponent,
+    AdvertisementsComponent,
+    SearchBarComponent,
+    AdvertisementComponent
   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        HttpClientModule
     ],
   providers: [],
   bootstrap: [AppComponent]

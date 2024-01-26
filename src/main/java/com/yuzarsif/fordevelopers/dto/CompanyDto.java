@@ -5,7 +5,6 @@ public record CompanyDto(
         String email,
         String companyName,
         String phoneNumber,
-        String city,
         LocationDto location
 ) {
 }

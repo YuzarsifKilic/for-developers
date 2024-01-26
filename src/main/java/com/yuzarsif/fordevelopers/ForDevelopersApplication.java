@@ -2,10 +2,8 @@ package com.yuzarsif.fordevelopers;
 
 import com.yuzarsif.fordevelopers.dto.*;
 import com.yuzarsif.fordevelopers.dto.request.*;
-import com.yuzarsif.fordevelopers.model.Course;
-import com.yuzarsif.fordevelopers.model.SocialMedia;
-import com.yuzarsif.fordevelopers.model.SocialMedias;
-import com.yuzarsif.fordevelopers.model.University;
+import com.yuzarsif.fordevelopers.model.*;
+import com.yuzarsif.fordevelopers.repository.AdvertisementRepository;
 import com.yuzarsif.fordevelopers.service.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -29,14 +27,10 @@ public class ForDevelopersApplication {
 								  CompanyService companyService,
 								  CourseService courseService,
 								  EducationService educationService,
-								  UniversityService universityService) {
+								  UniversityService universityService,
+								  AdvertisementRepository advertisementRepository) {
 		return (args) -> {
-
-
-
 		};
 
 	}
-
-
 }

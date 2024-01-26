@@ -5,6 +5,8 @@ import com.yuzarsif.fordevelopers.dto.request.CreateCompanyRequest;
 import com.yuzarsif.fordevelopers.exception.CompanyNotFoundException;
 import com.yuzarsif.fordevelopers.mapper.CompanyDtoMapper;
 import com.yuzarsif.fordevelopers.model.Company;
+import com.yuzarsif.fordevelopers.model.Location;
+import com.yuzarsif.fordevelopers.model.Roles;
 import com.yuzarsif.fordevelopers.repository.CompanyRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,17 +14,22 @@ import org.springframework.stereotype.Service;
 public class CompanyService {
 
     private final CompanyRepository repository;
+    private final LocationService locationService;
 
-    public CompanyService(CompanyRepository repository) {
+    public CompanyService(CompanyRepository repository, LocationService locationService) {
         this.repository = repository;
+        this.locationService = locationService;
     }
 
     public void saveCompany(CreateCompanyRequest request) {
+        Location location = locationService.findLocationById(request.locationId());
         Company company = Company
                 .builder()
-                .companyName(request.getCompanyName())
-                .email(request.getEmail())
-                .phoneNumber(request.getPhoneNumber())
+                .companyName(request.companyName())
+                .email(request.email())
+                .phoneNumber(request.phoneNumber())
+                .location(location)
+                .role(Roles.COMPANY)
                 .build();
 
         repository.save(company);

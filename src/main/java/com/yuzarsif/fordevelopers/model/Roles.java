@@ -2,5 +2,6 @@ package com.yuzarsif.fordevelopers.model;
 
 public enum Roles {
 
-    EMPLOYEE
+    EMPLOYEE,
+    COMPANY
 }

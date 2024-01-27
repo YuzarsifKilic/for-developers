@@ -1,5 +1,6 @@
 package com.yuzarsif.fordevelopers.service;
 
+import com.yuzarsif.fordevelopers.config.PasswordConfig;
 import com.yuzarsif.fordevelopers.dto.CompanyDto;
 import com.yuzarsif.fordevelopers.dto.request.CreateCompanyRequest;
 import com.yuzarsif.fordevelopers.exception.CompanyNotFoundException;
@@ -10,15 +11,19 @@ import com.yuzarsif.fordevelopers.model.Roles;
 import com.yuzarsif.fordevelopers.repository.CompanyRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 public class CompanyService {
 
     private final CompanyRepository repository;
     private final LocationService locationService;
+    private final PasswordConfig passwordConfig;
 
-    public CompanyService(CompanyRepository repository, LocationService locationService) {
+    public CompanyService(CompanyRepository repository, LocationService locationService, PasswordConfig passwordConfig) {
         this.repository = repository;
         this.locationService = locationService;
+        this.passwordConfig = passwordConfig;
     }
 
     public void saveCompany(CreateCompanyRequest request) {
@@ -27,9 +32,10 @@ public class CompanyService {
                 .builder()
                 .companyName(request.companyName())
                 .email(request.email())
+                .password(passwordConfig.passwordEncoder().encode(request.password()))
                 .phoneNumber(request.phoneNumber())
                 .location(location)
-                .role(Roles.COMPANY)
+                .authorities(Set.of(Roles.ROLE_COMPANY))
                 .build();
 
         repository.save(company);

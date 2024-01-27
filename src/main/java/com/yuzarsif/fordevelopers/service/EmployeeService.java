@@ -1,5 +1,6 @@
 package com.yuzarsif.fordevelopers.service;
 
+import com.yuzarsif.fordevelopers.config.PasswordConfig;
 import com.yuzarsif.fordevelopers.dto.request.CreateEmployeeRequest;
 import com.yuzarsif.fordevelopers.dto.EmployeeDto;
 import com.yuzarsif.fordevelopers.dto.SavedEmployeeDto;
@@ -11,30 +12,34 @@ import com.yuzarsif.fordevelopers.model.Roles;
 import com.yuzarsif.fordevelopers.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 public class EmployeeService {
 
     private final EmployeeRepository repository;
     private final GithubClient githubClient;
-    private SavedEmployeeMapper savedEmployeeMapper;
+    private final PasswordConfig passwordConfig;
 
-    public EmployeeService(EmployeeRepository repository, GithubClient githubClient) {
+    public EmployeeService(EmployeeRepository repository, GithubClient githubClient, PasswordConfig passwordConfig) {
         this.repository = repository;
         this.githubClient = githubClient;
+        this.passwordConfig = passwordConfig;
     }
 
     public SavedEmployeeDto createEmployee(CreateEmployeeRequest request) {
 
-        githubClient.validateUser(request.getGithubUsername());
+        githubClient.validateUser(request.githubUsername());
 
         Employee employee = Employee
                 .builder()
-                .email(request.getEmail())
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
-                .phoneNumber(request.getPhoneNumber())
-                .githubUsername(request.getGithubUsername())
-                .role(Roles.EMPLOYEE)
+                .email(request.email())
+                .password(passwordConfig.passwordEncoder().encode(request.password()))
+                .firstName(request.firstName())
+                .lastName(request.lastName())
+                .phoneNumber(request.phoneNumber())
+                .githubUsername(request.githubUsername())
+                .authorities(Set.of(Roles.ROLE_EMPLOYEE))
                 .build();
 
         return SavedEmployeeMapper.MAPPER.mapToSavedEmployeeDto(repository.save(employee));

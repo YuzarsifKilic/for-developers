@@ -20,3 +20,7 @@ github:
   authorize-url: https://github.com/login/oauth/authorize
   access-token-url: https://github.com/login/oauth/access_token
   html-url: https://github.com/
+
+
+jwt:
+  key: ${JWT_KEY}

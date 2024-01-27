@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 public record CreateCompanyRequest(
         String email,
+        String password,
         String companyName,
         String phoneNumber,
         String city,

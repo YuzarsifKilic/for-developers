@@ -1,7 +1,14 @@
 package com.yuzarsif.fordevelopers.model;
 
-public enum Roles {
+import org.springframework.security.core.GrantedAuthority;
 
-    EMPLOYEE,
-    COMPANY
+public enum Roles implements GrantedAuthority {
+
+    ROLE_EMPLOYEE,
+    ROLE_COMPANY;
+
+    @Override
+    public String getAuthority() {
+        return name();
+    }
 }

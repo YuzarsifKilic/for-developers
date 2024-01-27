@@ -10,6 +10,8 @@ import { AdvertisementsComponent } from './advertisements/advertisements.compone
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { AdvertisementComponent } from './advertisement/advertisement.component';
 import {HttpClientModule} from "@angular/common/http";
+import { WorkTypeFilterComponent } from './work-type-filter/work-type-filter.component';
+import { JobTitleFilterComponent } from './job-title-filter/job-title-filter.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import {HttpClientModule} from "@angular/common/http";
     SignInComponent,
     AdvertisementsComponent,
     SearchBarComponent,
-    AdvertisementComponent
+    AdvertisementComponent,
+    WorkTypeFilterComponent,
+    JobTitleFilterComponent
   ],
     imports: [
         BrowserModule,

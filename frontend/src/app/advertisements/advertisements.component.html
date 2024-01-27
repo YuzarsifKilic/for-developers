@@ -1,13 +1,15 @@
-<div class="h-screen">
-  <div class="mt-20 ml-72">
+<div class="h-full">
+  <div class="mt-20 ml-[420px]">
     <app-search-bar></app-search-bar>
   </div>
   <div class="mt-20 grid grid-cols-5">
-    <div class="border border-gray-600">
-      1. Component
+    <div class="border-t-gray-100">
+      <app-work-type-filter></app-work-type-filter>
+      <app-job-title-filter></app-job-title-filter>
+      <button class="bg-gradient-to-r from-sky-400 to-sky-600 text-white p-2 rounded-xl mt-4 ml-16 w-2/4">Filter</button>
     </div>
     <div class="col-span-3 flex-col ml-6">
-      <div class="col-span-3 mt-4" *ngFor="let advertisement of advertisements">
+      <div class="col-span-3 mt-4 mb-2" *ngFor="let advertisement of advertisements">
         <app-advertisement [advertisement]=advertisement></app-advertisement>
       </div>
     </div>

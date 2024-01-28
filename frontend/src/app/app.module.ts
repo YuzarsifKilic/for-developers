@@ -15,6 +15,8 @@ import { JobTitleFilterComponent } from './job-title-filter/job-title-filter.com
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { RegisterComponent } from './employee/register/register.component';
+import { CompanyRegisterComponent } from './company/company-register/company-register.component';
+import { CityFilterComponent } from './city-filter/city-filter.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { RegisterComponent } from './employee/register/register.component';
     AdvertisementComponent,
     WorkTypeFilterComponent,
     JobTitleFilterComponent,
-    RegisterComponent
+    RegisterComponent,
+    CompanyRegisterComponent,
+    CityFilterComponent
   ],
     imports: [
         BrowserModule,

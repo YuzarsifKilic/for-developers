@@ -21,7 +21,6 @@ export class RegisterComponent {
   })
 
   saveEmployee(): void {
-    console.log(this.employeeRegisterForm.value.email);
     this.employeeService.saveEmployee(this.employeeRegisterForm.value.email,
       this.employeeRegisterForm.value.password,
       this.employeeRegisterForm.value.firstName,

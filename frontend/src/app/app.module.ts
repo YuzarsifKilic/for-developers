@@ -12,6 +12,9 @@ import { AdvertisementComponent } from './advertisement/advertisement.component'
 import {HttpClientModule} from "@angular/common/http";
 import { WorkTypeFilterComponent } from './work-type-filter/work-type-filter.component';
 import { JobTitleFilterComponent } from './job-title-filter/job-title-filter.component';
+import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { RegisterComponent } from './employee/register/register.component';
 
 @NgModule({
   declarations: [
@@ -22,13 +25,16 @@ import { JobTitleFilterComponent } from './job-title-filter/job-title-filter.com
     SearchBarComponent,
     AdvertisementComponent,
     WorkTypeFilterComponent,
-    JobTitleFilterComponent
+    JobTitleFilterComponent,
+    RegisterComponent
   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
         ReactiveFormsModule,
-        HttpClientModule
+        ToastrModule.forRoot()
     ],
   providers: [],
   bootstrap: [AppComponent]

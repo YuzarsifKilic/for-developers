@@ -1,0 +1,56 @@
+<form [formGroup]="employeeRegisterForm" (ngSubmit)="saveEmployee()">
+  <div class="space-y-12">
+
+    <div class="border-b border-gray-900/10 py-24 px-96">
+      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="sm:col-span-3">
+          <label for="firstName" class="block text-sm font-medium leading-6 text-gray-900">First name</label>
+          <div class="mt-2">
+            <input type="text" name="firstName" id="firstName" autocomplete="given-name" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" formControlName="firstName">
+          </div>
+        </div>
+
+        <div class="sm:col-span-3">
+          <label for="lastName" class="block text-sm font-medium leading-6 text-gray-900">Last name</label>
+          <div class="mt-2">
+            <input type="text" name="lastName" id="lastName" autocomplete="family-name" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" formControlName="lastName">
+          </div>
+        </div>
+
+        <div class="sm:col-span-3">
+          <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+          <div class="mt-2">
+            <input id="email" name="email" type="email" autocomplete="email" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" formControlName="email">
+          </div>
+        </div>
+
+        <div class="sm:col-span-3">
+          <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+          <div class="mt-2">
+            <input id="password" name="password" type="password" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" formControlName="password">
+          </div>
+        </div>
+
+        <div class="sm:col-span-3">
+          <label for="phoneNumber" class="block text-sm font-medium leading-6 text-gray-900">Phone Number</label>
+          <div class="mt-2">
+            <input id="phoneNumber" name="phoneNumber" type="text" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" formControlName="phoneNumber">
+          </div>
+        </div>
+
+        <div class="sm:col-span-3">
+          <label for="githubUsername" class="block text-sm font-medium leading-6 text-gray-900">Github Username</label>
+          <div class="mt-2">
+            <input id="githubUsername" name="githubUsername" type="text" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" formControlName="githubUsername">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6 flex items-center justify-end gap-x-6">
+    <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+    <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+  </div>
+</form>
+

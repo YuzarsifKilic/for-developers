@@ -24,6 +24,36 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(EmailInUseException.class)
+    public ResponseEntity<ErrorResponse> handleEmailInUseException(EmailInUseException e, HttpServletResponse response) {
+        ErrorResponse errorResponse = ErrorResponse
+                .builder()
+                .message(e.getMessage())
+                .timestamp(LocalDateTime.now())
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(GithubUsernameInUseException.class)
+    public ResponseEntity<ErrorResponse> handleGithubUsernameInUseException(GithubUsernameInUseException e, HttpServletResponse response) {
+        ErrorResponse errorResponse = ErrorResponse
+                .builder()
+                .message(e.getMessage())
+                .timestamp(LocalDateTime.now())
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(PhoneNumberInUseException.class)
+    public ResponseEntity<ErrorResponse> handlePhoneNumberInUseExceptions(PhoneNumberInUseException e, HttpServletResponse response) {
+        ErrorResponse errorResponse = ErrorResponse
+                .builder()
+                .message(e.getMessage())
+                .timestamp(LocalDateTime.now())
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(AdvertisementNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleAdvertisementNotFoundException(AdvertisementNotFoundException e, HttpServletResponse response) {
         ErrorResponse errorResponse = ErrorResponse

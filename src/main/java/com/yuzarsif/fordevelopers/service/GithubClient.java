@@ -51,7 +51,7 @@ public class GithubClient {
         try {
             ResponseEntity<String> response = restTemplate.exchange(userUrl, HttpMethod.GET, request, String.class);
         } catch (HttpClientErrorException e) {
-            throw new GithubValidateException(String.format("User %s not found", githubUsername));
+            throw new GithubValidateException(String.format("Github user %s not found", githubUsername));
         }
     }
 

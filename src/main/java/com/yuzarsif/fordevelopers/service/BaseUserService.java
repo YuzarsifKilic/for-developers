@@ -1,5 +1,6 @@
 package com.yuzarsif.fordevelopers.service;
 
+import com.yuzarsif.fordevelopers.exception.EmailInUseException;
 import com.yuzarsif.fordevelopers.model.BaseUser;
 import com.yuzarsif.fordevelopers.repository.BaseUserRepository;
 import org.apache.catalina.User;
@@ -18,5 +19,12 @@ public class BaseUserService {
 
     Optional<BaseUser> findByEmail(String email) {
         return baseUserRepository.findByEmail(email);
+    }
+
+    protected void emailInUse(String email) {
+        baseUserRepository
+                .findByEmail(email)
+                .ifPresent(user -> {
+                    throw new EmailInUseException("email already in use");});
     }
 }

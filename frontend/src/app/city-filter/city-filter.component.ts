@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {AxiosService} from "../_services/axios.service";
-import {Location} from "../_models/location";
+import {LocationService} from "../_services/location.service";
+import {City} from "../_models/city";
 
 @Component({
   selector: 'app-city-filter',
@@ -9,31 +9,21 @@ import {Location} from "../_models/location";
 })
 export class CityFilterComponent {
 
-  locations: Location[] = [];
-  @Output() location: EventEmitter<string> = new EventEmitter<string>();
-  selectedLocation!: Location;
+  @Output() cityId = new EventEmitter<number>();
 
-  constructor(private axios: AxiosService) { }
+  cities: City[] = [];
 
-  ngOnInit() {
-    this.getCities();
-  }
+  constructor(private locationService: LocationService) { }
 
-  send(location: Location) {
-    this.location.emit(location.cityName);
-  }
-
-
-  public getCities() {
-    this.axios.request(
-      "GET",
-      "/api/locations", {})
+  ngOnInit(): void {
+    this.locationService.getCities()
       .then(resp => {
-        this.locations = resp.data;
+        this.cities = resp;
       })
-      .catch(error => {
-        console.log(error);
-      });
   }
 
+  selectCity(id: number) {
+    console.log(id);
+    this.cityId.emit(id);
+  }
 }

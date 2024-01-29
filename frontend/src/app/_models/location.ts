@@ -1,6 +1,8 @@
+import {City} from "./city";
+
 export class Location {
 
   id!: number
-  cityName!: string
+  city!: City
   districtName!: string
 }

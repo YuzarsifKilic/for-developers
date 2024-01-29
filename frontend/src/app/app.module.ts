@@ -16,8 +16,8 @@ import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { RegisterComponent } from './employee/register/register.component';
 import { CompanyRegisterComponent } from './company/company-register/company-register.component';
-import { CityFilterComponent } from './city-filter/city-filter.component';
-import { DistinctFilterComponent } from './city-filter/distinct-filter/distinct-filter.component';
+import { LocationFilterComponent } from './location-filter/location-filter.component';
+import {CityFilterComponent} from "./city-filter/city-filter.component";
 
 @NgModule({
   declarations: [
@@ -27,12 +27,12 @@ import { DistinctFilterComponent } from './city-filter/distinct-filter/distinct-
     AdvertisementsComponent,
     SearchBarComponent,
     AdvertisementComponent,
+    CityFilterComponent,
     WorkTypeFilterComponent,
     JobTitleFilterComponent,
     RegisterComponent,
     CompanyRegisterComponent,
-    CityFilterComponent,
-    DistinctFilterComponent
+    LocationFilterComponent
   ],
     imports: [
         BrowserModule,

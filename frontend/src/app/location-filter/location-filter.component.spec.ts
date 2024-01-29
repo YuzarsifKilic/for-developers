@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DistinctFilterComponent } from './distinct-filter.component';
+import { LocationFilterComponent } from './location-filter.component';
 
-describe('DistinctFilterComponent', () => {
-  let component: DistinctFilterComponent;
-  let fixture: ComponentFixture<DistinctFilterComponent>;
+describe('LocationFilterComponent', () => {
+  let component: LocationFilterComponent;
+  let fixture: ComponentFixture<LocationFilterComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DistinctFilterComponent]
+      declarations: [LocationFilterComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(DistinctFilterComponent);
+    fixture = TestBed.createComponent(LocationFilterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,8 +1,8 @@
 <div class="sm:col-span-3">
-  <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Country</label>
+  <label for="city" class="block text-sm font-medium leading-6 text-gray-900">City</label>
   <div class="mt-2">
-    <select id="country" name="country" autocomplete="country-name" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:max-w-xs sm:text-sm sm:leading-6">
-      <option *ngFor="let location of locations"><button (click)="send(location)">{{location.cityName}}</button></option>
+    <select id="city" name="city" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:max-w-xs sm:text-sm sm:leading-6">
+      <option *ngFor="let city of cities" [ngValue]="city.id"><p (click)="selectCity(city.id)" class="bg-amber-200">{{city.cityName}}</p></option>
     </select>
   </div>
 </div>

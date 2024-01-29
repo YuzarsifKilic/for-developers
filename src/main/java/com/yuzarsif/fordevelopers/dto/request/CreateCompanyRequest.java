@@ -8,7 +8,6 @@ public record CreateCompanyRequest(
         String email,
         String password,
         String companyName,
-        String phoneNumber,
-        Integer locationId
+        String phoneNumber
 ) {
 }

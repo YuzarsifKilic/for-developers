@@ -54,6 +54,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(CompanyNameInUseException.class)
+    public ResponseEntity<ErrorResponse> handleCompanyNameInUseException(CompanyNameInUseException e, HttpServletResponse response) {
+        ErrorResponse errorResponse = ErrorResponse
+                .builder()
+                .message(e.getMessage())
+                .timestamp(LocalDateTime.now())
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(AdvertisementNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleAdvertisementNotFoundException(AdvertisementNotFoundException e, HttpServletResponse response) {
         ErrorResponse errorResponse = ErrorResponse

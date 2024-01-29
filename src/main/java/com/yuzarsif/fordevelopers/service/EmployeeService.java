@@ -6,6 +6,7 @@ import com.yuzarsif.fordevelopers.dto.EmployeeDto;
 import com.yuzarsif.fordevelopers.dto.SavedEmployeeDto;
 import com.yuzarsif.fordevelopers.exception.EmailInUseException;
 import com.yuzarsif.fordevelopers.exception.EmployeeNotFoundException;
+import com.yuzarsif.fordevelopers.exception.PhoneNumberInUseException;
 import com.yuzarsif.fordevelopers.mapper.EmployeeDtoMapper;
 import com.yuzarsif.fordevelopers.mapper.SavedEmployeeMapper;
 import com.yuzarsif.fordevelopers.model.BaseUser;
@@ -37,7 +38,7 @@ public class EmployeeService {
 
     public SavedEmployeeDto createEmployee(CreateEmployeeRequest request) {
 
-        emailInUse(request.email());
+        baseUserService.emailInUse(request.email());
         phoneNumberInUse(request.phoneNumber());
         githubUsernameInUse(request.githubUsername());
 
@@ -72,24 +73,17 @@ public class EmployeeService {
                 .orElseThrow(() -> new EmployeeNotFoundException(id));
     }
 
-    private void emailInUse(String email) {
-        Optional<BaseUser> user = baseUserService.findByEmail(email);
-        if (user.isPresent()) {
-            throw new EmailInUseException(email + " already in use");
-        }
-    }
-
     private void phoneNumberInUse(String phoneNumber) {
-        Optional<Employee> employee = repository.findByPhoneNumber(phoneNumber);
-        if (employee.isPresent()) {
-            throw new EmployeeNotFoundException(phoneNumber + " already in use");
-        }
+        repository.findByPhoneNumber(phoneNumber)
+                .ifPresent(user -> {
+                    throw new PhoneNumberInUseException("phone number already in use");
+                });
     }
 
     private void githubUsernameInUse(String githubUsername) {
-        Optional<Employee> user = repository.findByGithubUsername(githubUsername);
-        if (user.isPresent()) {
-            throw new EmployeeNotFoundException(githubUsername + " already in use");
-        }
+        repository.findByGithubUsername(githubUsername)
+                .ifPresent(user -> {
+                    throw new EmailInUseException("github username already in use");
+                });
     }
 }

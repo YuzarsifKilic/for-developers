@@ -1,9 +1,0 @@
-<div class="sm:col-span-3">
-  <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Country</label>
-  <div class="mt-2">
-    <select id="country" name="country" (location)="receive($event)" autocomplete="country-name" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 sm:max-w-xs sm:text-sm sm:leading-6">
-      <option *ngFor="let location of locations"><button (click)="send(location)">{{location.cityName}}</button></option>
-    </select>
-  </div>
-</div>
-

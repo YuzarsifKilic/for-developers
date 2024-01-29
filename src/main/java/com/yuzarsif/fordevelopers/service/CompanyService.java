@@ -3,10 +3,11 @@ package com.yuzarsif.fordevelopers.service;
 import com.yuzarsif.fordevelopers.config.PasswordConfig;
 import com.yuzarsif.fordevelopers.dto.CompanyDto;
 import com.yuzarsif.fordevelopers.dto.request.CreateCompanyRequest;
+import com.yuzarsif.fordevelopers.exception.CompanyNameInUseException;
 import com.yuzarsif.fordevelopers.exception.CompanyNotFoundException;
+import com.yuzarsif.fordevelopers.exception.PhoneNumberInUseException;
 import com.yuzarsif.fordevelopers.mapper.CompanyDtoMapper;
 import com.yuzarsif.fordevelopers.model.Company;
-import com.yuzarsif.fordevelopers.model.Location;
 import com.yuzarsif.fordevelopers.model.Roles;
 import com.yuzarsif.fordevelopers.repository.CompanyRepository;
 import org.springframework.stereotype.Service;
@@ -19,22 +20,30 @@ public class CompanyService {
     private final CompanyRepository repository;
     private final LocationService locationService;
     private final PasswordConfig passwordConfig;
+    private final BaseUserService baseUserService;
 
-    public CompanyService(CompanyRepository repository, LocationService locationService, PasswordConfig passwordConfig) {
+    public CompanyService(CompanyRepository repository,
+                          LocationService locationService,
+                          PasswordConfig passwordConfig,
+                          BaseUserService baseUserService) {
         this.repository = repository;
         this.locationService = locationService;
         this.passwordConfig = passwordConfig;
+        this.baseUserService = baseUserService;
     }
 
     public void saveCompany(CreateCompanyRequest request) {
-        Location location = locationService.findLocationById(request.locationId());
+        baseUserService.emailInUse(request.email());
+
+        companyNameInUse(request.companyName());
+        phoneNumberInUse(request.phoneNumber());
+
         Company company = Company
                 .builder()
                 .companyName(request.companyName())
                 .email(request.email())
                 .password(passwordConfig.passwordEncoder().encode(request.password()))
                 .phoneNumber(request.phoneNumber())
-                .location(location)
                 .authorities(Set.of(Roles.ROLE_COMPANY))
                 .build();
 
@@ -55,4 +64,21 @@ public class CompanyService {
         return repository.findById(id)
                 .orElseThrow(() -> new CompanyNotFoundException(id));
     }
+
+    private void phoneNumberInUse(String phoneNumber) {
+        repository
+                .findByPhoneNumber(phoneNumber)
+                .ifPresent(company -> {
+                    throw new PhoneNumberInUseException("phone number already in use");
+                });
+    }
+
+    private void companyNameInUse(String companyName) {
+        repository
+                .findByCompanyName(companyName)
+                .ifPresent(company -> {
+                    throw new CompanyNameInUseException("company name already in use");
+                });
+    }
+
 }

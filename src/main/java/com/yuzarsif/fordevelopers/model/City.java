@@ -13,15 +13,12 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @Data
-public class Location {
+public class City {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne
-    @JoinColumn(name = "city_id")
-    private City city;
-    private String districtName;
-    @OneToOne(mappedBy = "location")
-    private Company company;
+    private String cityName;
+    @OneToMany(mappedBy = "city", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE})
+    private Set<Location> locations;
 }

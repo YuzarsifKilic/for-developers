@@ -64,6 +64,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(CityNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleCityNotFoundException(CityNotFoundException e, HttpServletResponse response) {
+        ErrorResponse errorResponse = ErrorResponse
+                .builder()
+                .message(e.getMessage())
+                .timestamp(LocalDateTime.now())
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(LocationNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleLocationNotFoundException(LocationNotFoundException e, HttpServletResponse response) {
         ErrorResponse errorResponse = ErrorResponse

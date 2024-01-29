@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {AxiosService} from "../_services/axios.service";
 import {Location} from "../_models/location";
 
@@ -10,11 +10,17 @@ import {Location} from "../_models/location";
 export class CityFilterComponent {
 
   locations: Location[] = [];
+  @Output() location: EventEmitter<string> = new EventEmitter<string>();
+  selectedLocation!: Location;
 
   constructor(private axios: AxiosService) { }
 
   ngOnInit() {
     this.getCities();
+  }
+
+  send(location: Location) {
+    this.location.emit(location.cityName);
   }
 
 

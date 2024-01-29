@@ -5,7 +5,7 @@ import com.yuzarsif.fordevelopers.model.Location;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(uses = {CityDtoMapper.class})
 public interface LocationDtoMapper {
 
     LocationDtoMapper MAPPER = Mappers.getMapper(LocationDtoMapper.class);

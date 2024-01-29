@@ -2,7 +2,7 @@ package com.yuzarsif.fordevelopers.dto;
 
 public record LocationDto(
     Integer id,
-    String cityName,
+    CityDto city,
     String districtName
 ) {
 }

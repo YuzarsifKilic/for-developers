@@ -14,20 +14,15 @@ import java.util.stream.Collectors;
 public class LocationService {
 
     private final LocationRepository repository;
+    private final CityService cityService;
 
-    public LocationService(LocationRepository repository) {
+    public LocationService(LocationRepository repository, CityService cityService) {
         this.repository = repository;
+        this.cityService = cityService;
     }
 
-    public List<LocationDto> findLocations() {
-        return repository.findAll()
-                .stream()
-                .map(LocationDtoMapper.MAPPER::mapToLocationDto)
-                .collect(Collectors.toList());
-    }
-
-    public List<LocationDto> findLocationDetails(String cityName) {
-        return repository.findByCityName(cityName)
+    public List<LocationDto> findLocationDetails(Integer cityId) {
+        return repository.findByCity_Id(cityId)
                 .stream()
                 .map(LocationDtoMapper.MAPPER::mapToLocationDto)
                 .collect(Collectors.toList());

@@ -20,13 +20,8 @@ public class LocationController {
         this.locationService = locationService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<LocationDto>> findLocations() {
-        return ResponseEntity.ok(locationService.findLocations());
-    }
-
-    @GetMapping("/{cityName}")
-    public ResponseEntity<List<LocationDto>> findLocationDetails(@PathVariable String cityName) {
-        return ResponseEntity.ok(locationService.findLocationDetails(cityName));
+    @GetMapping("/{cityId}")
+    public ResponseEntity<List<LocationDto>> findLocationDetails(@PathVariable Integer cityId) {
+        return ResponseEntity.ok(locationService.findLocationDetails(cityId));
     }
 }

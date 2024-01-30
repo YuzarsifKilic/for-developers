@@ -9,6 +9,9 @@ module.exports = {
         '420px': '420px',
       }
     },
+    fontFamily: {
+      'quicksand': ['Quicksand', 'sans-serif'],
+    }
   },
   plugins: [],
 }

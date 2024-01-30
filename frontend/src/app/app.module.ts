@@ -18,6 +18,8 @@ import { RegisterComponent } from './employee/register/register.component';
 import { CompanyRegisterComponent } from './company/company-register/company-register.component';
 import { LocationFilterComponent } from './location-filter/location-filter.component';
 import {CityFilterComponent} from "./city-filter/city-filter.component";
+import { EmployeeProfileComponent } from './employee/employee-profile/employee-profile.component';
+import {MatIcon} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import {CityFilterComponent} from "./city-filter/city-filter.component";
     JobTitleFilterComponent,
     RegisterComponent,
     CompanyRegisterComponent,
-    LocationFilterComponent
+    LocationFilterComponent,
+    EmployeeProfileComponent
   ],
     imports: [
         BrowserModule,
@@ -40,7 +43,8 @@ import {CityFilterComponent} from "./city-filter/city-filter.component";
         HttpClientModule,
         BrowserAnimationsModule,
         ReactiveFormsModule,
-        ToastrModule.forRoot()
+        ToastrModule.forRoot(),
+        MatIcon
     ],
   providers: [],
   bootstrap: [AppComponent]

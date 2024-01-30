@@ -1,0 +1,93 @@
+<div class="grid justify-items-center py-4 mt-24 gap-12">
+  <div class="bg-white p-2 rounded-xl px-12 shadow-md w-2/5">
+    <div class="text-2xl font-quicksand">
+      {{employee.firstName}} {{employee.lastName}}
+    </div>
+    <div class="flex flex-row mt-2 font-quicksand gap-4">
+      <div>
+        {{employee.email}}
+      </div>
+      <div>
+        {{employee.phoneNumber}}
+      </div>
+    </div>
+  </div>
+  <div class="bg-white p-2 rounded-xl px-12 shadow-md gap-4 w-2/5">
+    <div class="text-3xl font-quicksand">
+      Education
+    </div>
+    <div class="mt-4 font-quicksand gap-4 divide-y-2">
+      <div *ngFor="let education of employee.educations">
+        <div class="flex justify-between mt-4">
+          <div>
+            <div class="text-2xl">
+              {{education.university.universityName}}
+            </div>
+            <div>
+              {{education.course.courseName}} - {{education.degree.replace("_", " ")}}
+            </div>
+          </div>
+          <div class="text-sm">
+            <div>
+              {{education.startYear}} - {{education.endYear}}
+            </div>
+            <div>
+              {{education.gnp}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bg-white p-2 rounded-xl px-12 shadow-md gap-4 w-2/5">
+    <div class="text-3xl font-quicksand">
+      Experience
+    </div>
+    <div class="mt-4 divide-y-2 font-quicksand gap-4">
+      <div *ngFor="let experience of experiences">
+        <div class="flex justify-between mt-4">
+          <div>
+            <div class="text-2xl">
+              {{experience.companyName}}
+            </div>
+            <div class="text-sm">
+              {{experience.jobTitle.replace("_", " ")}}
+            </div>
+          </div>
+          <div>
+            <div class="text-sm">
+              {{experience.startYear}} / {{experience.endYear}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bg-white p-2 rounded-xl px-12 shadow-md gap-4 w-2/5">
+    <div class="text-3xl font-quicksand">
+      Projects
+    </div>
+    <div class="mt-4 divide-y-2 font-quicksand gap-4">
+      <div *ngFor="let project of projects">
+        <div class="flex justify-between mt-4">
+          <div>
+            <div class="text-2xl">
+              {{project.projectName}}
+            </div>
+            <div>
+              {{project.projectDescription}}
+            </div>
+            <div>
+              <a [href]="project.projectUrl" class="text-blue-400">{{project.projectUrl}}</a>
+            </div>
+          </div>
+          <div>
+            <div class="text-sm">
+              {{project.startDate}} / {{project.endDate}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

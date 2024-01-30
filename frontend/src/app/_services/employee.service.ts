@@ -26,4 +26,12 @@ export class EmployeeService {
           this.toastr.error(error.response.data.message, "Error")
       })
   }
+
+  findEmployeeById(id: string) {
+    return this.axios.request(
+      "GET",
+      "/api/employees/" + id,
+      {}
+    );
+  }
 }

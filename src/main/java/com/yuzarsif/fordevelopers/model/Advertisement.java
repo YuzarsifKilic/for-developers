@@ -24,6 +24,7 @@ public class Advertisement {
     private String advertisementTitle;
     private String advertisementContent;
     private int viewCount;
+    private boolean open;
     @Enumerated(EnumType.STRING)
     private WorkType workType;
     @Enumerated(EnumType.STRING)

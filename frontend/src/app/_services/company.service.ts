@@ -25,4 +25,12 @@ export class CompanyService {
         this.toastr.error(error.response.data.message, "Error");
       })
   }
+
+  findCompanyById(id: string) {
+    return this.axios.request(
+      "GET",
+      "/api/companies/" + id,
+      {}
+    );
+  }
 }

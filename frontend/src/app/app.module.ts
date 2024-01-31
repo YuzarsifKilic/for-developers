@@ -20,6 +20,7 @@ import { LocationFilterComponent } from './location-filter/location-filter.compo
 import {CityFilterComponent} from "./city-filter/city-filter.component";
 import { EmployeeProfileComponent } from './employee/employee-profile/employee-profile.component';
 import {MatIcon} from "@angular/material/icon";
+import { CompanyProfileComponent } from './company/company-profile/company-profile.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {MatIcon} from "@angular/material/icon";
     RegisterComponent,
     CompanyRegisterComponent,
     LocationFilterComponent,
-    EmployeeProfileComponent
+    EmployeeProfileComponent,
+    CompanyProfileComponent
   ],
     imports: [
         BrowserModule,

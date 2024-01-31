@@ -1,0 +1,50 @@
+<div class="grid justify-items-center py-4 mt-24 gap-12">
+  <div class="bg-white p-2 rounded-xl px-12 shadow-md w-2/5">
+    <div class="text-3xl font-quicksand">
+      {{company.companyName}}
+    </div>
+    <div class="flex flex-row justify-between mt-2 font-quicksand gap-8">
+      <div class="text-blue-600">
+        {{company.email}}
+      </div>
+      <div>
+        {{company.location.city.cityName}} / {{company.location.districtName}}
+      </div>
+    </div>
+  </div>
+  <div class="bg-white p-2 rounded-xl px-12 shadow-md gap-4 w-2/5">
+    <div class="text-3xl font-quicksand">
+      Advertisements
+    </div>
+    <div class="mt-4 font-quicksand gap-4 divide-y-2">
+      <div *ngFor="let advertisement of advertisements">
+        <div class="flex justify-between mt-4">
+          <div>
+            <div class="text-2xl">
+              {{advertisement.advertisementTitle}}
+              <div [ngSwitch]="advertisement.open" class="text-sm">
+                <div *ngSwitchCase="true" class="text-green-400">
+                  Still Open
+                </div>
+                <div *ngSwitchCase="false" class="text-red-600">
+                  Closed
+                </div>
+              </div>
+            </div>
+            <div>
+              {{advertisement.advertisementContent}}
+            </div>
+          </div>
+          <div class="text-sm">
+            <div class="">
+              {{advertisement.jobTitle.replace("_", " ")}}
+            </div>
+            <div>
+              {{advertisement.workType.replace("_", " ")}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -33,6 +33,7 @@ public class AdvertisementService {
                 .advertisementTitle(request.advertisementTitle())
                 .advertisementContent(request.advertisementContent())
                 .viewCount(0)
+                .open(true)
                 .workType(request.workType())
                 .jobTitle(request.jobTitle())
                 .build();

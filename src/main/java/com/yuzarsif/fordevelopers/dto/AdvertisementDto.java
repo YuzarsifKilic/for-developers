@@ -8,6 +8,8 @@ public record AdvertisementDto(
         CompanyDto company,
         String advertisementTitle,
         String advertisementContent,
+        boolean open,
+        int viewCount,
         WorkType workType,
         JobTitle jobTitle
 ) {

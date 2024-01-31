@@ -9,5 +9,6 @@ export class Advertisement {
   viewCount!: number;
   workType!: string;
   jobTitle!: string;
+  open!: boolean;
 
 }

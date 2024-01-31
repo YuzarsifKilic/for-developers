@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -22,8 +23,12 @@ public class Experience {
     private String companyName;
     @Enumerated(EnumType.STRING)
     private JobTitle jobTitle;
-    private LocalDate startYear;
-    private LocalDate endYear;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @Temporal(TemporalType.DATE)
+    private Date startDate;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @Temporal(TemporalType.DATE)
+    private Date endDate;
     @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;

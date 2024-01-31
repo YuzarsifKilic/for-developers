@@ -3,7 +3,6 @@ package com.yuzarsif.fordevelopers.service;
 import com.yuzarsif.fordevelopers.dto.request.CreateProjectRequest;
 import com.yuzarsif.fordevelopers.dto.ProjectDto;
 import com.yuzarsif.fordevelopers.exception.ProjectNotExistsException;
-import com.yuzarsif.fordevelopers.mapper.ProjectDtoMapper;
 import com.yuzarsif.fordevelopers.model.Employee;
 import com.yuzarsif.fordevelopers.model.Project;
 import com.yuzarsif.fordevelopers.repository.ProjectRepository;
@@ -28,7 +27,7 @@ public class ProjectService {
         this.employeeService = employeeService;
     }
 
-    public ProjectDto saveProject(CreateProjectRequest request) {
+    public void saveProject(CreateProjectRequest request) {
         Employee employee = employeeService.getById(request.getEmployeeId());
         githubClient.validateProjectUrl(employee.getGithubUsername(), request.getProjectName());
 
@@ -36,32 +35,23 @@ public class ProjectService {
                 .builder()
                 .projectName(request.getProjectName())
                 .projectDescription(request.getProjectDescription())
-                .startYear(convertToDate(request.getStartDate()))
-                .endYear(convertToDate(request.getEndDate()))
+                .startDate(convertToDate(request.getStartDate()))
+                .endDate(convertToDate(request.getEndDate()))
                 .employee(employee)
+                .projectUrl(githubClient.getProjectUrl(employee.getGithubUsername(), request.getProjectName()))
                 .build();
-
-        Project savedProject = repository.save(project);
-
-        return ProjectDto
-                .builder()
-                .projectName(savedProject.getProjectName())
-                .projectDescription(savedProject.getProjectDescription())
-                .startDate(savedProject.getStartYear().toString())
-                .endDate(savedProject.getEndYear().toString())
-                .projectUrl(githubClient.getProjectUrl(savedProject.getEmployee().getGithubUsername(), savedProject.getProjectName()))
-                .build();
+        repository.save(project);
     }
 
     public List<ProjectDto> findAllByEmployeeId(String employeeId) {
         return repository.findByEmployee_Id(employeeId)
                 .stream()
-                .map(ProjectDtoMapper.MAPPER::mapToProjectDto)
+                .map(ProjectDto::mapToProjectDto)
                 .collect(Collectors.toList());
     }
 
     public ProjectDto findProjectById(Long id) {
-        return ProjectDtoMapper.MAPPER.mapToProjectDto(getById(id));
+        return ProjectDto.mapToProjectDto(getById(id));
     }
 
     public void deleteById(Long id) {
@@ -77,11 +67,10 @@ public class ProjectService {
 
     private Date convertToDate(String date) {
         try {
-            SimpleDateFormat format = new SimpleDateFormat("MM/yyyy");
+            SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
             return format.parse(date);
         } catch (ParseException e) {
             throw new ProjectNotExistsException("Project not found");
         }
-
     }
 }

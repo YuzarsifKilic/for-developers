@@ -4,10 +4,9 @@ import com.yuzarsif.fordevelopers.dto.request.CreateProjectRequest;
 import com.yuzarsif.fordevelopers.dto.ProjectDto;
 import com.yuzarsif.fordevelopers.service.ProjectService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/projects")
@@ -20,7 +19,13 @@ public class ProjectController {
     }
 
     @PostMapping
-    public ResponseEntity<ProjectDto> saveProject(@RequestBody CreateProjectRequest request) {
-        return ResponseEntity.ok(projectService.saveProject(request));
+    public ResponseEntity<Void> saveProject(@RequestBody CreateProjectRequest request) {
+        projectService.saveProject(request);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<List<ProjectDto>> findProjectByEmployeeId(@PathVariable String id) {
+        return ResponseEntity.ok(projectService.findAllByEmployeeId(id));
     }
 }

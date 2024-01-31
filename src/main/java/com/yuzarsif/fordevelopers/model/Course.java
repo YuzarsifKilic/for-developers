@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -27,4 +28,16 @@ public class Course {
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE})
     private Set<Education> educations;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return Objects.equals(id, course.id) && Objects.equals(courseName, course.courseName) && Objects.equals(universities, course.universities);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, courseName, universities);
+    }
 }

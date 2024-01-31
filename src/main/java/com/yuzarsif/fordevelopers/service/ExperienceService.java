@@ -3,13 +3,17 @@ package com.yuzarsif.fordevelopers.service;
 import com.yuzarsif.fordevelopers.dto.request.CreateExperienceRequest;
 import com.yuzarsif.fordevelopers.dto.ExperienceDto;
 import com.yuzarsif.fordevelopers.exception.ExperienceNotFoundException;
+import com.yuzarsif.fordevelopers.exception.ProjectNotExistsException;
 import com.yuzarsif.fordevelopers.mapper.ExperienceDtoMapper;
 import com.yuzarsif.fordevelopers.model.Employee;
 import com.yuzarsif.fordevelopers.model.Experience;
 import com.yuzarsif.fordevelopers.repository.ExperienceRepository;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,14 +28,14 @@ public class ExperienceService {
         this.employeeService = employeeService;
     }
 
-    private void saveExperience(CreateExperienceRequest request) {
+    public void saveExperience(CreateExperienceRequest request) {
         Employee employee = employeeService.getById(request.employeeId());
 
         Experience experience = Experience
                 .builder()
                 .companyName(request.companyName())
-                .startYear(LocalDate.parse(request.startYear()))
-                .endYear(LocalDate.parse(request.endYear()))
+                .startDate(convertToDate(request.startYear()))
+                .endDate(convertToDate(request.endYear()))
                 .jobTitle(request.jobTitle())
                 .employee(employee)
                 .build();
@@ -42,7 +46,7 @@ public class ExperienceService {
     public List<ExperienceDto> findExperiencesByEmployeeId(String employeeId) {
         return repository.findAllByEmployeeId(employeeId)
                 .stream()
-                .map(ExperienceDtoMapper.MAPPER::mapToExperienceDto)
+                .map(ExperienceDto::mapToExperienceDto)
                 .collect(Collectors.toList());
     }
 
@@ -59,5 +63,14 @@ public class ExperienceService {
         return repository.findById(id).orElseThrow(
                 () -> new ExperienceNotFoundException("Experience not found by id : " + id)
         );
+    }
+
+    private Date convertToDate(String date) {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
+            return format.parse(date);
+        } catch (ParseException e) {
+            throw new ProjectNotExistsException("Project not found");
+        }
     }
 }

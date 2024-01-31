@@ -10,6 +10,7 @@ import com.yuzarsif.fordevelopers.exception.PhoneNumberInUseException;
 import com.yuzarsif.fordevelopers.mapper.EmployeeDtoMapper;
 import com.yuzarsif.fordevelopers.mapper.SavedEmployeeMapper;
 import com.yuzarsif.fordevelopers.model.BaseUser;
+import com.yuzarsif.fordevelopers.model.Education;
 import com.yuzarsif.fordevelopers.model.Employee;
 import com.yuzarsif.fordevelopers.model.Roles;
 import com.yuzarsif.fordevelopers.repository.EmployeeRepository;

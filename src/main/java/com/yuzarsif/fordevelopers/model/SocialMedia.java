@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class SocialMedia {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private SocialMedias socialMedia;
     private String url;

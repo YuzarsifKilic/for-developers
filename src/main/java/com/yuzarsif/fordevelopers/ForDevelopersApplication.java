@@ -33,9 +33,11 @@ public class ForDevelopersApplication {
 								  UniversityService universityService,
 								  AdvertisementRepository advertisementRepository,
 								  LocationRepository locationRepository,
-								  CompanyRepository companyRepository) {
+								  CompanyRepository companyRepository,
+								  GithubClient githubClient) {
 		return (args) -> {
 
+			githubClient.findRepositories("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");
 		};
 
 	}

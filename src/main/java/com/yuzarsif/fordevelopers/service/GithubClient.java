@@ -2,16 +2,13 @@ package com.yuzarsif.fordevelopers.service;
 
 import com.yuzarsif.fordevelopers.config.GithubProperties;
 import com.yuzarsif.fordevelopers.exception.GithubValidateException;
-import com.yuzarsif.fordevelopers.exception.GlobalExceptionHandler;
-import com.yuzarsif.fordevelopers.service.models.GithubAccessTokenRequest;
-import com.yuzarsif.fordevelopers.service.models.GithubAccessTokenResponse;
-import com.yuzarsif.fordevelopers.service.models.GithubProjectResponse;
+import com.yuzarsif.fordevelopers.service.models.*;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -71,5 +68,22 @@ public class GithubClient {
 
     public String getProjectUrl(String githubUsername, String project) {
         return String.format("%s/%s/%s", githubProperties.getHtmlUrl(), githubUsername, project);
+    }
+
+    public List<GithubRepositoryResponse> findRepositories(String accessToken) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Authorization", "Bearer " + accessToken);
+        httpHeaders.add("X-GitHub-Api-Version", "2022-11-28");
+
+        HttpEntity request = new HttpEntity(httpHeaders);
+
+        try {
+            ResponseEntity<GithubUserResponse> repositoryUrl = restTemplate.exchange(githubProperties.getApiUrl() + "/user", HttpMethod.GET, request, GithubUserResponse.class);
+            ResponseEntity<GithubRepositoryResponse[]> response = restTemplate.exchange(repositoryUrl.getBody().getReposUrl(), HttpMethod.GET, request, GithubRepositoryResponse[].class);
+            return List.of(response.getBody());
+        } catch (HttpClientErrorException e) {
+            throw new GithubValidateException("Access token is expired");
+        }
+
     }
 }

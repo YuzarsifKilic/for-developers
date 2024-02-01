@@ -21,4 +21,8 @@ export class AdvertisementService {
       `/api/advertisements/company/${id}`,
       {});
   }
+
+  saveAdvertisement(request: any) {
+
+  }
 }

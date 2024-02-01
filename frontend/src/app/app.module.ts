@@ -21,6 +21,7 @@ import {CityFilterComponent} from "./city-filter/city-filter.component";
 import { EmployeeProfileComponent } from './employee/employee-profile/employee-profile.component';
 import {MatIcon} from "@angular/material/icon";
 import { CompanyProfileComponent } from './company/company-profile/company-profile.component';
+import { AdvertisementSaveComponent } from './advertisements/advertisement-save/advertisement-save.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CompanyProfileComponent } from './company/company-profile/company-profi
     CompanyRegisterComponent,
     LocationFilterComponent,
     EmployeeProfileComponent,
-    CompanyProfileComponent
+    CompanyProfileComponent,
+    AdvertisementSaveComponent
   ],
     imports: [
         BrowserModule,

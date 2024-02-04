@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import {AxiosService} from "./axios.service";
 import {ToastrService} from "ngx-toastr";
+import {Employee} from "../_models/employee";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
+
+  employee!: Employee;
 
   constructor(private axios: AxiosService, private toastr: ToastrService) { }
 
@@ -32,6 +35,9 @@ export class EmployeeService {
       "GET",
       "/api/employees/" + id,
       {}
-    );
+    ).then(resp => {
+      this.employee = resp.data;
+      return resp.data;
+    });
   }
 }

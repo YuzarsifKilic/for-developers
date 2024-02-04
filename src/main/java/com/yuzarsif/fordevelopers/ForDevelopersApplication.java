@@ -37,7 +37,6 @@ public class ForDevelopersApplication {
 								  GithubClient githubClient) {
 		return (args) -> {
 
-			githubClient.findRepositories("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");
 		};
 
 	}

@@ -70,7 +70,8 @@ public class GithubClient {
         return String.format("%s/%s/%s", githubProperties.getHtmlUrl(), githubUsername, project);
     }
 
-    public List<GithubRepositoryResponse> findRepositories(String accessToken) {
+    public List<GithubRepositoryResponse> findRepositories(String code) {
+        String accessToken = getAccessToken(code);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", "Bearer " + accessToken);
         httpHeaders.add("X-GitHub-Api-Version", "2022-11-28");

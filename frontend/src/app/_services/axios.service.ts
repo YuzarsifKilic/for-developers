@@ -15,11 +15,15 @@ export class AxiosService {
     return window.localStorage.getItem("auth_token");
   }
 
-  setAuthToken(token: string | null): void {
-    if (token !== null) {
+  setAuthTokenAndRole(token: string | null, role: string | null, id: string | null): void {
+    if (token !== null && role !== null && id !== null) {
       window.localStorage.setItem("auth_token", token);
+      window.localStorage.setItem("auth_role", role);
+      window.localStorage.setItem("user_id", id);
     } else {
       window.localStorage.removeItem("auth_token");
+      window.localStorage.removeItem("auth_role");
+      window.localStorage.removeItem("id");
     }
   }
 

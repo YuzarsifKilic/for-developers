@@ -22,6 +22,9 @@ import { EmployeeProfileComponent } from './employee/employee-profile/employee-p
 import {MatIcon} from "@angular/material/icon";
 import { CompanyProfileComponent } from './company/company-profile/company-profile.component';
 import { AdvertisementSaveComponent } from './advertisements/advertisement-save/advertisement-save.component';
+import { EmployeeHomeComponent } from './employee/employee-home/employee-home.component';
+import { AddProjectComponent } from './project/add-project/add-project.component';
+import { GithubCallbackComponent } from './employee/github-callback/github-callback.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { AdvertisementSaveComponent } from './advertisements/advertisement-save/
     LocationFilterComponent,
     EmployeeProfileComponent,
     CompanyProfileComponent,
-    AdvertisementSaveComponent
+    AdvertisementSaveComponent,
+    EmployeeHomeComponent,
+    AddProjectComponent,
+    GithubCallbackComponent
   ],
     imports: [
         BrowserModule,

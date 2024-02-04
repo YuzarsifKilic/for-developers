@@ -1,0 +1,33 @@
+<div class="px-96 mt-48 rounded-md">
+  <div class="bg-white p-8 rounded-xl">
+    <form [formGroup]="projectSaveForm" (ngSubmit)="saveProject()">
+      <div class="sm:col-span-3">
+        <label for="repository-select" class="block font-quicksand leading-6 text-gray-900">Repository Name</label>
+        <div class="mt-2">
+          <select id="repository-select" name="repository-select" (change)="onSelectRepository($event)" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+            <option *ngFor="let repository of githubRepositoryResponses">{{repository.name}}</option>
+          </select>
+        </div>
+        <div class="text-sm font-quicksand mt-2 text-blue-700">
+          Select a repository from your Github Account.
+        </div>
+      </div>
+      <div class="sm:col-span-3">
+        <label for="project-title" class="block font-quicksand leading-6 text-gray-900 mt-4">Project Title</label>
+        <div class="mt-2">
+          <input type="text" name="project-title" id="project-title" autocomplete="advertisement-title" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" formControlName="projectTitle">
+        </div>
+      </div>
+
+      <div class="col-span-full">
+        <label for="project-description" class="block font-quicksand leading-6 text-gray-900 mt-4">Project Description</label>
+        <div class="mt-2">
+          <textarea id="project-description" name="project-description" rows="3" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" formControlName="projectDescription"></textarea>
+        </div>
+      </div>
+      <div class="grid justify-items-center mt-8">
+        <button type="submit" class="bg-gradient-to-r from-sky-400 to-sky-600 text-white p-2 rounded-xl w-1/3 font-quicksand mt-8 hover:bg-gradient-to-r hover:from-sky-500 hover:to-sky-700">Project Save</button>
+      </div>
+    </form>
+  </div>
+</div>

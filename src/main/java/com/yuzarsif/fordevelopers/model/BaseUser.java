@@ -12,6 +12,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity(name = "user")
@@ -46,5 +47,18 @@ public class BaseUser implements UserDetails {
     @Override
     public String getUsername() {
         return getEmail();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BaseUser baseUser = (BaseUser) o;
+        return accountNonExpired == baseUser.accountNonExpired && isEnabled == baseUser.isEnabled && accountNonLocked == baseUser.accountNonLocked && credentialsNonExpired == baseUser.credentialsNonExpired && Objects.equals(id, baseUser.id) && Objects.equals(email, baseUser.email) && Objects.equals(password, baseUser.password) && Objects.equals(authorities, baseUser.authorities) && Objects.equals(createdAt, baseUser.createdAt) && Objects.equals(updatedAt, baseUser.updatedAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, email, password, authorities, createdAt, updatedAt, accountNonExpired, isEnabled, accountNonLocked, credentialsNonExpired);
     }
 }

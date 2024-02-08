@@ -25,6 +25,7 @@ import { AdvertisementSaveComponent } from './advertisements/advertisement-save/
 import { EmployeeHomeComponent } from './employee/employee-home/employee-home.component';
 import { AddProjectComponent } from './project/add-project/add-project.component';
 import { GithubCallbackComponent } from './employee/github-callback/github-callback.component';
+import { ShowApplyComponent } from './apply/show-apply/show-apply.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { GithubCallbackComponent } from './employee/github-callback/github-callb
     AdvertisementSaveComponent,
     EmployeeHomeComponent,
     AddProjectComponent,
-    GithubCallbackComponent
+    GithubCallbackComponent,
+    ShowApplyComponent
   ],
     imports: [
         BrowserModule,

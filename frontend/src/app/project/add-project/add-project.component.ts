@@ -4,6 +4,7 @@ import {ProjectService} from "../../_services/project.service";
 import {GithubRepositoryResponse} from "../../_models/github-repository-response";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {PROJECT_DAY, PROJECT_MONTH, PROJECT_YEAR} from "../../_consts/project-day";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-add-project',
@@ -30,7 +31,7 @@ export class AddProjectComponent {
     projectDescription: ['', Validators.required]
   })
 
-  constructor(private router: Router, private projectService: ProjectService, private formBuilder: FormBuilder) { }
+  constructor(private router: Router, private projectService: ProjectService, private formBuilder: FormBuilder, private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     if (window.localStorage.getItem("user_id") === null || window.localStorage.getItem("auth_token") === null || window.localStorage.getItem("auth_role") === null) {
@@ -56,7 +57,15 @@ export class AddProjectComponent {
         this.projectSaveForm.get("projectDescription")?.value,
         startedDate,
         finishedDate,
-        this.githubRepository.htmlUrl);
+        this.githubRepository.htmlUrl)
+      .then(resp => {
+        if (resp.status === 200) {
+          this.toastrService.success("Project has been saved successfully!", "Success");
+          this.router.navigate(["employee/home" + window.localStorage.getItem("user_id")]);
+        } else {
+          this.toastrService.error("Something went wrong!", "Error");
+        }
+      })
   }
 
   onSelectRepository(event: any) {

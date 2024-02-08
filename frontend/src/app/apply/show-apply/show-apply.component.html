@@ -1,0 +1,28 @@
+<div class="px-96 mt-24 gap-4">
+  <div *ngFor="let apply of applies" class="bg-gradient-to-r from-sky-400 to-sky-600 rounded-xl font-quicksand hover:shadow-2xl">
+    <div class="divide-y-2">
+      <!-- Üst kısım -->
+      <div class="flex justify-between items-center p-4">
+        <!-- Sol kısım -->
+        <div class="text-white">
+          <h2 class="text-3xl">{{apply.advertisement.company.companyName}}</h2>
+          <p class="mt-2">{{apply.advertisement.company.location.city.cityName}}/{{apply.advertisement.company.location.districtName}}</p>
+          <p class="mt-1 text-sm">Applied {{apply.appliedDate}}</p>
+        </div>
+        <!-- Sağ kısım -->
+        <div class="text-white">
+          <h2>{{apply.advertisement.jobTitle.replace("_", " ")}}</h2>
+          <p>{{apply.advertisement.workType}}</p>
+        </div>
+      </div>
+      <!-- Alt kısım -->
+      <div class="p-4 text-white">
+        <h1 class="text-3xl">{{apply.advertisement.advertisementTitle}}</h1>
+        <p class="text-lg">{{apply.advertisement.advertisementContent}}</p>
+        <div class="flex justify-end mt-8">
+          <button class="p-2 bg-red-600 rounded-xl">Remove Apply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

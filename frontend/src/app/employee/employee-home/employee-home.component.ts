@@ -65,4 +65,8 @@ export class EmployeeHomeComponent {
   connectToGithub() {
     window.location.href = "http://localhost:8080/auth/github/authorize"
   }
+
+  showApplies() {
+    this.router.navigate(["/employee/" + this.employeeId + "/apply"]);
+  }
 }

@@ -10,6 +10,7 @@ import {AdvertisementSaveComponent} from "./advertisements/advertisement-save/ad
 import {EmployeeHomeComponent} from "./employee/employee-home/employee-home.component";
 import {AddProjectComponent} from "./project/add-project/add-project.component";
 import {GithubCallbackComponent} from "./employee/github-callback/github-callback.component";
+import {ShowApplyComponent} from "./apply/show-apply/show-apply.component";
 
 const routes: Routes = [
   {path: "sign-in", component: SignInComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: "employee/:id", component: EmployeeProfileComponent},
   {path: "employee/home/:id", component: EmployeeHomeComponent},
   {path: "employee/:id/project", component: AddProjectComponent},
+  {path: "employee/:id/apply", component: ShowApplyComponent},
   {path: "company/register", component: CompanyRegisterComponent},
   {path: "company/:id", component: CompanyProfileComponent},
   {path: "company/:id/advertisement-save", component: AdvertisementSaveComponent},

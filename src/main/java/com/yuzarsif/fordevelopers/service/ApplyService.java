@@ -4,7 +4,6 @@ import com.yuzarsif.fordevelopers.dto.CompanyApplyDto;
 import com.yuzarsif.fordevelopers.dto.request.CreateApplyRequest;
 import com.yuzarsif.fordevelopers.dto.EmployeeApplyDto;
 import com.yuzarsif.fordevelopers.mapper.CompanyApplyDtoMapper;
-import com.yuzarsif.fordevelopers.mapper.EmployeeApplyDtoMapper;
 import com.yuzarsif.fordevelopers.model.Advertisement;
 import com.yuzarsif.fordevelopers.model.Apply;
 import com.yuzarsif.fordevelopers.model.Employee;
@@ -43,7 +42,7 @@ public class ApplyService {
         employeeService.getById(employeeId);
         return repository.findAllByEmployeeId(employeeId)
                 .stream()
-                .map(EmployeeApplyDtoMapper.MAPPER::mapToEmployeeApplyDto)
+                .map(EmployeeApplyDto::mapToEmployeeApplyDto)
                 .collect(Collectors.toList());
     }
 

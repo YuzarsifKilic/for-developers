@@ -23,19 +23,7 @@ public class GithubClient {
     }
 
     public String getAuthorizeUrl() {
-        return String.format("%s/?client_id=%s", githubProperties.getAuthorizeUrl(), githubProperties.getClientId());
-    }
-
-    public String getAccessToken(String code) {
-        GithubAccessTokenRequest accessTokenRequest = GithubAccessTokenRequest
-                .builder()
-                .clientId(githubProperties.getClientId())
-                .clientSecret(githubProperties.getClientSecret())
-                .code(code)
-                .build();
-        HttpEntity<GithubAccessTokenRequest> request = new HttpEntity<>(accessTokenRequest);
-        ResponseEntity<GithubAccessTokenResponse> exchange = restTemplate.exchange(githubProperties.getAccessTokenUrl(), HttpMethod.POST, request, GithubAccessTokenResponse.class);
-        return Objects.requireNonNull(exchange.getBody()).getAccessToken();
+        return String.format("%s/?client_id=%s&redirect_uri=http://localhost:4200/auth/github/callback", githubProperties.getAuthorizeUrl(), githubProperties.getClientId());
     }
 
     public void validateUser(String githubUsername) {
@@ -50,6 +38,12 @@ public class GithubClient {
         } catch (HttpClientErrorException e) {
             throw new GithubValidateException(String.format("Github user %s not found", githubUsername));
         }
+    }
+
+    protected boolean validateGithubUsername(String code, String githubUsername) {
+        String githubUser = extractGithubUsername(code);
+
+        return Objects.equals(githubUser, githubUsername);
     }
 
     public void validateProjectUrl(String githubUsername, String project) {
@@ -74,7 +68,6 @@ public class GithubClient {
         String accessToken = getAccessToken(code);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", "Bearer " + accessToken);
-        httpHeaders.add("X-GitHub-Api-Version", "2022-11-28");
 
         HttpEntity request = new HttpEntity(httpHeaders);
 
@@ -85,6 +78,42 @@ public class GithubClient {
         } catch (HttpClientErrorException e) {
             throw new GithubValidateException("Access token is expired");
         }
+    }
 
+    public String extractGithubUsername(String code) {
+        String accessToken = getAccessToken(code);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Authorization", "Bearer " + accessToken);
+
+        HttpEntity request = new HttpEntity(httpHeaders);
+
+        try {
+            ResponseEntity<GithubUserResponse> repositoryUrl = restTemplate.exchange(githubProperties.getApiUrl() + "/user", HttpMethod.GET, request, GithubUserResponse.class);
+            return repositoryUrl.getBody().getLogin();
+        } catch (HttpClientErrorException e) {
+            throw new GithubValidateException("Access token is expired");
+        }
+    }
+
+    private HttpEntity getHttpEntity(String code) {
+        String accessToken = getAccessToken(code);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("Authorization", "Bearer " + accessToken);
+        httpHeaders.add("X-GitHub-Api-Version", "2022-11-28");
+
+        HttpEntity request = new HttpEntity(httpHeaders);
+        return request;
+    }
+
+    public String getAccessToken(String code) {
+        GithubAccessTokenRequest accessTokenRequest = GithubAccessTokenRequest
+                .builder()
+                .clientId(githubProperties.getClientId())
+                .clientSecret(githubProperties.getClientSecret())
+                .code(code)
+                .build();
+        HttpEntity<GithubAccessTokenRequest> request = new HttpEntity<>(accessTokenRequest);
+        ResponseEntity<GithubAccessTokenResponse> exchange = restTemplate.exchange(githubProperties.getAccessTokenUrl(), HttpMethod.POST, request, GithubAccessTokenResponse.class);
+        return Objects.requireNonNull(exchange.getBody()).getAccessToken();
     }
 }

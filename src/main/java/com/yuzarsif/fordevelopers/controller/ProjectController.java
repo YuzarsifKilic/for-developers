@@ -1,5 +1,6 @@
 package com.yuzarsif.fordevelopers.controller;
 
+import com.yuzarsif.fordevelopers.dto.GithubUsernameCheckRequest;
 import com.yuzarsif.fordevelopers.dto.request.CreateProjectRequest;
 import com.yuzarsif.fordevelopers.dto.ProjectDto;
 import com.yuzarsif.fordevelopers.service.GithubClient;
@@ -26,6 +27,16 @@ public class ProjectController {
     public ResponseEntity<Void> saveProject(@RequestBody CreateProjectRequest request) {
         projectService.saveProject(request);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/github-callback")
+    public ResponseEntity<Boolean> checkGithubUsername(@RequestBody GithubUsernameCheckRequest request) {
+        return ResponseEntity.ok(projectService.validateUser(request));
+    }
+
+    @PostMapping("/employee/repository")
+    public ResponseEntity<List<GithubRepositoryResponse>> findRepositories(@RequestBody GithubUsernameCheckRequest request) {
+        return ResponseEntity.ok(projectService.findRepositories(request.code(), request.employeeId()));
     }
 
     @GetMapping("/employee/{id}")

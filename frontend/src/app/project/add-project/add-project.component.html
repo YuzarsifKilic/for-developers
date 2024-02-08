@@ -25,6 +25,58 @@
           <textarea id="project-description" name="project-description" rows="3" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" formControlName="projectDescription"></textarea>
         </div>
       </div>
+      <div class="sm:col-span-3 flex flex-row gap-10">
+        <div class="flex flex-col">
+          <label for="project-started-day" class="block font-quicksand leading-6 text-gray-900 mt-4">Started Day</label>
+          <div class="mt-2">
+            <select id="project-started-day" name="project-started-day" (change)="onSelectStartedDay($event)" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+              <option *ngFor="let projectDay of PROJECT_DAY">{{projectDay}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <label for="project-started-month" class="block font-quicksand leading-6 text-gray-900 mt-4">Started Month</label>
+          <div class="mt-2">
+            <select id="project-started-month" name="project-started-month" (change)="onSelectedStartedMonth($event)" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+              <option *ngFor="let projectMonth of PROJECT_MONTH">{{projectMonth}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <label for="project-started-year" class="block font-quicksand leading-6 text-gray-900 mt-4">Started Year</label>
+          <div class="mt-2">
+            <select id="project-started-year" name="project-started-year" (change)="onSelectedStartedYear($event)" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+              <option *ngFor="let projectYear of PROJECT_YEAR">{{projectYear}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="sm:col-span-3 flex flex-row gap-8">
+        <div class="flex flex-col">
+          <label for="project-finish-day" class="block font-quicksand leading-6 text-gray-900 mt-4">Finished Day</label>
+          <div class="mt-2">
+            <select id="project-finish-day" name="project-finish-day" (change)="onSelectedFinishDay($event)" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+              <option *ngFor="let projectDay of PROJECT_DAY">{{projectDay}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <label for="project-finish-month" class="block font-quicksand leading-6 text-gray-900 mt-4">Finished Month</label>
+          <div class="mt-2">
+            <select id="project-finish-month" name="project-finish-month" (change)="onSelectedFinishMonth($event)" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+              <option *ngFor="let projectMonth of PROJECT_MONTH">{{projectMonth}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <label for="project-finish-year" class="block font-quicksand leading-6 text-gray-900 mt-4">Finished Year</label>
+          <div class="mt-2">
+            <select id="project-finish-year" name="project-finish-year" (change)="onSelectedFinishYear($event)" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+              <option *ngFor="let projectYear of PROJECT_YEAR">{{projectYear}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
       <div class="grid justify-items-center mt-8">
         <button type="submit" class="bg-gradient-to-r from-sky-400 to-sky-600 text-white p-2 rounded-xl w-1/3 font-quicksand mt-8 hover:bg-gradient-to-r hover:from-sky-500 hover:to-sky-700">Project Save</button>
       </div>

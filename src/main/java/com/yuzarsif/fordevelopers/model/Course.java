@@ -12,6 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @Data
+@ToString(exclude = {"universities", "educations"})
 public class Course {
 
     @Id

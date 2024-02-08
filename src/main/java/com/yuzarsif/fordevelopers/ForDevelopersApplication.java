@@ -7,11 +7,15 @@ import com.yuzarsif.fordevelopers.repository.AdvertisementRepository;
 import com.yuzarsif.fordevelopers.repository.CompanyRepository;
 import com.yuzarsif.fordevelopers.repository.LocationRepository;
 import com.yuzarsif.fordevelopers.service.*;
+import com.yuzarsif.fordevelopers.service.models.GithubRepositoryResponse;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -37,7 +41,10 @@ public class ForDevelopersApplication {
 								  GithubClient githubClient) {
 		return (args) -> {
 
+
+
 		};
 
 	}
+
 }

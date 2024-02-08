@@ -4,6 +4,7 @@ import com.yuzarsif.fordevelopers.service.GithubClient;
 import com.yuzarsif.fordevelopers.service.models.GithubAccessTokenRequest;
 import com.yuzarsif.fordevelopers.service.models.GithubAccessTokenResponse;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,8 +23,8 @@ public class GithubAuthController {
         response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
     }
 
-    @PostMapping("/access_token")
-    public GithubAccessTokenResponse getAccessToken(@RequestBody GithubAccessTokenRequest request) {
-        return GithubAccessTokenResponse.builder().accessToken(githubClient.getAccessToken(request.getCode())).build();
+    @GetMapping("/{code}")
+    public ResponseEntity<String> extractGithubUsername(@PathVariable String code) {
+        return ResponseEntity.ok(githubClient.extractGithubUsername(code));
     }
 }

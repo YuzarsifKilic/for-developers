@@ -8,5 +8,6 @@ import lombok.Data;
 @Data
 public class GithubUserResponse {
 
+    private String login;
     private String reposUrl;
 }

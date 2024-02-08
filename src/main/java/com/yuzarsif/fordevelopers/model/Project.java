@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -21,14 +22,23 @@ public class Project {
     private Long id;
     private String projectName;
     private String projectDescription;
-    private String projectUrl;
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    @Temporal(TemporalType.DATE)
-    private Date startDate;
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    @Temporal(TemporalType.DATE)
-    private Date endDate;
+    private String repositoryUrl;
+    private LocalDate startDate;
+    private LocalDate endDate;
     @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
+
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", projectName='" + projectName + '\'' +
+                ", projectDescription='" + projectDescription + '\'' +
+                ", repositoryUrl='" + repositoryUrl + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                '}';
+    }
 }

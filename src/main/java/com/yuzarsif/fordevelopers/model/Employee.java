@@ -13,6 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @SuperBuilder
 @Data
+@ToString(exclude = {"projects", "socialMedia", "educations", "experiences", "applies"})
 public class Employee extends BaseUser {
 
     private String firstName;

@@ -10,6 +10,8 @@ import {ToastrService} from "ngx-toastr";
 })
 export class GithubCallbackComponent {
 
+  userId = window.localStorage.getItem("user_id");
+
   constructor(private route: ActivatedRoute,
               private projectService: ProjectService,
               private router: Router,
@@ -17,11 +19,19 @@ export class GithubCallbackComponent {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.projectService.code = params['code'];
       window.localStorage.setItem("github_code", params['code']);
-      this.toastr.success("Successfully connected redirecting to home page", "Success");
-      this.router.navigate(["employee/home/" + window.localStorage.getItem("user_id")]);
     })
+    this.validateGithubUser(window.localStorage.getItem("github_code")!);
   }
 
+  validateGithubUser(code: string) {
+    this.projectService.validateGithubUser(code).then(resp => {
+      if (resp === true) {
+        this.toastr.success("Successfully connected redirecting to app", "Success");
+        this.router.navigate(["employee/" + this.userId + "/project"]);
+      } else {
+        this.toastr.error("Your github username doesn't match", "Error");
+      }
+    })
+  }
 }

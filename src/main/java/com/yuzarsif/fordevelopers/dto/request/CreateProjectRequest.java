@@ -14,9 +14,10 @@ import java.util.Date;
 @AllArgsConstructor
 public class CreateProjectRequest {
 
-    private String projectName;
+    private String projectTitle;
     private String projectDescription;
     private String startDate;
     private String endDate;
+    private String repositoryUrl;
     private String employeeId;
 }

@@ -23,7 +23,7 @@ public record ProjectDto(
                 .id(project.getId())
                 .projectName(project.getProjectName())
                 .projectDescription(project.getProjectDescription())
-                .projectUrl(project.getProjectUrl())
+                .projectUrl(project.getRepositoryUrl())
                 .startDate(project.getStartDate().toString())
                 .endDate(project.getEndDate().toString())
                 .build();

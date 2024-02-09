@@ -26,6 +26,7 @@ import { EmployeeHomeComponent } from './employee/employee-home/employee-home.co
 import { AddProjectComponent } from './project/add-project/add-project.component';
 import { GithubCallbackComponent } from './employee/github-callback/github-callback.component';
 import { ShowApplyComponent } from './apply/show-apply/show-apply.component';
+import { CompanyHomeComponent } from './company/company-home/company-home.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ShowApplyComponent } from './apply/show-apply/show-apply.component';
     EmployeeHomeComponent,
     AddProjectComponent,
     GithubCallbackComponent,
-    ShowApplyComponent
+    ShowApplyComponent,
+    CompanyHomeComponent
   ],
     imports: [
         BrowserModule,

@@ -24,4 +24,13 @@ public class Location {
     private String districtName;
     @OneToOne(mappedBy = "location")
     private Company company;
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "id=" + id +
+                ", city=" + city +
+                ", districtName='" + districtName + '\'' +
+                '}';
+    }
 }

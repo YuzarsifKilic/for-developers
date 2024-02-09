@@ -23,7 +23,7 @@ export class AxiosService {
     } else {
       window.localStorage.removeItem("auth_token");
       window.localStorage.removeItem("auth_role");
-      window.localStorage.removeItem("id");
+      window.localStorage.removeItem("user_id");
     }
   }
 

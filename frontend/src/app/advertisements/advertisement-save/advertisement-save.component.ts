@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AdvertisementService} from "../../_services/advertisement.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-advertisement-save',
@@ -25,7 +27,7 @@ export class AdvertisementSaveComponent {
     {id: 1, name: "Backend Developer"},
     {id: 2, name: "Frontend Developer"},
     {id: 3, name: "Full Stack Developer"},
-    {id: 4, name: "Mobile App Developer"},
+    {id: 4, name: "Mobile Developer"},
     {id: 5, name: "Android Developer"},
     {id: 6, name: "IOS Developer"},
     {id: 7, name: "Data Science"},
@@ -33,18 +35,22 @@ export class AdvertisementSaveComponent {
     {id: 9, name: "Data Engineer"},
     {id: 10, name: "Data Architect"},
     {id: 11, name: "Data Scientist"},
-  ];
-
-  workTypeId!: number;
-  jobTitleId!: number;
+  ]
 
 
-  constructor(private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder) { }
+  constructor(private activatedRoute: ActivatedRoute,
+              private formBuilder: FormBuilder,
+              private advertisementService: AdvertisementService,
+              private toastr: ToastrService,
+              private router: Router) { }
 
   advertisementSaveForm: FormGroup = this.formBuilder.group({
     advertisementTitle: ['', Validators.required],
     advertisementContent: ['', Validators.required]
   })
+
+  workType =  this.workTypes[0].name;
+  jobTitle = this.jobTitles[0].name;
 
   ngOnInit(): void {
     this.companyId = this.activatedRoute.snapshot.paramMap.get('id') as string;
@@ -53,18 +59,29 @@ export class AdvertisementSaveComponent {
   onSelectChange(event: any) {
     let selectedValue = event.target.value;
     console.log(selectedValue);
-    this.jobTitleId = selectedValue;
+    this.jobTitle = selectedValue.toUpperCase().replace(" ", "_");
   }
 
   onSelectWorkType(event: any) {
     let selectedValue = event.target.value;
-    console.log(selectedValue);
-    this.workTypeId = selectedValue;
+    console.log(selectedValue.toUpperCase().replace(" ", "_"));
+    this.workType = selectedValue.toUpperCase().replace(" ", "_");
   }
 
   saveAdvertisement() {
     console.log(this.advertisementSaveForm.value);
-    console.log(this.jobTitleId);
-    console.log(this.workTypeId);
+    this.advertisementService.saveAdvertisement(
+      this.advertisementSaveForm.get("advertisementTitle")?.value,
+      this.advertisementSaveForm.get("advertisementContent")?.value,
+      this.workType.toUpperCase(),
+      this.jobTitle)
+      .then(resp => {
+        if (resp.status === 200) {
+          this.router.navigate(["company/home/" + window.localStorage.getItem("user_id")]);
+          this.toastr.success("Advertisement saved", "Success");
+        } else {
+          this.toastr.error("Something went wrong", "Error");
+        }
+      })
   }
 }

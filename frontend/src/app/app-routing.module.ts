@@ -11,6 +11,7 @@ import {EmployeeHomeComponent} from "./employee/employee-home/employee-home.comp
 import {AddProjectComponent} from "./project/add-project/add-project.component";
 import {GithubCallbackComponent} from "./employee/github-callback/github-callback.component";
 import {ShowApplyComponent} from "./apply/show-apply/show-apply.component";
+import {CompanyHomeComponent} from "./company/company-home/company-home.component";
 
 const routes: Routes = [
   {path: "sign-in", component: SignInComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: "employee/:id/apply", component: ShowApplyComponent},
   {path: "company/register", component: CompanyRegisterComponent},
   {path: "company/:id", component: CompanyProfileComponent},
+  {path: "company/home/:id", component: CompanyHomeComponent},
   {path: "company/:id/advertisement-save", component: AdvertisementSaveComponent},
 ];
 

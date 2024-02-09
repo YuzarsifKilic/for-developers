@@ -29,7 +29,7 @@ export class AuthService {
         if (resp.data.roles[0] === "ROLE_EMPLOYEE") {
           this.router.navigate(["employee/home/" + resp.data.id])
         } else if (resp.data.roles[0] === "ROLE_COMPANY") {
-          this.router.navigate(["company/" + resp.data.id])
+          this.router.navigate(["company/home/" + resp.data.id])
         }
     }).catch(error => {
       this.toastr.error("Bad Credentials", "Error")

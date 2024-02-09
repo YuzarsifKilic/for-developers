@@ -21,4 +21,12 @@ public class City {
     private String cityName;
     @OneToMany(mappedBy = "city", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE})
     private Set<Location> locations;
+
+    @Override
+    public String toString() {
+        return "City{" +
+                "id=" + id +
+                ", cityName='" + cityName + '\'' +
+                '}';
+    }
 }

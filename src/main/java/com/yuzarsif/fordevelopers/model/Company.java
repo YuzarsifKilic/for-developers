@@ -40,4 +40,13 @@ public class Company extends BaseUser {
     public int hashCode() {
         return Objects.hash(super.hashCode(), companyName, phoneNumber);
     }
+
+    @Override
+    public String toString() {
+        return "Company{" +
+                "companyName='" + companyName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", location=" + location +
+                '}';
+    }
 }

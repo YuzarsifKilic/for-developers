@@ -59,6 +59,7 @@ export class AddProjectComponent {
         finishedDate,
         this.githubRepository.htmlUrl)
       .then(resp => {
+        console.log(resp);
         if (resp.status === 200) {
           this.toastrService.success("Project has been saved successfully!", "Success");
           this.router.navigate(["employee/home" + window.localStorage.getItem("user_id")]);

@@ -32,4 +32,17 @@ public class Advertisement {
     private JobTitle jobTitle;
     @OneToMany(mappedBy = "advertisement", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE})
     private Set<Apply> applies;
+
+    @Override
+    public String toString() {
+        return "Advertisement{" +
+                "id=" + id +
+                ", advertisementTitle='" + advertisementTitle + '\'' +
+                ", advertisementContent='" + advertisementContent + '\'' +
+                ", viewCount=" + viewCount +
+                ", open=" + open +
+                ", workType=" + workType +
+                ", jobTitle=" + jobTitle +
+                '}';
+    }
 }

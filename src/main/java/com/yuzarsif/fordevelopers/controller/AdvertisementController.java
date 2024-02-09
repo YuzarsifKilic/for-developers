@@ -19,9 +19,9 @@ public class AdvertisementController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> saveAdvertisement(@RequestBody CreateAdvertisementRequest request) {
+    public ResponseEntity<String> saveAdvertisement(@RequestBody CreateAdvertisementRequest request) {
         advertisementService.saveAdvertisement(request);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("Advertisement created");
     }
 
     @PostMapping("/increment-view-count/{id}")

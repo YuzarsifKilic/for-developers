@@ -2,6 +2,7 @@ package com.yuzarsif.fordevelopers.service;
 
 import com.yuzarsif.fordevelopers.dto.AdvertisementDto;
 import com.yuzarsif.fordevelopers.dto.request.CreateAdvertisementRequest;
+import com.yuzarsif.fordevelopers.dto.request.UpdateAdvertisementRequest;
 import com.yuzarsif.fordevelopers.exception.AdvertisementNotFoundException;
 import com.yuzarsif.fordevelopers.mapper.AdvertisementDtoMapper;
 import com.yuzarsif.fordevelopers.model.Advertisement;
@@ -18,10 +19,12 @@ public class AdvertisementService {
 
     private final AdvertisementRepository repository;
     private final CompanyService companyService;
+    private final ApplyManager applyManager;
 
-    public AdvertisementService(AdvertisementRepository repository, CompanyService companyService) {
+    public AdvertisementService(AdvertisementRepository repository, CompanyService companyService, ApplyManager applyManager) {
         this.repository = repository;
         this.companyService = companyService;
+        this.applyManager = applyManager;
     }
 
     public void saveAdvertisement(CreateAdvertisementRequest request) {
@@ -68,11 +71,26 @@ public class AdvertisementService {
     @Transactional
     public void deleteById(Long id) {
         findById(id);
+
+        applyManager.deleteByAdvertisementId(id);
+
         repository.deleteById(id);
     }
 
     protected Advertisement findById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new AdvertisementNotFoundException(String.format("Advertisement not found with id: %s", id)));
+    }
+
+    @Transactional
+    public void updateAdvertisement(UpdateAdvertisementRequest request) {
+        Advertisement advertisement = findById(request.id());
+
+        advertisement.setAdvertisementTitle(request.advertisementTitle());
+        advertisement.setAdvertisementContent(request.advertisementContent());
+        advertisement.setWorkType(request.workType());
+        advertisement.setJobTitle(request.jobTitle());
+
+        repository.save(advertisement);
     }
 }

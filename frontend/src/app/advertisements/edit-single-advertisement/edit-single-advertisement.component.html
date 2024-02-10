@@ -1,0 +1,51 @@
+<div class="mt-24 px-72">
+  <div class="bg-white p-8 rounded-xl">
+    <form [formGroup]="advertisementSaveForm" (ngSubmit)="updateAdvertisement()">
+      <div class="space-y-12">
+        <div>
+          <h2 class="text-center text-2xl font-quicksand leading-7 text-gray-900">Advertisement Information</h2>
+
+          <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div class="sm:col-span-3">
+              <label for="advertisement-title" class="block font-quicksand leading-6 text-gray-900">Advertisement Title</label>
+              <div class="mt-2">
+                <input type="text" name="advertisement-title" id="advertisement-title" value="{{advertisement.advertisementTitle}}" autocomplete="advertisement-title" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" formControlName="advertisementTitle">
+              </div>
+            </div>
+
+            <div class="col-span-full">
+              <label for="advertisement-content" class="block font-quicksand leading-6 text-gray-900">Advertisement Content</label>
+              <div class="mt-2">
+                <textarea id="advertisement-content" name="advertisement-content" [value]=advertisement.advertisementContent rows="3" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" formControlName="advertisementContent"></textarea>
+              </div>
+            </div>
+
+            <div class="sm:col-span-3">
+              <label for="work-type" class="block font-quicksand leading-6 text-gray-900">Work Type</label>
+              <div class="mt-2">
+                <select id="work-type" name="work-type" [value]="advertisement.workType" (change)="onSelectWorkType($event)" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                  <option *ngFor="let workType of workTypes">{{workType.name}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="sm:col-span-3">
+              <label for="job-title" class="block font-quicksand leading-6 text-gray-900">Job Title</label>
+              <div class="mt-2">
+                <select id="job-title" [value]="advertisement.jobTitle" name="job-title" (change)="onSelectJobTitle($event)" autocomplete="country-name" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                  <option *ngFor="let jobTitle of jobTitles">{{jobTitle.name}}</option>
+                </select>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="grid justify-items-center mt-8">
+            <button type="submit" class="bg-gradient-to-r from-sky-400 to-sky-600 text-white p-2 rounded-xl  mt-8 hover:bg-gradient-to-r hover:from-sky-500 hover:to-sky-700">Update Advertisement</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

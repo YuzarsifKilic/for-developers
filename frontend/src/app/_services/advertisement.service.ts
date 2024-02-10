@@ -24,6 +24,13 @@ export class AdvertisementService {
       {});
   }
 
+  getAdvertisementByAdvertisementId(id: number) {
+    return this.axiosService.request(
+      "GET",
+      `/api/advertisements/${id}`,
+      {});
+  }
+
   saveAdvertisement(advertisementTitle: string, advertisementContent: string, workType: string, jobTitle: string) {
     return this.axiosService.requestWithToken(
       "POST",
@@ -35,6 +42,25 @@ export class AdvertisementService {
         workType: workType,
         jobTitle: jobTitle,
       });
+  }
 
+  updateAdvertisement(advertisementTitle: string, advertisementContent: string, workType: string, jobTitle: string, advertisementId: number) {
+    return this.axiosService.requestWithToken(
+      "PUT",
+      `/api/advertisements`,
+      {
+        id: +advertisementId,
+        advertisementTitle: advertisementTitle,
+        advertisementContent: advertisementContent,
+        workType: workType,
+        jobTitle: jobTitle,
+      });
+  }
+
+  deleteAdvertisement(id: number) {
+    return this.axiosService.requestWithToken(
+      "DELETE",
+      `/api/advertisements/${id}`,
+      {});
   }
 }

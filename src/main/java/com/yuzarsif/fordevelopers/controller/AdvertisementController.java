@@ -2,6 +2,7 @@ package com.yuzarsif.fordevelopers.controller;
 
 import com.yuzarsif.fordevelopers.dto.AdvertisementDto;
 import com.yuzarsif.fordevelopers.dto.request.CreateAdvertisementRequest;
+import com.yuzarsif.fordevelopers.dto.request.UpdateAdvertisementRequest;
 import com.yuzarsif.fordevelopers.service.AdvertisementService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,12 @@ public class AdvertisementController {
     @PostMapping("/increment-view-count/{id}")
     public ResponseEntity<Void> incrementViewCount(@PathVariable Long id) {
         advertisementService.incrementViewCount(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping
+    public ResponseEntity<Void> updateAdvertisement(@RequestBody UpdateAdvertisementRequest request) {
+        advertisementService.updateAdvertisement(request);
         return ResponseEntity.ok().build();
     }
 

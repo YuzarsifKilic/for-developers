@@ -12,6 +12,10 @@ import {AddProjectComponent} from "./project/add-project/add-project.component";
 import {GithubCallbackComponent} from "./employee/github-callback/github-callback.component";
 import {ShowApplyComponent} from "./apply/show-apply/show-apply.component";
 import {CompanyHomeComponent} from "./company/company-home/company-home.component";
+import {EditAdvertisementComponent} from "./advertisements/edit-advertisement/edit-advertisement.component";
+import {
+  EditSingleAdvertisementComponent
+} from "./advertisements/edit-single-advertisement/edit-single-advertisement.component";
 
 const routes: Routes = [
   {path: "sign-in", component: SignInComponent},
@@ -26,6 +30,8 @@ const routes: Routes = [
   {path: "company/:id", component: CompanyProfileComponent},
   {path: "company/home/:id", component: CompanyHomeComponent},
   {path: "company/:id/advertisement-save", component: AdvertisementSaveComponent},
+  {path: "company/:id/edit-advertisement", component: EditAdvertisementComponent},
+  {path: "company/:id/edit-advertisement/:advertisementId", component: EditSingleAdvertisementComponent},
 ];
 
 @NgModule({

@@ -52,4 +52,6 @@ public class ApplyService {
                 .map(CompanyApplyDtoMapper.MAPPER::mapToCompanyApplyDto)
                 .collect(Collectors.toList());
     }
+
+
 }

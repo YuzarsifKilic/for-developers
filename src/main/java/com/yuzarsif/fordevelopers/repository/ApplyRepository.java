@@ -10,4 +10,6 @@ public interface ApplyRepository extends JpaRepository<Apply, Long> {
     List<Apply> findAllByEmployeeId(String employeeId);
 
     List<Apply> findAllByAdvertisement_Company_Id(String companyId);
+
+    List<Apply> findAllByAdvertisement_Id(Long advertisementId);
 }

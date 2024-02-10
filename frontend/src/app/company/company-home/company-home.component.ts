@@ -37,4 +37,8 @@ export class CompanyHomeComponent {
   addAdvertisement() {
     this.router.navigate(["/company/" + this.companyId + "/advertisement-save"]);
   }
+
+  editAdvertisement() {
+    this.router.navigate(["/company/" + this.companyId + "/edit-advertisement"]);
+  }
 }

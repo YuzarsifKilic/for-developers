@@ -54,4 +54,8 @@ export class CompanyHomeComponent {
     this.toastr.success("Successfully logged out, redirecting to home page...", "Success");
     this.router.navigate(["/advertisements"]);
   }
+
+  changePassword() {
+    this.router.navigate(["/auth/change-password"]);
+  }
 }

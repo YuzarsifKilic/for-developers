@@ -40,6 +40,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(request -> request
+                        .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/locations/**").permitAll()
                         .requestMatchers("/api/cities/**").permitAll()
                         .requestMatchers("/api/employees/**").permitAll()
@@ -49,7 +50,6 @@ public class SecurityConfig {
                         .requestMatchers("/api/experiences/**").permitAll()
                         .requestMatchers("/api/companies/**").permitAll()
                         .requestMatchers("/api/advertisements/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())

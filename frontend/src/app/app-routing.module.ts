@@ -16,12 +16,14 @@ import {EditAdvertisementComponent} from "./advertisements/edit-advertisement/ed
 import {
   EditSingleAdvertisementComponent
 } from "./advertisements/edit-single-advertisement/edit-single-advertisement.component";
+import {ChangePasswordComponent} from "./change-password/change-password.component";
 
 const routes: Routes = [
   {path: "sign-in", component: SignInComponent},
   {path: "advertisements", component: AdvertisementsComponent},
   {path: "employee/register", component: RegisterComponent},
   {path: "auth/github/callback", component: GithubCallbackComponent},
+  {path: "auth/change-password", component: ChangePasswordComponent},
   {path: "employee/:id", component: EmployeeProfileComponent},
   {path: "employee/home/:id", component: EmployeeHomeComponent},
   {path: "employee/:id/project", component: AddProjectComponent},

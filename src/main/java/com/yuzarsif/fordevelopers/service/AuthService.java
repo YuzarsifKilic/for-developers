@@ -2,7 +2,9 @@ package com.yuzarsif.fordevelopers.service;
 
 import com.yuzarsif.fordevelopers.config.PasswordConfig;
 import com.yuzarsif.fordevelopers.dto.AuthResponseDto;
+import com.yuzarsif.fordevelopers.dto.request.ChangePasswordRequest;
 import com.yuzarsif.fordevelopers.dto.request.LoginUserRequest;
+import com.yuzarsif.fordevelopers.exception.AuthenticationCredentialsException;
 import com.yuzarsif.fordevelopers.model.BaseUser;
 import com.yuzarsif.fordevelopers.repository.BaseUserRepository;
 import com.yuzarsif.fordevelopers.security.JwtService;
@@ -36,6 +38,15 @@ public class AuthService {
             return authResponseDto;
         }
 
-        throw new EntityNotFoundException("User not found");
+        throw new AuthenticationCredentialsException("User credentials are not valid");
+    }
+
+    public void changePassword(ChangePasswordRequest request) {
+        login(new LoginUserRequest(request.email(), request.oldPassword()));
+
+        BaseUser baseUser = baseUserRepository.findByEmail(request.email()).get();
+        baseUser.setPassword(passwordConfig.passwordEncoder().encode(request.newPassword()));
+
+        baseUserRepository.save(baseUser);
     }
 }

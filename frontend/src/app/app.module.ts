@@ -29,6 +29,7 @@ import { ShowApplyComponent } from './apply/show-apply/show-apply.component';
 import { CompanyHomeComponent } from './company/company-home/company-home.component';
 import { EditAdvertisementComponent } from './advertisements/edit-advertisement/edit-advertisement.component';
 import { EditSingleAdvertisementComponent } from './advertisements/edit-single-advertisement/edit-single-advertisement.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { EditSingleAdvertisementComponent } from './advertisements/edit-single-a
     ShowApplyComponent,
     CompanyHomeComponent,
     EditAdvertisementComponent,
-    EditSingleAdvertisementComponent
+    EditSingleAdvertisementComponent,
+    ChangePasswordComponent
   ],
     imports: [
         BrowserModule,

@@ -52,4 +52,15 @@ export class AuthService {
   setUsername(username: string) {
     this.username.next(username);
   }
+
+  changePassword(email: string, oldPassword: string, newPassword: string) {
+    return this.axios.request(
+      "PUT",
+      "/api/auth/change-password",
+      {
+        email: email,
+        oldPassword: oldPassword,
+        newPassword: newPassword
+      });
+  }
 }

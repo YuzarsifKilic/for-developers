@@ -72,4 +72,8 @@ export class EmployeeHomeComponent {
   showApplies() {
     this.router.navigate(["/employee/" + this.employeeId + "/apply"]);
   }
+
+  changePassword() {
+    this.router.navigate(["/auth/change-password"]);
+  }
 }

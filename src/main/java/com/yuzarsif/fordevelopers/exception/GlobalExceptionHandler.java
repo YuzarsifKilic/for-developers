@@ -25,6 +25,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(AuthenticationCredentialsException.class)
+    public ResponseEntity<ErrorResponse> handleAuthenticationCredentialsException(AuthenticationCredentialsException e, HttpServletResponse response) {
+        ErrorResponse errorResponse = ErrorResponse
+                .builder()
+                .message(e.getMessage())
+                .timestamp(LocalDateTime.now())
+                .build();
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(ExpiredJwtException.class)
     public ResponseEntity<ErrorResponse> handleExpiredJwtException(ExpiredJwtException e, HttpServletResponse response) {
         ErrorResponse errorResponse = ErrorResponse

@@ -7,6 +7,7 @@ import {ExperienceService} from "../../_services/experience.service";
 import {Project} from "../../_models/project";
 import {Experience} from "../../_models/experience";
 import {Router} from "@angular/router";
+import {AuthService} from "../../_services/auth.service";
 
 @Component({
   selector: 'app-employee-home',
@@ -24,6 +25,7 @@ export class EmployeeHomeComponent {
               private employeeService: EmployeeService,
               private projectService: ProjectService,
               private experienceService: ExperienceService,
+              private authService: AuthService,
               private router: Router) { }
 
   ngOnInit(): void {
@@ -47,6 +49,7 @@ export class EmployeeHomeComponent {
       .then(resp => {
         console.log(resp);
         this.employee = resp;
+        this.authService.setUsername(this.employee.firstName + " " + this.employee.lastName);
       })
   }
 

@@ -5,6 +5,7 @@ import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {Employee} from "../_models/employee";
 import {Company} from "../_models/company";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,11 @@ import {Company} from "../_models/company";
 export class AuthService {
 
   employee!: Employee;
-  company!: Company;
+  private company!: Company;
+  private username = new BehaviorSubject<string>("");
+  username$ = this.username.asObservable();
+  private loggedIn = new BehaviorSubject<boolean>(false);
+  loggedIn$ = this.loggedIn.asObservable();
 
   constructor(private axios: AxiosService, private toastr: ToastrService, private router: Router) { }
 
@@ -25,6 +30,7 @@ export class AuthService {
         password: password
       }).then(resp => {
         this.axios.setAuthTokenAndRole(resp.data.token, resp.data.roles[0], resp.data.id)
+        this.loggedIn.next(true);
         this.toastr.success("Successfully logged in, redirecting to home page", "Success")
         if (resp.data.roles[0] === "ROLE_EMPLOYEE") {
           this.router.navigate(["employee/home/" + resp.data.id])
@@ -34,5 +40,16 @@ export class AuthService {
     }).catch(error => {
       this.toastr.error("Bad Credentials", "Error")
     })
+  }
+
+  logOut() {
+    window.localStorage.removeItem("auth_token");
+    window.localStorage.removeItem("auth_role");
+    window.localStorage.removeItem("user_id");
+    this.loggedIn.next(false);
+  }
+
+  setUsername(username: string) {
+    this.username.next(username);
   }
 }

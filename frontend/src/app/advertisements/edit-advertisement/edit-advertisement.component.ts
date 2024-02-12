@@ -36,7 +36,8 @@ export class EditAdvertisementComponent {
   }
 
   editAdvertisement(id: number) {
-    this.router.navigate(["/company/" + this.userId + "/edit-advertisement/" + id]);
+    console.log(id);
+    this.router.navigate(["/company/" + window.localStorage.getItem("user_id") + "/edit-advertisement/" + id]);
   }
 
   deleteAdvertisement(id: number) {

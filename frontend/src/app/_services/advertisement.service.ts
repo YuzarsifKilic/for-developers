@@ -63,4 +63,11 @@ export class AdvertisementService {
       `/api/advertisements/${id}`,
       {});
   }
+
+  searchAdvertisementsByTitle(title: string) {
+    return this.axiosService.request(
+      "GET",
+      `/api/advertisements/search/${title}`,
+      {});
+  }
 }

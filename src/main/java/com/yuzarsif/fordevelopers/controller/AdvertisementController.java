@@ -52,6 +52,11 @@ public class AdvertisementController {
         return ResponseEntity.ok(advertisementService.findMostPopularAdvertisements());
     }
 
+    @GetMapping("/search/{title}")
+    public ResponseEntity<List<AdvertisementDto>> searchAdvertisementsByTitle(@PathVariable String title) {
+        return ResponseEntity.ok(advertisementService.searchAdvertisementsByTitle(title));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         advertisementService.deleteById(id);

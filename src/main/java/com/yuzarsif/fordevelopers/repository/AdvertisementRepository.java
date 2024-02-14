@@ -10,4 +10,6 @@ public interface AdvertisementRepository extends JpaRepository<Advertisement, Lo
     List<Advertisement> findAllByCompany_Id(String companyId);
 
     List<Advertisement> findTop20ByOrderByViewCountDesc();
+
+    List<Advertisement> findByAdvertisementTitleContainingIgnoreCase(String title);
 }

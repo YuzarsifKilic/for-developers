@@ -93,4 +93,11 @@ public class AdvertisementService {
 
         repository.save(advertisement);
     }
+
+    public List<AdvertisementDto> searchAdvertisementsByTitle(String title) {
+        return repository.findByAdvertisementTitleContainingIgnoreCase(title)
+                .stream()
+                .map(AdvertisementDtoMapper.MAPPER::mapToAdvertisementDto)
+                .collect(Collectors.toList());
+    }
 }

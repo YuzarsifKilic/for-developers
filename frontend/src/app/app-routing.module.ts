@@ -20,7 +20,7 @@ import {ChangePasswordComponent} from "./change-password/change-password.compone
 
 const routes: Routes = [
   {path: "sign-in", component: SignInComponent},
-  {path: "advertisements", component: AdvertisementsComponent},
+  {path: "", component: AdvertisementsComponent},
   {path: "employee/register", component: RegisterComponent},
   {path: "auth/github/callback", component: GithubCallbackComponent},
   {path: "auth/change-password", component: ChangePasswordComponent},

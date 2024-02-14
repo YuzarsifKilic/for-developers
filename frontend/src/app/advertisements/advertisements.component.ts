@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {AdvertisementService} from "../_services/advertisement.service";
 import {Advertisement} from "../_models/advertisement";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
   selector: 'app-advertisements',
@@ -9,7 +10,9 @@ import {Advertisement} from "../_models/advertisement";
 })
 export class AdvertisementsComponent {
 
-  advertisements: Advertisement[] = [];
+  protected advertisements = new BehaviorSubject<Advertisement[]>([]);
+  advertisements$ = this.advertisements.asObservable();
+
 
   constructor(private advertisementService: AdvertisementService) {
   }
@@ -18,10 +21,14 @@ export class AdvertisementsComponent {
     this.advertisementService.getAdvertisements()
       .subscribe(resp => {
         console.log(resp)
-        this.advertisements = resp;
+        this.advertisements.next(resp);
       }, error => {
         console.log(error)
       })
+  }
+
+  setAdvertisements(advertisements: Advertisement[]) {
+    this.advertisements.next(advertisements);
   }
 
 }

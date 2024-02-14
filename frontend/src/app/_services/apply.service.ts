@@ -16,4 +16,15 @@ export class ApplyService {
       {}
     )
   }
+
+  saveApply(advertisementId: number, employeeId: string) {
+    return this.axiosService.requestWithToken(
+      "POST",
+      "api/apply",
+      {
+        advertisementId: advertisementId,
+        employeeId: employeeId
+      }
+    )
+  }
 }

@@ -18,7 +18,7 @@
       <h1 class="text-3xl">{{advertisement.advertisementTitle}}</h1>
       <p class="text-lg">{{advertisement.advertisementContent}}</p>
       <div class="flex text-black justify-center">
-        <button class="p-2 bg-white rounded-md w-24 hover:shadow-2xl">
+        <button (click)="saveApply()" class="p-2 bg-white rounded-md w-24 hover:shadow-2xl">
           Apply
         </button>
       </div>

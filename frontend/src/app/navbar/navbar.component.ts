@@ -36,4 +36,8 @@ export class NavbarComponent {
       this.router.navigate(["company/home/" + window.localStorage.getItem("user_id")]);
     }
   }
+
+  advertisements() {
+    this.router.navigate(["/"]);
+  }
 }

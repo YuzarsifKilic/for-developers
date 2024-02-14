@@ -3,6 +3,7 @@ package com.yuzarsif.fordevelopers.service;
 import com.yuzarsif.fordevelopers.dto.CompanyApplyDto;
 import com.yuzarsif.fordevelopers.dto.request.CreateApplyRequest;
 import com.yuzarsif.fordevelopers.dto.EmployeeApplyDto;
+import com.yuzarsif.fordevelopers.exception.AlreadyAppliedException;
 import com.yuzarsif.fordevelopers.mapper.CompanyApplyDtoMapper;
 import com.yuzarsif.fordevelopers.model.Advertisement;
 import com.yuzarsif.fordevelopers.model.Apply;
@@ -29,6 +30,9 @@ public class ApplyService {
     public void saveApply(CreateApplyRequest request) {
         Advertisement advertisement = advertisementService.findById(request.advertisementId());
         Employee employee = employeeService.getById(request.employeeId());
+
+        checkAlreadyApply(employee.getId(), advertisement.getId());
+
         Apply apply = Apply
                 .builder()
                 .advertisement(advertisement)
@@ -36,6 +40,13 @@ public class ApplyService {
                 .build();
 
         repository.save(apply);
+    }
+
+    private void checkAlreadyApply(String employeeId, Long advertisementId) {
+        if (repository.findByEmployee_IdAndAdvertisement_Id(employeeId, advertisementId).isPresent()) {
+            throw new AlreadyAppliedException("Already applied");
+        }
+
     }
 
     public List<EmployeeApplyDto> findAllByEmployeeId(String employeeId) {

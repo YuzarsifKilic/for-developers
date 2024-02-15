@@ -1,6 +1,7 @@
 package com.yuzarsif.fordevelopers.controller;
 
 import com.yuzarsif.fordevelopers.dto.AdvertisementDto;
+import com.yuzarsif.fordevelopers.dto.request.AdvertisementSearchFilter;
 import com.yuzarsif.fordevelopers.dto.request.CreateAdvertisementRequest;
 import com.yuzarsif.fordevelopers.dto.request.UpdateAdvertisementRequest;
 import com.yuzarsif.fordevelopers.service.AdvertisementService;
@@ -54,7 +55,12 @@ public class AdvertisementController {
 
     @GetMapping("/search/{title}")
     public ResponseEntity<List<AdvertisementDto>> searchAdvertisementsByTitle(@PathVariable String title) {
-        return ResponseEntity.ok(advertisementService.searchAdvertisementsByTitle(title));
+        return ResponseEntity.ok(advertisementService.filter(new AdvertisementSearchFilter(title, null, null)));
+    }
+
+    @PostMapping("/filter")
+    public ResponseEntity<List<AdvertisementDto>> searchAdvertisementsByFilter(@RequestBody AdvertisementSearchFilter filter) {
+        return ResponseEntity.ok(advertisementService.filter(filter));
     }
 
     @DeleteMapping("/{id}")

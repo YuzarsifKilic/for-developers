@@ -6,7 +6,7 @@
     <div class="border-t-gray-100">
       <app-work-type-filter></app-work-type-filter>
       <app-job-title-filter></app-job-title-filter>
-      <button class="bg-gradient-to-r from-sky-400 to-sky-600 text-white p-2 rounded-xl mt-4 ml-16 w-2/4">Filter</button>
+      <button (click)="filter()" class="bg-gradient-to-r from-sky-400 to-sky-600 text-white p-2 rounded-xl mt-4 ml-16 w-2/4">Filter</button>
     </div>
     <div class="col-span-3 flex-col ml-6">
       <div class="col-span-3 mt-4 mb-2" *ngFor="let advertisement of advertisements.getValue()">

@@ -1,6 +1,7 @@
 package com.yuzarsif.fordevelopers.service;
 
 import com.yuzarsif.fordevelopers.dto.AdvertisementDto;
+import com.yuzarsif.fordevelopers.dto.request.AdvertisementSearchFilter;
 import com.yuzarsif.fordevelopers.dto.request.CreateAdvertisementRequest;
 import com.yuzarsif.fordevelopers.dto.request.UpdateAdvertisementRequest;
 import com.yuzarsif.fordevelopers.exception.AdvertisementNotFoundException;
@@ -96,6 +97,39 @@ public class AdvertisementService {
 
     public List<AdvertisementDto> searchAdvertisementsByTitle(String title) {
         return repository.findByAdvertisementTitleContainingIgnoreCase(title)
+                .stream()
+                .map(AdvertisementDtoMapper.MAPPER::mapToAdvertisementDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<AdvertisementDto> filter(AdvertisementSearchFilter filter) {
+        if (filter.jobTitles() == null && filter.workTypes() == null) {
+            return searchAdvertisementsByTitle(filter.advertisementTitle());
+        } else if (filter.jobTitles() == null) {
+            return searchAdvertisementsByWorkTypes(filter);
+        } else if (filter.workTypes() == null) {
+            return searchAdvertisementsByJobTitles(filter);
+        } else {
+            return searchAdvertisementsByJobTitlesAndWorkTypes(filter);
+        }
+    }
+
+    public List<AdvertisementDto> searchAdvertisementsByJobTitles(AdvertisementSearchFilter filter) {
+        return repository.findByAdvertisementTitleContainingIgnoreCaseAndJobTitleIn(filter.advertisementTitle(), filter.jobTitles())
+                .stream()
+                .map(AdvertisementDtoMapper.MAPPER::mapToAdvertisementDto)
+                .collect(Collectors.toList());
+    }
+
+    List<AdvertisementDto> searchAdvertisementsByWorkTypes(AdvertisementSearchFilter filter) {
+        return repository.findByAdvertisementTitleContainingIgnoreCaseAndWorkTypeIn(filter.advertisementTitle(), filter.workTypes())
+                .stream()
+                .map(AdvertisementDtoMapper.MAPPER::mapToAdvertisementDto)
+                .collect(Collectors.toList());
+    }
+
+    List<AdvertisementDto> searchAdvertisementsByJobTitlesAndWorkTypes(AdvertisementSearchFilter filter) {
+        return repository.findByAdvertisementTitleContainingIgnoreCaseAndJobTitleInAndWorkTypeIn(filter.advertisementTitle(), filter.jobTitles(), filter.workTypes())
                 .stream()
                 .map(AdvertisementDtoMapper.MAPPER::mapToAdvertisementDto)
                 .collect(Collectors.toList());

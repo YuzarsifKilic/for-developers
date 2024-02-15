@@ -4,33 +4,11 @@
   </div>
   <div class="pt-4" id="filter-section-mobile-0">
     <div class="space-y-1">
-      <div class="flex items-center">
-        <input id="filter-mobile-color-0" name="color[]" value="white" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-        <label for="filter-mobile-color-0" class="ml-3 min-w-0 flex-1 text-gray-600">Remote</label>
-      </div>
-      <div class="flex items-center">
-        <input id="filter-mobile-color-1" name="color[]" value="beige" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-        <label for="filter-mobile-color-1" class="ml-3 min-w-0 flex-1 text-gray-500">Hybrid</label>
-      </div>
-      <div class="flex items-center">
-        <input id="filter-mobile-color-2" name="color[]" value="blue" type="checkbox" checked class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-        <label for="filter-mobile-color-2" class="ml-3 min-w-0 flex-1 text-gray-500">Freelance</label>
-      </div>
-      <div class="flex items-center">
-        <input id="filter-mobile-color-3" name="color[]" value="brown" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-        <label for="filter-mobile-color-3" class="ml-3 min-w-0 flex-1 text-gray-500">Part Time</label>
-      </div>
-      <div class="flex items-center">
-        <input id="filter-mobile-color-4" name="color[]" value="green" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-        <label for="filter-mobile-color-4" class="ml-3 min-w-0 flex-1 text-gray-500">On Site</label>
-      </div>
-      <div class="flex items-center">
-        <input id="filter-mobile-color-5" name="color[]" value="purple" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-        <label for="filter-mobile-color-5" class="ml-3 min-w-0 flex-1 text-gray-500">Flexible</label>
-      </div>
-      <div class="flex items-center">
-        <input id="filter-mobile-color-6" name="color[]" value="purple" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-        <label for="filter-mobile-color-6" class="ml-3 min-w-0 flex-1 text-gray-500">Co-Working</label>
+      <div *ngFor="let workType of WORK_TYPE">
+        <div class="flex items-center">
+          <input (click)="selectWorkType(workType)" id="filter-mobile-color-0" name="color[]" value="white" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+          <label for="filter-mobile-color-0" class="ml-3 min-w-0 flex-1 text-gray-500">{{workType.replace("_", " ")}}</label>
+        </div>
       </div>
     </div>
   </div>

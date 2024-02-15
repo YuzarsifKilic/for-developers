@@ -70,4 +70,34 @@ export class AdvertisementService {
       `/api/advertisements/search/${title}`,
       {});
   }
+
+  filterAdvertisement(advertisementTitle: string, workType: string[], jobTitle: string[]) {
+    if (workType.length == 0 && jobTitle.length == 0) {
+      return this.axiosService.request(
+        "POST",
+        "api/advertisements/filter",
+        {
+          advertisementTitle: advertisementTitle
+        }
+      )
+    } else if (workType.length == 0) {
+      return this.axiosService.request(
+        "POST",
+        "api/advertisements/filter",
+        {
+          advertisementTitle: advertisementTitle,
+          jobTitles: jobTitle
+        }
+      )
+    } else {
+      return this.axiosService.request(
+        "POST",
+        "api/advertisements/filter",
+        {
+          advertisementTitle: advertisementTitle,
+          workTypes: workType
+        }
+      )
+    }
+  }
 }

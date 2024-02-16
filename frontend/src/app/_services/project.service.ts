@@ -21,25 +21,38 @@ export class ProjectService {
     });
   }
 
-  findRepositories(): Promise<GithubRepositoryResponse[]> {
+  findRepositories() {
+    console.log(window.localStorage.getItem("github_token"));
     return this.axiosService.requestWithToken(
-      "GET",
-      `/api/projects/` + window.localStorage.getItem("user_id"),
-      {}).then(resp => {
+      "POST",
+      `/api/projects/employee/repository`,
+      {
+        "accessToken": window.localStorage.getItem("github_token"),
+        "employeeId": window.localStorage.getItem("user_id")
+      }).then(resp => {
         return resp.data;
     });
   }
 
-  validateGithubUser(code: string) {
+  validateGithubUser(accessToken: string) {
+    console.log(accessToken);
     return this.axiosService.requestWithToken(
       "POST",
       "/api/projects/github-callback",
       {
-        "code": code,
+        "accessToken": accessToken,
         "employeeId": window.localStorage.getItem("user_id")
       }).then(resp => {
         return resp.data;
     })
+  }
+
+  getAccessToken(code: string) {
+    return this.axiosService.requestWithToken(
+      "POST",
+      "/auth/github/" + code,
+      {}
+    );
   }
 
   saveProject(projectTitle: string, projectDescription: string, startDate: string, endDate: string, repositoryUrl: string) {

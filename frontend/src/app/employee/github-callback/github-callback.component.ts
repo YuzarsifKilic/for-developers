@@ -21,18 +21,24 @@ export class GithubCallbackComponent {
     this.route.queryParams.subscribe(params => {
       window.localStorage.setItem("github_code", params['code']);
     })
-    this.validateGithubUser(window.localStorage.getItem("github_code")!);
+    this.getAccessToken(window.localStorage.getItem("github_code")!);
   }
 
-  validateGithubUser(code: string) {
-    window.localStorage.setItem("github_code", code);
-    this.projectService.validateGithubUser(code).then(resp => {
-      if (resp === true) {
-        this.toastr.success("Successfully connected redirecting to app", "Success");
-        this.router.navigate(["employee/" + this.userId + "/project"]);
-      } else {
-        this.toastr.error("Your github username doesn't match", "Error");
-      }
-    })
+  getAccessToken(code: string) {
+    this.projectService.getAccessToken(code)
+      .then(resp => {
+        console.log(resp);
+        window.localStorage.setItem("github_token", resp.data);
+        this.projectService.validateGithubUser(window.localStorage.getItem("github_token")!).then(resp => {
+          if (resp === true) {
+            this.toastr.success("Successfully connected redirecting to app", "Success");
+            this.router.navigate(["employee/" + this.userId + "/project"]);
+          } else {
+            this.toastr.error("Your github username doesn't match", "Error");
+          }
+        })
+      })
+
   }
+
 }

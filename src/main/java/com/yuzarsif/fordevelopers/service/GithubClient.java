@@ -41,8 +41,8 @@ public class GithubClient {
         }
     }
 
-    protected boolean validateGithubUsername(String code, String githubUsername) {
-        String githubUser = extractGithubUsername(code).githubUsername();
+    protected boolean validateGithubUsername(String accessToken, String githubUsername) {
+        String githubUser = extractGithubUsername(accessToken).githubUsername();
 
         return Objects.equals(githubUser, githubUsername);
     }
@@ -80,8 +80,7 @@ public class GithubClient {
         }
     }
 
-    public GithubUsernameResponse extractGithubUsername(String code) {
-        String accessToken = getAccessToken(code);
+    public GithubUsernameResponse extractGithubUsername(String accessToken) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", "Bearer " + accessToken);
 

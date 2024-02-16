@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Builder
 public record GithubUsernameCheckRequest(
-        String code,
+        String accessToken,
         String employeeId
 ) {
 }

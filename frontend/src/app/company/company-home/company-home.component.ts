@@ -52,7 +52,7 @@ export class CompanyHomeComponent {
   signOut() {
     this.authService.logOut();
     this.toastr.success("Successfully logged out, redirecting to home page...", "Success");
-    this.router.navigate(["/advertisements"]);
+    this.router.navigate(["/"]);
   }
 
   changePassword() {

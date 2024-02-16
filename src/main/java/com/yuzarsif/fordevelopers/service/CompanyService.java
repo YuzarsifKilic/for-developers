@@ -3,6 +3,7 @@ package com.yuzarsif.fordevelopers.service;
 import com.yuzarsif.fordevelopers.config.PasswordConfig;
 import com.yuzarsif.fordevelopers.dto.CompanyDto;
 import com.yuzarsif.fordevelopers.dto.request.CreateCompanyRequest;
+import com.yuzarsif.fordevelopers.dto.request.UpdateCompanyRequest;
 import com.yuzarsif.fordevelopers.exception.CompanyNameInUseException;
 import com.yuzarsif.fordevelopers.exception.CompanyNotFoundException;
 import com.yuzarsif.fordevelopers.exception.PhoneNumberInUseException;
@@ -58,6 +59,25 @@ public class CompanyService {
     public void deleteById(String id) {
         getById(id);
         repository.deleteById(id);
+    }
+
+    public void updateCompany(String id, UpdateCompanyRequest request) {
+        Company company = getById(id);
+
+        if (request.companyName() != null) {
+            companyNameInUse(request.companyName());
+            company.setCompanyName(request.companyName());
+        }
+        if (request.phoneNumber() != null) {
+            phoneNumberInUse(request.phoneNumber());
+            company.setPhoneNumber(request.phoneNumber());
+        }
+        if (request.email() != null) {
+            baseUserService.emailInUse(request.email());
+            company.setEmail(request.email());
+        }
+
+        repository.save(company);
     }
 
     protected Company getById(String id) {

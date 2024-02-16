@@ -4,6 +4,7 @@ import com.yuzarsif.fordevelopers.config.PasswordConfig;
 import com.yuzarsif.fordevelopers.dto.request.CreateEmployeeRequest;
 import com.yuzarsif.fordevelopers.dto.EmployeeDto;
 import com.yuzarsif.fordevelopers.dto.SavedEmployeeDto;
+import com.yuzarsif.fordevelopers.dto.request.UpdateEmployeeRequest;
 import com.yuzarsif.fordevelopers.exception.EmailInUseException;
 import com.yuzarsif.fordevelopers.exception.EmployeeNotFoundException;
 import com.yuzarsif.fordevelopers.exception.PhoneNumberInUseException;
@@ -67,6 +68,26 @@ public class EmployeeService {
     public void deleteById(String id) {
         getById(id);
         repository.deleteById(id);
+    }
+
+    public void updateEmployee(String id, UpdateEmployeeRequest request) {
+        Employee employee = getById(id);
+        if (request.email() != null) {
+            baseUserService.emailInUse(request.email());
+            employee.setEmail(request.email());
+        }
+        if (request.firstName() != null) {
+            employee.setFirstName(request.firstName());
+        }
+        if (request.lastName() != null) {
+            employee.setLastName(request.lastName());
+        }
+        if (request.phoneNumber() != null) {
+            phoneNumberInUse(request.phoneNumber());
+            employee.setPhoneNumber(request.phoneNumber());
+        }
+
+        repository.save(employee);
     }
 
     protected Employee getById(String id) {

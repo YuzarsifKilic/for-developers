@@ -1,5 +1,6 @@
 package com.yuzarsif.fordevelopers.controller;
 
+import com.yuzarsif.fordevelopers.dto.GithubUsernameResponse;
 import com.yuzarsif.fordevelopers.service.GithubClient;
 import com.yuzarsif.fordevelopers.service.models.GithubAccessTokenRequest;
 import com.yuzarsif.fordevelopers.service.models.GithubAccessTokenResponse;
@@ -23,8 +24,13 @@ public class GithubAuthController {
         response.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
     }
 
+    @PostMapping("/{code}")
+    public ResponseEntity<String> getAccessToken(@PathVariable String code) {
+        return ResponseEntity.ok(githubClient.getAccessToken(code));
+    }
+
     @GetMapping("/{code}")
-    public ResponseEntity<String> extractGithubUsername(@PathVariable String code) {
+    public ResponseEntity<GithubUsernameResponse> extractGithubUsername(@PathVariable String code) {
         return ResponseEntity.ok(githubClient.extractGithubUsername(code));
     }
 }

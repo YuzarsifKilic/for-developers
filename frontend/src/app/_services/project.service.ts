@@ -21,10 +21,10 @@ export class ProjectService {
     });
   }
 
-  findRepositories(access_token: string): Promise<GithubRepositoryResponse[]> {
+  findRepositories(): Promise<GithubRepositoryResponse[]> {
     return this.axiosService.requestWithToken(
       "GET",
-      `/api/projects/${access_token}`,
+      `/api/projects/` + window.localStorage.getItem("user_id"),
       {}).then(resp => {
         return resp.data;
     });

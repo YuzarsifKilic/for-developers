@@ -88,6 +88,6 @@ export class EmployeeHomeComponent {
   }
 
   addEducation() {
-
+    this.router.navigate(["/employee/" + this.employeeId + "/add-education"]);
   }
 }

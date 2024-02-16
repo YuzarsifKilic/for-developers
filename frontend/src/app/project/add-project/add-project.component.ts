@@ -42,7 +42,7 @@ export class AddProjectComponent {
   }
 
   getRepositories() {
-    this.projectService.findRepositories(window.localStorage.getItem("github_code")!)
+    this.projectService.findRepositories()
       .then(resp => {
         this.githubRepositoryResponses = resp;
       })

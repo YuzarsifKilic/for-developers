@@ -1,6 +1,7 @@
 package com.yuzarsif.fordevelopers.service;
 
 import com.yuzarsif.fordevelopers.config.GithubProperties;
+import com.yuzarsif.fordevelopers.dto.GithubUsernameResponse;
 import com.yuzarsif.fordevelopers.exception.GithubValidateException;
 import com.yuzarsif.fordevelopers.service.models.*;
 import org.springframework.http.*;
@@ -41,7 +42,7 @@ public class GithubClient {
     }
 
     protected boolean validateGithubUsername(String code, String githubUsername) {
-        String githubUser = extractGithubUsername(code);
+        String githubUser = extractGithubUsername(code).githubUsername();
 
         return Objects.equals(githubUser, githubUsername);
     }
@@ -64,8 +65,7 @@ public class GithubClient {
         return String.format("%s/%s/%s", githubProperties.getHtmlUrl(), githubUsername, project);
     }
 
-    public List<GithubRepositoryResponse> findRepositories(String code) {
-        String accessToken = getAccessToken(code);
+    public List<GithubRepositoryResponse> findRepositories(String accessToken) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", "Bearer " + accessToken);
 
@@ -80,7 +80,7 @@ public class GithubClient {
         }
     }
 
-    public String extractGithubUsername(String code) {
+    public GithubUsernameResponse extractGithubUsername(String code) {
         String accessToken = getAccessToken(code);
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", "Bearer " + accessToken);
@@ -89,7 +89,7 @@ public class GithubClient {
 
         try {
             ResponseEntity<GithubUserResponse> repositoryUrl = restTemplate.exchange(githubProperties.getApiUrl() + "/user", HttpMethod.GET, request, GithubUserResponse.class);
-            return repositoryUrl.getBody().getLogin();
+            return new GithubUsernameResponse(repositoryUrl.getBody().getLogin(), accessToken);
         } catch (HttpClientErrorException e) {
             throw new GithubValidateException("Access token is expired");
         }

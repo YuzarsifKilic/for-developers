@@ -43,6 +43,7 @@ public class EducationService {
                 .startYear(request.startYear())
                 .endYear(request.endYear())
                 .gnp(request.gnp())
+                .degree(request.degree())
                 .employee(employee)
                 .build();
 

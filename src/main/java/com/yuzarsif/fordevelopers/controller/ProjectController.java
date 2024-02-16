@@ -3,6 +3,7 @@ package com.yuzarsif.fordevelopers.controller;
 import com.yuzarsif.fordevelopers.dto.GithubUsernameCheckRequest;
 import com.yuzarsif.fordevelopers.dto.request.CreateProjectRequest;
 import com.yuzarsif.fordevelopers.dto.ProjectDto;
+import com.yuzarsif.fordevelopers.dto.request.RepositoriesRequest;
 import com.yuzarsif.fordevelopers.service.GithubClient;
 import com.yuzarsif.fordevelopers.service.ProjectService;
 import com.yuzarsif.fordevelopers.service.models.GithubRepositoryResponse;
@@ -35,8 +36,8 @@ public class ProjectController {
     }
 
     @PostMapping("/employee/repository")
-    public ResponseEntity<List<GithubRepositoryResponse>> findRepositories(@RequestBody GithubUsernameCheckRequest request) {
-        return ResponseEntity.ok(projectService.findRepositories(request.code(), request.employeeId()));
+    public ResponseEntity<List<GithubRepositoryResponse>> findRepositories(@RequestBody RepositoriesRequest request) {
+        return ResponseEntity.ok(projectService.findRepositories(request.accessToken(), request.employeeId()));
     }
 
     @GetMapping("/employee/{id}")

@@ -48,9 +48,9 @@ public class ProjectService {
         repository.save(project);
     }
 
-    public List<GithubRepositoryResponse> findRepositories(String code, String employeeId) {
+    public List<GithubRepositoryResponse> findRepositories(String accessToken, String employeeId) {
         Employee employee = employeeService.getById(employeeId);
-        List<GithubRepositoryResponse> repositories = githubClient.findRepositories(code);
+        List<GithubRepositoryResponse> repositories = githubClient.findRepositories(accessToken);
 
         List<ProjectDto> allByEmployeeId = findAllByEmployeeId(employeeId);
 

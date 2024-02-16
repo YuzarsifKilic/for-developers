@@ -25,6 +25,7 @@ export class GithubCallbackComponent {
   }
 
   validateGithubUser(code: string) {
+    window.localStorage.setItem("github_code", code);
     this.projectService.validateGithubUser(code).then(resp => {
       if (resp === true) {
         this.toastr.success("Successfully connected redirecting to app", "Success");

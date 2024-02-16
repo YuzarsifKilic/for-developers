@@ -64,15 +64,15 @@ public class CompanyService {
     public void updateCompany(String id, UpdateCompanyRequest request) {
         Company company = getById(id);
 
-        if (request.companyName() != null) {
+        if (request.companyName() != null && !request.companyName().equals(company.getCompanyName())) {
             companyNameInUse(request.companyName());
             company.setCompanyName(request.companyName());
         }
-        if (request.phoneNumber() != null) {
+        if (request.phoneNumber() != null && !request.phoneNumber().equals(company.getPhoneNumber())) {
             phoneNumberInUse(request.phoneNumber());
             company.setPhoneNumber(request.phoneNumber());
         }
-        if (request.email() != null) {
+        if (request.email() != null && !request.email().equals(company.getEmail())) {
             baseUserService.emailInUse(request.email());
             company.setEmail(request.email());
         }

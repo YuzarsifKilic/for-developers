@@ -17,6 +17,9 @@ import {
   EditSingleAdvertisementComponent
 } from "./advertisements/edit-single-advertisement/edit-single-advertisement.component";
 import {ChangePasswordComponent} from "./change-password/change-password.component";
+import {EditCompanyProfileComponent} from "./company/edit-company-profile/edit-company-profile.component";
+import {EditEmployeeProfileComponent} from "./employee/edit-employee-profile/edit-employee-profile.component";
+import {AddEducationComponent} from "./add-education/add-education.component";
 
 const routes: Routes = [
   {path: "sign-in", component: SignInComponent},
@@ -28,11 +31,14 @@ const routes: Routes = [
   {path: "employee/home/:id", component: EmployeeHomeComponent},
   {path: "employee/:id/project", component: AddProjectComponent},
   {path: "employee/:id/apply", component: ShowApplyComponent},
+  {path: "employee/:id/edit-profile", component: EditEmployeeProfileComponent},
+  {path: "employee/:id/add-education", component: AddEducationComponent},
   {path: "company/register", component: CompanyRegisterComponent},
   {path: "company/:id", component: CompanyProfileComponent},
   {path: "company/home/:id", component: CompanyHomeComponent},
   {path: "company/:id/advertisement-save", component: AdvertisementSaveComponent},
   {path: "company/:id/edit-advertisement", component: EditAdvertisementComponent},
+  {path: "company/:id/edit-profile", component: EditCompanyProfileComponent},
   {path: "company/:id/edit-advertisement/:advertisementId", component: EditSingleAdvertisementComponent},
 ];
 

@@ -76,4 +76,18 @@ export class EmployeeHomeComponent {
   changePassword() {
     this.router.navigate(["/auth/change-password"]);
   }
+
+  editProfile() {
+    this.router.navigate(["/employee/" + this.employeeId + "/edit-profile"]);
+  }
+
+  signOut() {
+    this.authService.logOut();
+    this.toastr.success("Successfully logged out, redirecting to home page...", "Success");
+    this.router.navigate(["/advertisements"]);
+  }
+
+  addEducation() {
+
+  }
 }

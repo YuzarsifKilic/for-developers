@@ -1,0 +1,38 @@
+<div class="mt-36 px-72">
+  <div class="bg-white p-8 rounded-xl">
+    <form [formGroup]="companyUpdateForm" (ngSubmit)="updateCompany()">
+      <div class="space-y-12">
+        <div>
+          <h2 class="text-center text-2xl font-quicksand leading-7 text-gray-900">User Information</h2>
+
+          <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div class="sm:col-span-3">
+              <label for="email" class="block font-quicksand leading-6 text-gray-900">Email</label>
+              <div class="mt-2">
+                <input type="text" name="email" id="email" autocomplete="email" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" formControlName="email">
+              </div>
+            </div>
+
+            <div class="sm:col-span-3">
+              <label for="company-name" class="block font-quicksand leading-6 text-gray-900">Company Name</label>
+              <div class="mt-2">
+                <input type="text" name="company-name" id="company-name" autocomplete="company-name" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" formControlName="companyName">
+              </div>
+            </div>
+
+            <div class="sm:col-span-3">
+              <label for="phoneNumber" class="block font-quicksand leading-6 text-gray-900">Phone Number</label>
+              <div class="mt-2">
+                <input type="number" name="phoneNumber" id="phoneNumber" autocomplete="phoneNumber" class="block w-full rounded-md border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" formControlName="phoneNumber">
+              </div>
+            </div>
+          </div>
+          <div class="grid justify-items-center mt-8">
+            <button type="submit" class="bg-gradient-to-r from-sky-400 to-sky-600 text-white p-2 rounded-xl  mt-8 hover:bg-gradient-to-r hover:from-sky-500 hover:to-sky-700">Update Information's</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

@@ -72,17 +72,17 @@ public class EmployeeService {
 
     public void updateEmployee(String id, UpdateEmployeeRequest request) {
         Employee employee = getById(id);
-        if (request.email() != null) {
+        if (request.email() != null && !request.email().equals(employee.getEmail())) {
             baseUserService.emailInUse(request.email());
             employee.setEmail(request.email());
         }
-        if (request.firstName() != null) {
+        if (request.firstName() != null && !request.firstName().equals(employee.getFirstName())) {
             employee.setFirstName(request.firstName());
         }
-        if (request.lastName() != null) {
+        if (request.lastName() != null && !request.lastName().equals(employee.getLastName())) {
             employee.setLastName(request.lastName());
         }
-        if (request.phoneNumber() != null) {
+        if (request.phoneNumber() != null && !request.phoneNumber().equals(employee.getPhoneNumber())) {
             phoneNumberInUse(request.phoneNumber());
             employee.setPhoneNumber(request.phoneNumber());
         }

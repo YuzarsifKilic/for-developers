@@ -33,4 +33,16 @@ export class CompanyService {
       {}
     );
   }
+
+  updateCompany(id: string, email: string, companyName: string, phoneNumber: string) {
+    return this.axios.request(
+      "PUT",
+      "/api/companies/" + id,
+      {
+        email: email,
+        companyName: companyName,
+        phoneNumber: phoneNumber
+      }
+    );
+  }
 }

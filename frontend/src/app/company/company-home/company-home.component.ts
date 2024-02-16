@@ -58,4 +58,8 @@ export class CompanyHomeComponent {
   changePassword() {
     this.router.navigate(["/auth/change-password"]);
   }
+
+  editProfile() {
+    this.router.navigate(["/company/" + window.localStorage.getItem("user_id") + "/edit-profile"]);
+  }
 }

@@ -40,4 +40,17 @@ export class EmployeeService {
       return resp.data;
     });
   }
+
+  updateEmployee(id: string, email: string, firstName: string, lastName: string, phoneNumber: string) {
+    return this.axios.request(
+      "PUT",
+      "/api/employees/" + id,
+      {
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        phoneNumber: phoneNumber
+      }
+    );
+  }
 }

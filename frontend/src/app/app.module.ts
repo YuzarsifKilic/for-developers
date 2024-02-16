@@ -30,6 +30,9 @@ import { CompanyHomeComponent } from './company/company-home/company-home.compon
 import { EditAdvertisementComponent } from './advertisements/edit-advertisement/edit-advertisement.component';
 import { EditSingleAdvertisementComponent } from './advertisements/edit-single-advertisement/edit-single-advertisement.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { EditCompanyProfileComponent } from './company/edit-company-profile/edit-company-profile.component';
+import { EditEmployeeProfileComponent } from './employee/edit-employee-profile/edit-employee-profile.component';
+import {AddEducationComponent} from "./add-education/add-education.component";
 
 @NgModule({
   declarations: [
@@ -55,7 +58,10 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     CompanyHomeComponent,
     EditAdvertisementComponent,
     EditSingleAdvertisementComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    EditCompanyProfileComponent,
+    EditEmployeeProfileComponent,
+    AddEducationComponent
   ],
     imports: [
         BrowserModule,

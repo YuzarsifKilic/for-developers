@@ -24,3 +24,5 @@ github:
 
 jwt:
   key: ${JWT_KEY}
+
+allowed-origins: ${ALLOWED_ORIGINS}

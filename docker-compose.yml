@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  for-developers-mysql:
+    image: mysql
+    container_name: for-developers-mysql
+    ports:
+      - 3312:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+      MYSQL_DATABASE: for-developers
+    restart: always
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 10s
+      retries: 10
+      interval: 10s
+      start_period: 10s
+  for-developers-api:
+    image: yuzarsifkilic/for-developers-api:0.0.6.SNAPSHOT
+    container_name: for-developers-backend
+    build: .
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - for-developers-mysql

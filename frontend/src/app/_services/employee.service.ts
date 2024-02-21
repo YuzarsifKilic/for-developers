@@ -30,15 +30,14 @@ export class EmployeeService {
       })
   }
 
-  findEmployeeById(id: string) {
-    return this.axios.request(
+  async findEmployeeById(id: string): Promise<Employee> {
+    const resp = await this.axios.request(
       "GET",
       "/api/employees/" + id,
       {}
-    ).then(resp => {
-      this.employee = resp.data;
-      return resp.data;
-    });
+    );
+    this.employee = resp.data;
+    return resp.data;
   }
 
   updateEmployee(id: string, email: string, firstName: string, lastName: string, phoneNumber: string) {

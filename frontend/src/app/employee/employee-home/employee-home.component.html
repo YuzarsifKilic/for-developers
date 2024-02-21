@@ -25,11 +25,11 @@
     </div>
   </div>
   <div class="grid col-span-4 mt-24 py-4 px-48 gap-12">
-    <div class="bg-white p-4 rounded-xl shadow-md">
+    <div class="bg-white p-4 rounded-xl shadow-md" *ngIf="employee$ | async as employee">
       <div class="text-2xl font-quicksand">
         {{employee.firstName}} {{employee.lastName}}
       </div>
-      <div class="flex flex-row mt-2 font-quicksand gap-4">
+      <div class="flex flex-row mt-4 font-quicksand gap-4">
         <div>
           {{employee.email}}
         </div>
@@ -43,7 +43,7 @@
         Education
       </div>
       <div class="mt-4 font-quicksand gap-4 divide-y-2">
-        <div *ngFor="let education of employee.educations">
+        <div *ngFor="let education of educations$ | async">
           <div class="flex justify-between mt-4">
             <div>
               <div class="text-2xl">
@@ -70,7 +70,7 @@
         Experience
       </div>
       <div class="mt-4 divide-y-2 font-quicksand gap-4">
-        <div *ngFor="let experience of experiences">
+        <div *ngFor="let experience of experiences$ | async">
           <div class="flex justify-between mt-4">
             <div>
               <div class="text-2xl">
@@ -94,7 +94,7 @@
         Projects
       </div>
       <div class="mt-4 divide-y-2 font-quicksand gap-4">
-        <div *ngFor="let project of projects">
+        <div *ngFor="let project of projects$ | async">
           <div class="flex justify-between mt-4">
             <div>
               <div class="text-2xl">

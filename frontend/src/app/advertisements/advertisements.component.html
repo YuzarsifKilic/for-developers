@@ -1,6 +1,19 @@
 <div class="h-full">
   <div class="mt-20 ml-[420px]">
-    <app-search-bar></app-search-bar>
+    <form [formGroup]="advertisementSearchForm" (ngSubmit)="advertisementSearch()">
+      <div class="flex flex-row gap-4">
+        <input id="advertisement-search"
+               name="advertisement-search"
+               type="text"
+               autocomplete="advertisement-search"
+               required class="block w-2/4 rounded-md border-0 h-12 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+               placeholder="Search..."
+               formControlName="advertisementTitle">
+        <div class="grid justify-items-center">
+          <button type="submit" class="bg-gradient-to-r from-sky-400 to-sky-600 text-white w-24 p-2 rounded-xl hover:bg-gradient-to-r hover:from-sky-500 hover:to-sky-700">Search</button>
+        </div>
+      </div>
+    </form>
   </div>
   <div class="mt-20 grid grid-cols-5">
     <div class="border-t-gray-100">
@@ -8,13 +21,10 @@
       <app-job-title-filter></app-job-title-filter>
       <button (click)="filter()" class="bg-gradient-to-r from-sky-400 to-sky-600 text-white p-2 rounded-xl mt-4 ml-16 w-2/4">Filter</button>
     </div>
-    <div class="col-span-3 flex-col ml-6">
-      <div class="col-span-3 mt-4 mb-2" *ngFor="let advertisement of advertisements.getValue()">
+    <div class="col-span-3 flex-col ml-6" *ngIf="advertisements$ | async as advertisements">
+      <div class="col-span-3 mt-4 mb-2" *ngFor="let advertisement of advertisements">
         <app-advertisement [advertisement]=advertisement></app-advertisement>
       </div>
     </div>
   </div>
-
-
-
 </div>

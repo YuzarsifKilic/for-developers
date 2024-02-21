@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AxiosService} from "./axios.service";
+import {Experience} from "../_models/experience";
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +10,11 @@ export class ExperienceService {
   constructor(private axiosService: AxiosService) { }
 
 
-  getExperiences(id: string): Promise<any> {
-    return this.axiosService.request(
+  async getExperiences(id: string): Promise<Experience[]> {
+    const resp = await this.axiosService.request(
       "GET",
       `/api/experiences/${id}`,
-      {}).then(resp => {
-        return resp.data;
-    });
+      {});
+    return resp.data;
   }
 }

@@ -7,7 +7,7 @@ import axios from "axios";
 export class AxiosService {
 
   constructor() {
-    axios.defaults.baseURL = "http://18.185.139.226";
+    axios.defaults.baseURL = "https://for-developers-api-fh7wkqikqq-uc.a.run.app";
     axios.defaults.headers.post['Content-Type'] = 'application/json';
   }
 

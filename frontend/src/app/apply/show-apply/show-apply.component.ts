@@ -9,20 +9,16 @@ import {Apply} from "../../_models/apply";
 })
 export class ShowApplyComponent {
 
-  applies: Apply[] = [];
+  applies$!: Promise<Apply[]>;
 
   constructor(private applyService: ApplyService) { }
 
   ngOnInit() {
-    this.getApplies();
-
+    this.applies$ =this.getApplies();
   }
 
   getApplies() {
-    this.applyService.findAppliesByEmployeeId()
-      .then(resp => {
-        this.applies = resp.data;
-      })
+    return this.applyService.findAppliesByEmployeeId();
   }
 
   removeApply() {

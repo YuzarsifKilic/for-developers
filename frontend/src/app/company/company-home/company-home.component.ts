@@ -15,8 +15,8 @@ import {ToastrService} from "ngx-toastr";
 export class CompanyHomeComponent {
 
   companyId!: string;
-  company!: Company;
-  advertisements: Advertisement[] = [];
+  company$!: Promise<Company>;
+  advertisements$!: Promise<Advertisement[]>;
 
   constructor(private router: Router,
               private companyService: CompanyService,
@@ -25,20 +25,16 @@ export class CompanyHomeComponent {
               private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.companyService.findCompanyById(window.localStorage.getItem("user_id")!)
-      .then(resp => {
-        console.log(resp.data);
-        this.company = resp.data;
-        this.authService.setUsername(this.company.companyName);
-      })
-    this.getAdvertisements();
+    this.company$ = this.getCompany();
+    this.advertisements$ =this.getAdvertisements();
   }
 
-  getAdvertisements() {
-    this.advertisementService.getAdvertisementByCompanyId(window.localStorage.getItem("user_id")!)
-      .then(resp => {
-        this.advertisements = resp.data;
-      })
+  getCompany(): Promise<Company> {
+    return this.companyService.findCompanyById(window.localStorage.getItem("user_id")!)
+  }
+
+  getAdvertisements(): Promise<Advertisement[]> {
+    return this.advertisementService.getAdvertisementByCompanyId(window.localStorage.getItem("user_id")!);
   }
 
   addAdvertisement() {

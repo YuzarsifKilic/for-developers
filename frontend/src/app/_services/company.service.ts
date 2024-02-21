@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {AxiosService} from "./axios.service";
 import {ToastrService} from "ngx-toastr";
+import {Company} from "../_models/company";
 
 @Injectable({
   providedIn: 'root'
@@ -26,12 +27,13 @@ export class CompanyService {
       })
   }
 
-  findCompanyById(id: string) {
-    return this.axios.request(
+  async findCompanyById(id: string): Promise<Company> {
+    const resp = await this.axios.request(
       "GET",
       "/api/companies/" + id,
       {}
     );
+    return resp.data;
   }
 
   updateCompany(id: string, email: string, companyName: string, phoneNumber: string) {

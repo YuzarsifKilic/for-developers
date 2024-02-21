@@ -13,7 +13,7 @@ import {ToastrService} from "ngx-toastr";
 export class EditSingleAdvertisementComponent {
 
   advertisementId!: number;
-  advertisement!: Advertisement;
+  advertisement$!: Promise<Advertisement>;
 
   workTypes = [
     {id: 1, name: "Remote"},
@@ -53,14 +53,11 @@ export class EditSingleAdvertisementComponent {
     this.route.params.subscribe(params => {
       this.advertisementId = params['advertisementId'];
     })
-    this.getAdvertisement();
+    this.advertisement$ = this.getAdvertisement();
   }
 
   getAdvertisement() {
-    this.advertisementService.getAdvertisementByAdvertisementId(this.advertisementId)
-      .then(resp => {
-        this.advertisement = resp.data;
-      })
+    return this.advertisementService.getAdvertisementByAdvertisementId(this.advertisementId);
   }
 
   onSelectJobTitle(event: any) {

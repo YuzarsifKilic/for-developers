@@ -21,11 +21,7 @@ export class SearchBarComponent {
     advertisementTitle: ['', Validators.required],
   })
 
-  advertisementSearch() {
+  async advertisementSearch() {
     this.advertisementFilter.setTitle(this.advertisementSearchForm.value.advertisementTitle)
-    this.advertisementService.searchAdvertisementsByTitle(this.advertisementSearchForm.value.advertisementTitle)
-      .then(resp => {
-        this.advertisement.setAdvertisements(resp.data);
-      })
   }
 }

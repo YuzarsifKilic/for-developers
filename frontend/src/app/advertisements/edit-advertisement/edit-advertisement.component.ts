@@ -29,10 +29,7 @@ export class EditAdvertisementComponent {
   }
 
   getAdvertisements() {
-    this.advertisementService.getAdvertisementByCompanyId(this.userId!)
-      .then(resp => {
-        this.advertisements = resp.data;
-      })
+    this.advertisementService.getAdvertisementByCompanyId(this.userId!);
   }
 
   editAdvertisement(id: number) {

@@ -1,5 +1,5 @@
 <div class="px-96 mt-24 gap-4">
-  <div *ngFor="let apply of applies" class="bg-gradient-to-r from-sky-400 to-sky-600 rounded-xl font-quicksand hover:shadow-2xl mt-4">
+  <div *ngFor="let apply of applies$ | async" class="bg-gradient-to-r from-sky-400 to-sky-600 rounded-xl font-quicksand hover:shadow-2xl mt-4">
     <div class="divide-y-2">
       <!-- Üst kısım -->
       <div class="flex justify-between items-center p-4">

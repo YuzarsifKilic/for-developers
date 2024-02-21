@@ -8,11 +8,11 @@ export class UniversityService {
 
   constructor(private axiosService: AxiosService) { }
 
-  getUniversities() {
-    return this.axiosService.request(
+  async getUniversities() {
+    const resp = await this.axiosService.request(
       "GET",
       "api/universities",
-      {}
-    )
+      {});
+    return resp.data;
   }
 }

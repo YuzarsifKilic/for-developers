@@ -13,22 +13,28 @@ export class AdvertisementService {
   constructor(private http: HttpClient, private axiosService: AxiosService, private toastr: ToastrService) { }
 
 
-  getAdvertisements(): Observable<Advertisement[]> {
-    return this.http.get<Advertisement[]>('http://localhost:8080/api/advertisements/most-popular');
+  async getAdvertisements(): Promise<Advertisement[]> {
+    const resp = await this.axiosService.request(
+      "GET",
+      "/api/advertisements/most-popular",
+      {});
+    return resp.data;
   }
 
-  getAdvertisementByCompanyId(id: string) {
-    return this.axiosService.request(
+  async getAdvertisementByCompanyId(id: string): Promise<Advertisement[]> {
+    const resp = await this.axiosService.request(
       "GET",
       `/api/advertisements/company/${id}`,
       {});
+    return resp.data;
   }
 
-  getAdvertisementByAdvertisementId(id: number) {
-    return this.axiosService.request(
+  async getAdvertisementByAdvertisementId(id: number): Promise<Advertisement> {
+    const resp = await this.axiosService.request(
       "GET",
       `/api/advertisements/${id}`,
       {});
+    return resp.data;
   }
 
   saveAdvertisement(advertisementTitle: string, advertisementContent: string, workType: string, jobTitle: string) {
@@ -64,40 +70,41 @@ export class AdvertisementService {
       {});
   }
 
-  searchAdvertisementsByTitle(title: string) {
-    return this.axiosService.request(
+  async searchAdvertisementsByTitle(title: string): Promise<Advertisement[]> {
+    const resp = await this.axiosService.request(
       "GET",
       `/api/advertisements/search/${title}`,
       {});
+    return resp.data;
   }
 
-  filterAdvertisement(advertisementTitle: string, workType: string[], jobTitle: string[]) {
+  async filterAdvertisement(advertisementTitle: string, workType: string[], jobTitle: string[]) {
     if (workType.length == 0 && jobTitle.length == 0) {
-      return this.axiosService.request(
+      const resp = await this.axiosService.request(
         "POST",
         "api/advertisements/filter",
         {
           advertisementTitle: advertisementTitle
-        }
-      )
+        });
+      return resp.data;
     } else if (workType.length == 0) {
-      return this.axiosService.request(
+      const resp = await this.axiosService.request(
         "POST",
         "api/advertisements/filter",
         {
           advertisementTitle: advertisementTitle,
           jobTitles: jobTitle
-        }
-      )
+        });
+      return resp.data;
     } else {
-      return this.axiosService.request(
+      const resp = await this.axiosService.request(
         "POST",
         "api/advertisements/filter",
         {
           advertisementTitle: advertisementTitle,
           workTypes: workType
-        }
-      )
+        });
+      return resp.data;
     }
   }
 }

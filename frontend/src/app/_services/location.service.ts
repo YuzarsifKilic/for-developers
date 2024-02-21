@@ -12,13 +12,12 @@ export class LocationService {
   constructor(private axios: AxiosService) { }
 
   async getCities(): Promise<City[]> {
-    return await this.axios.request(
+    const resp =  await this.axios.request(
       "GET",
       "/api/cities",
       {}
-    ).then(resp => {
-      return resp.data;
-    })
+    );
+    return resp.data;
   }
 
   async getLocations(id: number): Promise<Location[]> {

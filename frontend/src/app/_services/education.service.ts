@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AxiosService} from "./axios.service";
+import {Education} from "../_models/education";
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,14 @@ export class EducationService {
         employeeId: employeeId
       }
     );
+  }
+
+  async findEducationsByEmployeeId(employeeId: string): Promise<Education[]> {
+    const resp = await this.axiosService.request(
+      "GET",
+      "api/educations/employee/" + employeeId,
+      {}
+    );
+    return resp.data;
   }
 }

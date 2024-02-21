@@ -27,20 +27,11 @@ export class CompanyProfileComponent {
   }
 
   getCompany() {
-    this.companyService.findCompanyById(this.companyId)
-      .then(resp => {
-        console.log(resp);
-        this.company = resp.data;
-      })
-      .catch(error => {
-        console.log(error);
-      })
+    this.companyService.findCompanyById(window.localStorage.getItem("user_id")!);
   }
 
   getAdvertisements(){
-    this.advertisementService.getAdvertisementByCompanyId(this.companyId).then(resp => {
-      this.advertisements = resp.data;
-    })
+    this.advertisementService.getAdvertisementByCompanyId(this.companyId);
   }
 
 }

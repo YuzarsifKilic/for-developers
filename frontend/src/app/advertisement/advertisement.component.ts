@@ -13,7 +13,9 @@ export class AdvertisementComponent {
 
   @Input() advertisement!: Advertisement;
 
-  constructor(private applyService: ApplyService, private router: Router, private toastr: ToastrService) { }
+  constructor(private applyService: ApplyService, private router: Router, private toastr: ToastrService) {
+    console.log(this.advertisement);
+  }
 
   saveApply() {
     if (window.localStorage.getItem("user_id") != null && window.localStorage.getItem("auth_role") == "ROLE_EMPLOYEE") {

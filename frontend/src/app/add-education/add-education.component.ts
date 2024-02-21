@@ -32,8 +32,8 @@ export class AddEducationComponent {
     gnp: ['', Validators.required]
   })
 
-  universities: University[] = [];
-  courses: Course[] = [];
+  universities$!: Promise<University[]>;
+  courses$!: Promise<Course[]>;
   degree!: string;
   universityId!: number;
   courseId!: number;
@@ -41,11 +41,11 @@ export class AddEducationComponent {
   endYear!: number;
 
   ngOnInit(): void {
-    this.universityService.getUniversities()
-      .then(resp => {
-        console.log(resp);
-        this.universities = resp.data;
-      })
+    this.universities$ = this.getUniversities();
+  }
+
+  getUniversities() {
+    return this.universityService.getUniversities();
   }
 
   saveEducation() {
@@ -68,11 +68,7 @@ export class AddEducationComponent {
   onSelectUniversity(event: any) {
     let id = event.target.value.split("-")[0]
     this.universityId = id;
-    this.courseService.getCourses(id)
-      .then(resp => {
-        console.log(resp);
-        this.courses = resp.data;
-      })
+    this.courses$ = this.courseService.getCourses(id);
   }
 
   onSelectedStartedYear($event: any) {

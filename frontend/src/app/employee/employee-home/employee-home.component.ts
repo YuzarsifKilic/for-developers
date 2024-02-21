@@ -8,6 +8,8 @@ import {Project} from "../../_models/project";
 import {Experience} from "../../_models/experience";
 import {Router} from "@angular/router";
 import {AuthService} from "../../_services/auth.service";
+import {EducationService} from "../../_services/education.service";
+import {Education} from "../../_models/education";
 
 @Component({
   selector: 'app-employee-home',
@@ -17,18 +19,21 @@ import {AuthService} from "../../_services/auth.service";
 export class EmployeeHomeComponent {
 
   employeeId!: string;
-  employee!: Employee;
-  projects!: Project[];
-  experiences!: Experience[];
+  employee$!: Promise<Employee>;
+  educations$!: Promise<Education[]>;
+  projects$!: Promise<Project[]>;
+  experiences$!: Promise<Experience[]>;
 
   constructor(private toastr: ToastrService,
               private employeeService: EmployeeService,
+              private educationService: EducationService,
               private projectService: ProjectService,
               private experienceService: ExperienceService,
               private authService: AuthService,
-              private router: Router) { }
+              private router: Router) {
+  }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     var userId = window.localStorage.getItem("user_id");
     var authToken = window.localStorage.getItem("auth_token");
     var authRole = window.localStorage.getItem("auth_role");
@@ -38,31 +43,28 @@ export class EmployeeHomeComponent {
       this.router.navigate(["/sign-in"]);
     } else {
       this.employeeId = userId;
-      this.getEmployee();
-      this.getProjects();
-      this.getExperiences();
+      this.employee$ = this.getEmployee();
+      this.educations$ = this.getEducations();
+      this.experiences$ = this.getExperiences();
+      this.projects$ = this.getProjects();
     }
   }
 
-  getEmployee() {
-    this.employeeService.findEmployeeById(this.employeeId)
-      .then(resp => {
-        console.log(resp);
-        this.employee = resp;
-        this.authService.setUsername(this.employee.firstName + " " + this.employee.lastName);
-      })
+
+  getEmployee(): Promise<Employee> {
+    return this.employeeService.findEmployeeById(window.localStorage.getItem("user_id")!);
   }
 
-  getProjects(){
-    this.projectService.getProjects(this.employeeId).then(resp => {
-      this.projects = resp;
-    })
+  getEducations(): Promise<Education[]>{
+    return this.educationService.findEducationsByEmployeeId(window.localStorage.getItem("user_id")!);
   }
 
-  getExperiences(){
-    this.experienceService.getExperiences(this.employeeId).then(resp => {
-      this.experiences = resp;
-    })
+  getProjects(): Promise<Project[]> {
+    return this.projectService.getProjects(window.localStorage.getItem("user_id")!);
+  }
+
+  getExperiences(): Promise<Experience[]> {
+    return this.experienceService.getExperiences(window.localStorage.getItem("user_id")!);
   }
 
   connectToGithub() {

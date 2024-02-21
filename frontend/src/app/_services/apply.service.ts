@@ -9,12 +9,12 @@ export class ApplyService {
 
   constructor(private axiosService: AxiosService) { }
 
-  findAppliesByEmployeeId() {
-    return this.axiosService.requestWithToken(
+  async findAppliesByEmployeeId(): Promise<Apply[]> {
+    const resp = await this.axiosService.requestWithToken(
       "GET",
       "api/apply/employee/" + window.localStorage.getItem("user_id"),
-      {}
-    )
+      {});
+    return resp.data;
   }
 
   saveApply(advertisementId: number, employeeId: string) {

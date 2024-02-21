@@ -12,13 +12,12 @@ export class ProjectService {
 
   constructor(private axiosService: AxiosService) { }
 
-  getProjects(id: string): Promise<Project[]> {
-    return this.axiosService.request(
+  async getProjects(id: string): Promise<Project[]> {
+    const resp = await this.axiosService.request(
       "GET",
       `/api/projects/employee/${id}`,
-      {}).then(resp => {
-        return resp.data;
-    });
+      {});
+    return resp.data;
   }
 
   findRepositories() {

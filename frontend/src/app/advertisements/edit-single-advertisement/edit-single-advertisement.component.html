@@ -1,7 +1,7 @@
 <div class="mt-24 px-72">
   <div class="bg-white p-8 rounded-xl">
     <form [formGroup]="advertisementSaveForm" (ngSubmit)="updateAdvertisement()">
-      <div class="space-y-12">
+      <div class="space-y-12" *ngIf="advertisement$ | async as advertisement">
         <div>
           <h2 class="text-center text-2xl font-quicksand leading-7 text-gray-900">Advertisement Information</h2>
 

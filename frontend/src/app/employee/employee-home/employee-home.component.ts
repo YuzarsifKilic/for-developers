@@ -10,6 +10,8 @@ import {Router} from "@angular/router";
 import {AuthService} from "../../_services/auth.service";
 import {EducationService} from "../../_services/education.service";
 import {Education} from "../../_models/education";
+import {SocialMediaService} from "../../_services/social-media.service";
+import {SocialMedia} from "../../_models/social-media";
 
 @Component({
   selector: 'app-employee-home',
@@ -23,12 +25,14 @@ export class EmployeeHomeComponent {
   educations$!: Promise<Education[]>;
   projects$!: Promise<Project[]>;
   experiences$!: Promise<Experience[]>;
+  socialMedias$!: Promise<SocialMedia[]>;
 
   constructor(private toastr: ToastrService,
               private employeeService: EmployeeService,
               private educationService: EducationService,
               private projectService: ProjectService,
               private experienceService: ExperienceService,
+              private socialMediaService: SocialMediaService,
               private authService: AuthService,
               private router: Router) {
   }
@@ -47,6 +51,7 @@ export class EmployeeHomeComponent {
       this.educations$ = this.getEducations();
       this.experiences$ = this.getExperiences();
       this.projects$ = this.getProjects();
+      this.socialMedias$ = this.getSocialMedias();
     }
   }
 
@@ -65,6 +70,10 @@ export class EmployeeHomeComponent {
 
   getExperiences(): Promise<Experience[]> {
     return this.experienceService.getExperiences(window.localStorage.getItem("user_id")!);
+  }
+
+  getSocialMedias(): Promise<SocialMedia[]> {
+    return this.socialMediaService.findSocialMediaById(window.localStorage.getItem("user_id")!);
   }
 
   connectToGithub() {

@@ -33,6 +33,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { EditCompanyProfileComponent } from './company/edit-company-profile/edit-company-profile.component';
 import { EditEmployeeProfileComponent } from './employee/edit-employee-profile/edit-employee-profile.component';
 import {AddEducationComponent} from "./add-education/add-education.component";
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -63,15 +64,16 @@ import {AddEducationComponent} from "./add-education/add-education.component";
     EditEmployeeProfileComponent,
     AddEducationComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        ReactiveFormsModule,
-        ToastrModule.forRoot(),
-        MatIcon
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
+    MatIcon,
+    NgOptimizedImage
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

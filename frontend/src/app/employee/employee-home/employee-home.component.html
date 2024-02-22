@@ -29,12 +29,37 @@
       <div class="text-2xl font-quicksand">
         {{employee.firstName}} {{employee.lastName}}
       </div>
-      <div class="flex flex-row mt-4 font-quicksand gap-4">
+      <div class="flex flex-row mt-8 font-quicksand gap-4 justify-between">
         <div>
-          {{employee.email}}
+          <div>
+            {{employee.email}}
+          </div>
+          <div>
+            {{employee.phoneNumber}}
+          </div>
         </div>
-        <div>
-          {{employee.phoneNumber}}
+        <div *ngFor="let socialMedia of socialMedias$ | async">
+          <div>
+            <div class="flex flex-row">
+              <div [ngSwitch]="socialMedia.socialMedia">
+                <div *ngSwitchCase="'INSTAGRAM'">
+                  <img src="assets/instagram-1581266_640.webp" alt="instagram"
+                       height="30" width="30"/>
+                </div>
+                <div *ngSwitchCase="'X'">
+                  <img src="assets/twitter_x_new_logo_x_rounded_icon_256078.png" alt="x"
+                       height="40" width="40"/>
+                </div>
+                <div *ngSwitchCase="'FACEBOOK'">
+                  <img src="assets/Facebook_Logo_(2019).png" alt="facebook"
+                       height="40" width="40"/>
+                </div>
+              </div>
+              <div>
+                <a [href]="socialMedia.url" class="text-center text-blue-400">{{socialMedia.url}}</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

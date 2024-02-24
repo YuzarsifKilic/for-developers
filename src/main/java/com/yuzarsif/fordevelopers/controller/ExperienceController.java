@@ -4,6 +4,7 @@ import com.yuzarsif.fordevelopers.dto.ExperienceDto;
 import com.yuzarsif.fordevelopers.dto.request.CreateExperienceRequest;
 import com.yuzarsif.fordevelopers.service.ExperienceService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class ExperienceController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createExperience(@RequestBody CreateExperienceRequest request) {
+    public ResponseEntity<Void> createExperience(@Validated @RequestBody CreateExperienceRequest request) {
         experienceService.saveExperience(request);
         return ResponseEntity.ok().build();
     }

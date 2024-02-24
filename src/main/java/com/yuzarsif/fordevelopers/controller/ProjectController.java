@@ -8,6 +8,7 @@ import com.yuzarsif.fordevelopers.service.GithubClient;
 import com.yuzarsif.fordevelopers.service.ProjectService;
 import com.yuzarsif.fordevelopers.service.models.GithubRepositoryResponse;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,18 +26,18 @@ public class ProjectController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> saveProject(@RequestBody CreateProjectRequest request) {
+    public ResponseEntity<Void> saveProject(@Validated @RequestBody CreateProjectRequest request) {
         projectService.saveProject(request);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/github-callback")
-    public ResponseEntity<Boolean> checkGithubUsername(@RequestBody GithubUsernameCheckRequest request) {
+    public ResponseEntity<Boolean> checkGithubUsername(@Validated @RequestBody GithubUsernameCheckRequest request) {
         return ResponseEntity.ok(projectService.validateUser(request));
     }
 
     @PostMapping("/employee/repository")
-    public ResponseEntity<List<GithubRepositoryResponse>> findRepositories(@RequestBody RepositoriesRequest request) {
+    public ResponseEntity<List<GithubRepositoryResponse>> findRepositories(@Validated @RequestBody RepositoriesRequest request) {
         return ResponseEntity.ok(projectService.findRepositories(request.accessToken(), request.employeeId()));
     }
 

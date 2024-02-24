@@ -56,7 +56,17 @@
                 </div>
               </div>
               <div>
-                <a [href]="socialMedia.url" class="text-center text-blue-400">{{socialMedia.url}}</a>
+                <a [href]="socialMedia.url" class="text-center text-blue-400" [ngSwitch]="socialMedia.socialMedia">
+                  <div *ngSwitchCase="'INSTAGRAM'">
+                    {{socialMedia.url.replace("https://www.instagram.com/", "")}}
+                  </div>
+                  <div *ngSwitchCase="'X'">
+                    {{socialMedia.url.replace("https://twitter.com/", "")}}
+                  </div>
+                  <div *ngSwitchCase="'FACEBOOK'">
+                    {{socialMedia.url.replace("https://facebook.com/", "")}}
+                  </div>
+                </a>
               </div>
             </div>
           </div>

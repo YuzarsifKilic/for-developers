@@ -6,6 +6,7 @@ import com.yuzarsif.fordevelopers.dto.request.CreateAdvertisementRequest;
 import com.yuzarsif.fordevelopers.dto.request.UpdateAdvertisementRequest;
 import com.yuzarsif.fordevelopers.service.AdvertisementService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class AdvertisementController {
     }
 
     @PostMapping
-    public ResponseEntity<String> saveAdvertisement(@RequestBody CreateAdvertisementRequest request) {
+    public ResponseEntity<String> saveAdvertisement(@Validated @RequestBody CreateAdvertisementRequest request) {
         advertisementService.saveAdvertisement(request);
         return ResponseEntity.ok("Advertisement created");
     }
@@ -33,7 +34,7 @@ public class AdvertisementController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> updateAdvertisement(@RequestBody UpdateAdvertisementRequest request) {
+    public ResponseEntity<Void> updateAdvertisement(@Validated @RequestBody UpdateAdvertisementRequest request) {
         advertisementService.updateAdvertisement(request);
         return ResponseEntity.ok().build();
     }

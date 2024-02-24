@@ -4,6 +4,7 @@ import com.yuzarsif.fordevelopers.dto.SocialMediaDto;
 import com.yuzarsif.fordevelopers.dto.request.SaveSocialMediaRequest;
 import com.yuzarsif.fordevelopers.service.SocialMediaService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class SocialMediaController {
     }
 
     @PostMapping
-    public void saveSocialMedia(@RequestBody SaveSocialMediaRequest request) {
+    public void saveSocialMedia(@Validated @RequestBody SaveSocialMediaRequest request) {
         socialMediaService.saveSocialMedia(request);
     }
 

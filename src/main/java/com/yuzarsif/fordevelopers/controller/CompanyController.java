@@ -6,6 +6,7 @@ import com.yuzarsif.fordevelopers.dto.request.UpdateCompanyRequest;
 import com.yuzarsif.fordevelopers.service.CompanyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,7 +20,7 @@ public class CompanyController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> saveCompany(@RequestBody CreateCompanyRequest request) {
+    public ResponseEntity<Void> saveCompany(@Validated @RequestBody CreateCompanyRequest request) {
         companyService.saveCompany(request);
         return ResponseEntity.ok().build();
     }
@@ -31,7 +32,7 @@ public class CompanyController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Void> updateCompany(@PathVariable String id, @RequestBody UpdateCompanyRequest request) {
+    public ResponseEntity<Void> updateCompany(@PathVariable String id, @Validated @RequestBody UpdateCompanyRequest request) {
         companyService.updateCompany(id, request);
         return ResponseEntity.ok().build();
     }

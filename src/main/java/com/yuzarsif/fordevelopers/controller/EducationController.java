@@ -4,6 +4,7 @@ import com.yuzarsif.fordevelopers.dto.EducationDto;
 import com.yuzarsif.fordevelopers.dto.request.SaveEducationRequest;
 import com.yuzarsif.fordevelopers.service.EducationService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class EducationController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> saveEducation(@RequestBody SaveEducationRequest request) {
+    public ResponseEntity<Void> saveEducation(@Validated @RequestBody SaveEducationRequest request) {
         educationService.saveEducation(request);
         return ResponseEntity.ok().build();
     }

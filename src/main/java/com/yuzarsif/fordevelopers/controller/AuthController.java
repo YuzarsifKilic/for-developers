@@ -5,6 +5,7 @@ import com.yuzarsif.fordevelopers.dto.request.ChangePasswordRequest;
 import com.yuzarsif.fordevelopers.dto.request.LoginUserRequest;
 import com.yuzarsif.fordevelopers.service.AuthService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,12 +19,12 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponseDto> login(@RequestBody LoginUserRequest request) {
+    public ResponseEntity<AuthResponseDto> login(@Validated @RequestBody LoginUserRequest request) {
         return ResponseEntity.ok(authService.login(request));
     }
 
     @PutMapping("/change-password")
-    public ResponseEntity<Void> changePassword(@RequestBody ChangePasswordRequest request) {
+    public ResponseEntity<Void> changePassword(@Validated @RequestBody ChangePasswordRequest request) {
         authService.changePassword(request);
         return ResponseEntity.ok().build();
     }

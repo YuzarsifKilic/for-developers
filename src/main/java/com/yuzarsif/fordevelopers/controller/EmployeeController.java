@@ -7,6 +7,7 @@ import com.yuzarsif.fordevelopers.dto.request.UpdateEmployeeRequest;
 import com.yuzarsif.fordevelopers.service.EmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,7 +21,7 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<SavedEmployeeDto> createEmployee(@RequestBody CreateEmployeeRequest request) {
+    public ResponseEntity<SavedEmployeeDto> createEmployee(@Validated @RequestBody CreateEmployeeRequest request) {
         return ResponseEntity.ok(employeeService.createEmployee(request));
     }
 
@@ -31,7 +32,7 @@ public class EmployeeController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Void> updateEmployee(@PathVariable String id, @RequestBody UpdateEmployeeRequest request) {
+    public ResponseEntity<Void> updateEmployee(@PathVariable String id, @Validated @RequestBody UpdateEmployeeRequest request) {
         employeeService.updateEmployee(id, request);
         return ResponseEntity.ok().build();
     }

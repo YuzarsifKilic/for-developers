@@ -4,6 +4,7 @@ import com.yuzarsif.fordevelopers.dto.UniversityDto;
 import com.yuzarsif.fordevelopers.dto.request.CreateUniversityRequest;
 import com.yuzarsif.fordevelopers.service.UniversityService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class UniversityController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> saveUniversity(@RequestBody CreateUniversityRequest request) {
+    public ResponseEntity<Void> saveUniversity(@Validated @RequestBody CreateUniversityRequest request) {
         universityService.saveUniversity(request);
         return ResponseEntity.ok().build();
     }

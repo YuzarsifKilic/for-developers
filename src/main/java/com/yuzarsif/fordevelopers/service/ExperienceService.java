@@ -2,6 +2,7 @@ package com.yuzarsif.fordevelopers.service;
 
 import com.yuzarsif.fordevelopers.dto.request.CreateExperienceRequest;
 import com.yuzarsif.fordevelopers.dto.ExperienceDto;
+import com.yuzarsif.fordevelopers.exception.DateConvertException;
 import com.yuzarsif.fordevelopers.exception.ExperienceNotFoundException;
 import com.yuzarsif.fordevelopers.exception.ProjectNotExistsException;
 import com.yuzarsif.fordevelopers.mapper.ExperienceDtoMapper;
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.zip.DataFormatException;
 
 @Service
 public class ExperienceService {
@@ -70,7 +72,7 @@ public class ExperienceService {
             SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
             return format.parse(date);
         } catch (ParseException e) {
-            throw new ProjectNotExistsException("Project not found");
+            throw new DateConvertException("Date not converted : " + date);
         }
     }
 }

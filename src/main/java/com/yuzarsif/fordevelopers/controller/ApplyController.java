@@ -5,6 +5,7 @@ import com.yuzarsif.fordevelopers.dto.request.CreateApplyRequest;
 import com.yuzarsif.fordevelopers.dto.EmployeeApplyDto;
 import com.yuzarsif.fordevelopers.service.ApplyService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class ApplyController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> saveApply(@RequestBody CreateApplyRequest request) {
+    public ResponseEntity<Void> saveApply(@Validated @RequestBody CreateApplyRequest request) {
         applyService.saveApply(request);
         return ResponseEntity.ok().build();
     }

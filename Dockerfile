@@ -1,4 +1,9 @@
+FROM gradle:jdk17-alpine AS build
+COPY --chown=gradle:gradle . /home/gradle/src
+WORKDIR /home/gradle/src
+RUN gradle build -x test --no-daemon
+
 FROM openjdk:17-alpine
-WORKDIR /app
-COPY build/libs/for-developers-0.0.1-SNAPSHOT.jar for-developers.jar
+EXPOSE 8080
+COPY --from=build /home/gradle/src/build/libs/*.jar for-developers.jar
 ENTRYPOINT ["java", "-jar", "for-developers.jar"]

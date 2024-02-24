@@ -29,12 +29,12 @@ public class SocialMediaService {
     }
 
     public void saveSocialMedia(SaveSocialMediaRequest request) {
-        Employee employee = employeeService.getById(request.getEmployeeId());
+        Employee employee = employeeService.getById(request.employeeId());
 
         SocialMedia socialMedia = SocialMedia
                 .builder()
-                .url(request.getUrl())
-                .socialMedia(request.getSocialMedia())
+                .url(request.url())
+                .socialMedia(request.socialMedia())
                 .employee(employee)
                 .build();
 

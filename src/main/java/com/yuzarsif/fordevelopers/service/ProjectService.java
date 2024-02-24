@@ -34,16 +34,16 @@ public class ProjectService {
     }
 
     public void saveProject(CreateProjectRequest request) {
-        Employee employee = employeeService.getById(request.getEmployeeId());
+        Employee employee = employeeService.getById(request.employeeId());
 
         Project project = Project
                 .builder()
-                .projectName(request.getProjectTitle())
-                .projectDescription(request.getProjectDescription())
-                .startDate(convertToDate(request.getStartDate()))
-                .endDate(convertToDate(request.getEndDate()))
+                .projectName(request.projectDescription())
+                .projectDescription(request.projectDescription())
+                .startDate(convertToDate(request.startDate()))
+                .endDate(convertToDate(request.endDate()))
                 .employee(employee)
-                .repositoryUrl(request.getRepositoryUrl())
+                .repositoryUrl(request.repositoryUrl())
                 .build();
         repository.save(project);
     }

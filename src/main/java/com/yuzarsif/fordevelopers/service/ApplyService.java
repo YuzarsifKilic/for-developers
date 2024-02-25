@@ -57,12 +57,10 @@ public class ApplyService {
                 .collect(Collectors.toList());
     }
 
-    public List<CompanyApplyDto> findAllByCompanyId(String companyId) {
-        return repository.findAllByAdvertisement_Company_Id(companyId)
+    public List<CompanyApplyDto> findAllByCompany(Long advertisementId) {
+        return repository.findAllByAdvertisement_Id(advertisementId)
                 .stream()
                 .map(CompanyApplyDtoMapper.MAPPER::mapToCompanyApplyDto)
                 .collect(Collectors.toList());
     }
-
-
 }

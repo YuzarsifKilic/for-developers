@@ -58,4 +58,8 @@ export class CompanyHomeComponent {
   editProfile() {
     this.router.navigate(["/company/" + window.localStorage.getItem("user_id") + "/edit-profile"]);
   }
+
+  showApplies() {
+    this.router.navigate(["/company/" + window.localStorage.getItem("user_id") + "/advertisement-list"]);
+  }
 }

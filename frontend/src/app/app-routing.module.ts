@@ -20,6 +20,10 @@ import {ChangePasswordComponent} from "./change-password/change-password.compone
 import {EditCompanyProfileComponent} from "./company/edit-company-profile/edit-company-profile.component";
 import {EditEmployeeProfileComponent} from "./employee/edit-employee-profile/edit-employee-profile.component";
 import {AddEducationComponent} from "./add-education/add-education.component";
+import {
+  CompanyAdvertisementListComponent
+} from "./apply/company-advertisement-list/company-advertisement-list.component";
+import {CompanyShowApplyComponent} from "./apply/company-show-apply/company-show-apply.component";
 
 const routes: Routes = [
   {path: "sign-in", component: SignInComponent},
@@ -39,6 +43,8 @@ const routes: Routes = [
   {path: "company/:id/advertisement-save", component: AdvertisementSaveComponent},
   {path: "company/:id/edit-advertisement", component: EditAdvertisementComponent},
   {path: "company/:id/edit-profile", component: EditCompanyProfileComponent},
+  {path: "company/:id/advertisement-list", component: CompanyAdvertisementListComponent},
+  {path: "company/:id/apply/:advertisementId", component: CompanyShowApplyComponent},
   {path: "company/:id/edit-advertisement/:advertisementId", component: EditSingleAdvertisementComponent},
 ];
 

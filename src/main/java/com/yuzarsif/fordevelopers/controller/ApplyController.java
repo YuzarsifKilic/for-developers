@@ -31,8 +31,8 @@ public class ApplyController {
         return ResponseEntity.ok(applyService.findAllByEmployeeId(employeeId));
     }
 
-    @GetMapping("/company/{companyId}")
-    public ResponseEntity<List<CompanyApplyDto>> findAllByCompanyId(@PathVariable String companyId) {
-        return ResponseEntity.ok(applyService.findAllByCompanyId(companyId));
+    @GetMapping("/company/{advertisementId}")
+    public ResponseEntity<List<CompanyApplyDto>> findAllByCompany(@PathVariable Long advertisementId) {
+        return ResponseEntity.ok(applyService.findAllByCompany(advertisementId));
     }
 }

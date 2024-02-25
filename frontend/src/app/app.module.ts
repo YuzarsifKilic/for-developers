@@ -34,6 +34,8 @@ import { EditCompanyProfileComponent } from './company/edit-company-profile/edit
 import { EditEmployeeProfileComponent } from './employee/edit-employee-profile/edit-employee-profile.component';
 import {AddEducationComponent} from "./add-education/add-education.component";
 import {NgOptimizedImage} from "@angular/common";
+import { CompanyShowApplyComponent } from './apply/company-show-apply/company-show-apply.component';
+import { CompanyAdvertisementListComponent } from './apply/company-advertisement-list/company-advertisement-list.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,9 @@ import {NgOptimizedImage} from "@angular/common";
     ChangePasswordComponent,
     EditCompanyProfileComponent,
     EditEmployeeProfileComponent,
-    AddEducationComponent
+    AddEducationComponent,
+    CompanyShowApplyComponent,
+    CompanyAdvertisementListComponent
   ],
   imports: [
     BrowserModule,

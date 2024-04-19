@@ -5,6 +5,7 @@ import com.yuzarsif.fordevelopers.dto.request.*;
 import com.yuzarsif.fordevelopers.model.*;
 import com.yuzarsif.fordevelopers.repository.AdvertisementRepository;
 import com.yuzarsif.fordevelopers.repository.CompanyRepository;
+import com.yuzarsif.fordevelopers.repository.GithubTokenRepository;
 import com.yuzarsif.fordevelopers.repository.LocationRepository;
 import com.yuzarsif.fordevelopers.service.*;
 import com.yuzarsif.fordevelopers.service.models.GithubRepositoryResponse;
@@ -38,7 +39,8 @@ public class ForDevelopersApplication {
 								  AdvertisementRepository advertisementRepository,
 								  LocationRepository locationRepository,
 								  CompanyRepository companyRepository,
-								  GithubClient githubClient) {
+								  GithubClient githubClient,
+								  GithubTokenRepository githubTokenRepository) {
 		return (args) -> {
 
 

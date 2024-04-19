@@ -40,6 +40,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(request -> request
+                        /*
+                        .requestMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/api/advertisements").hasAnyRole("COMPANY")
                         .requestMatchers(HttpMethod.POST, "/api/advertisements").hasAnyRole("COMPANY")
                         .requestMatchers(HttpMethod.DELETE, "/api/advertisements").hasAnyRole("COMPANY")
@@ -49,6 +51,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/companies/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/experiences").hasAnyRole("EMPLOYEE")
                         .requestMatchers("/api/experiences/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/employees").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/api/employees/**").hasAnyRole("EMPLOYEE")
                         .requestMatchers("/api/employees/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/applies").hasAnyRole("EMPLOYEE")
@@ -68,8 +71,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/projects/**").hasAnyRole("EMPLOYEE")
                         .requestMatchers("/api/projects/employee/**").permitAll()
                         .requestMatchers("/auth/github/**").hasAnyRole("EMPLOYEE")
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .anyRequest().authenticated())
+
+                         */
+                        .anyRequest().permitAll())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)

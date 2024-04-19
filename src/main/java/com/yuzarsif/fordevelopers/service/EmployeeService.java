@@ -44,8 +44,6 @@ public class EmployeeService {
         phoneNumberInUse(request.phoneNumber());
         githubUsernameInUse(request.githubUsername());
 
-        githubClient.validateUser(request.githubUsername());
-
         Employee employee = Employee
                 .builder()
                 .email(request.email())

@@ -31,10 +31,6 @@ public class ProjectController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/github-callback")
-    public ResponseEntity<Boolean> checkGithubUsername(@Validated @RequestBody GithubUsernameCheckRequest request) {
-        return ResponseEntity.ok(projectService.validateUser(request));
-    }
 
     @PostMapping("/employee/repository")
     public ResponseEntity<List<GithubRepositoryResponse>> findRepositories(@Validated @RequestBody RepositoriesRequest request) {

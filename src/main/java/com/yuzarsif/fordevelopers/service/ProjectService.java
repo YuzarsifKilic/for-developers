@@ -96,9 +96,4 @@ public class ProjectService {
         }
     }
 
-    public Boolean validateUser(GithubUsernameCheckRequest request) {
-        EmployeeDto employee = employeeService.findEmployeeById(request.employeeId());
-
-        return githubClient.validateGithubUsername(request.accessToken(), employee.githubUsername());
-    }
 }

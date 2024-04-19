@@ -25,12 +25,12 @@
     </div>
   </div>
   <div class="grid col-span-4 mt-24 py-4 px-48 gap-12">
-    <div class="bg-white p-4 rounded-xl shadow-md" *ngIf="employee$ | async as employee">
+    <div class="bg-white p-4 rounded-xl shadow-md shadow-blue-400 hover:shadow-xl hover:shadow-blue-400" *ngIf="employee$ | async as employee">
       <div class="text-2xl font-quicksand">
         {{employee.firstName}} {{employee.lastName}}
       </div>
-      <div class="flex flex-row mt-8 font-quicksand gap-4 justify-between">
-        <div>
+      <div class="flex flex-row mt-8 font-quicksand gap-4 justify-between items-start">
+        <div class="flex flex-col">
           <div>
             {{employee.email}}
           </div>
@@ -38,42 +38,24 @@
             {{employee.phoneNumber}}
           </div>
         </div>
-        <div *ngFor="let socialMedia of socialMedias$ | async">
-          <div>
-            <div class="flex flex-row">
-              <div [ngSwitch]="socialMedia.socialMedia">
-                <div *ngSwitchCase="'INSTAGRAM'">
-                  <img src="assets/instagram-1581266_640.webp" alt="instagram"
-                       height="30" width="30"/>
-                </div>
-                <div *ngSwitchCase="'X'">
-                  <img src="assets/twitter_x_new_logo_x_rounded_icon_256078.png" alt="x"
-                       height="40" width="40"/>
-                </div>
-                <div *ngSwitchCase="'FACEBOOK'">
-                  <img src="assets/Facebook_Logo_(2019).png" alt="facebook"
-                       height="40" width="40"/>
-                </div>
+        <div class="flex flex-row">
+          <div *ngFor="let socialMedia of socialMedias$ | async">
+            <div [ngSwitch]="socialMedia.socialMedia">
+              <div *ngSwitchCase="'INSTAGRAM'" class="mr-2 flex flex-row">
+                <img src="assets/instagram-1581266_640.webp" alt="instagram"
+                     height="30" width="30"/> <a class="text-blue-400" [href]="socialMedia.url">{{socialMedia.url.replace("https://www.instagram.com/", "").replace("/", "")}}</a>
               </div>
-              <div>
-                <a [href]="socialMedia.url" class="text-center text-blue-400" [ngSwitch]="socialMedia.socialMedia">
-                  <div *ngSwitchCase="'INSTAGRAM'">
-                    {{socialMedia.url.replace("https://www.instagram.com/", "")}}
-                  </div>
-                  <div *ngSwitchCase="'X'">
-                    {{socialMedia.url.replace("https://twitter.com/", "")}}
-                  </div>
-                  <div *ngSwitchCase="'FACEBOOK'">
-                    {{socialMedia.url.replace("https://facebook.com/", "")}}
-                  </div>
-                </a>
+              <div *ngSwitchCase="'X'" class="flex flex-row">
+                <img src="assets/twitter_x_new_logo_x_rounded_icon_256078.png" alt="x"
+                     height="40" width="40"/><a class="text-blue-400" [href]="socialMedia.url">{{socialMedia.url.replace("https://twitter.com/", "")}}</a>
               </div>
             </div>
           </div>
         </div>
       </div>
+
     </div>
-    <div class="bg-white p-2 rounded-xl px-12 shadow-md gap-4">
+    <div class="bg-white p-2 rounded-xl px-12 shadow-md shadow-blue-400 hover:shadow-xl hover:shadow-blue-400 gap-4">
       <div class="text-3xl font-quicksand">
         Education
       </div>
@@ -100,7 +82,7 @@
         </div>
       </div>
     </div>
-    <div class="bg-white p-2 rounded-xl px-12 shadow-md gap-4">
+    <div class="bg-white p-2 rounded-xl px-12 shadow-md shadow-blue-400 hover:shadow-xl hover:shadow-blue-400 gap-4">
       <div class="text-3xl font-quicksand">
         Experience
       </div>
@@ -124,7 +106,7 @@
         </div>
       </div>
     </div>
-    <div class="bg-white p-2 rounded-xl px-12 shadow-md gap-4">
+    <div class="bg-white p-2 rounded-xl px-12 shadow-md shadow-blue-400 hover:shadow-xl hover:shadow-blue-400 mb-8 gap-4">
       <div class="text-3xl font-quicksand">
         Projects
       </div>

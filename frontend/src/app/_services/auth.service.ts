@@ -6,6 +6,8 @@ import {Router} from "@angular/router";
 import {Employee} from "../_models/employee";
 import {Company} from "../_models/company";
 import {BehaviorSubject} from "rxjs";
+import {EmployeeService} from "./employee.service";
+import {CompanyService} from "./company.service";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +21,7 @@ export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(false);
   loggedIn$ = this.loggedIn.asObservable();
 
-  constructor(private axios: AxiosService, private toastr: ToastrService, private router: Router) { }
+  constructor(private axios: AxiosService, private toastr: ToastrService, private router: Router, private employeeService: EmployeeService, private companyService: CompanyService) { }
 
   login(email: string, password: string) {
     this.axios.request(
@@ -33,8 +35,16 @@ export class AuthService {
         this.loggedIn.next(true);
         this.toastr.success("Successfully logged in, redirecting to home page", "Success")
         if (resp.data.roles[0] === "ROLE_EMPLOYEE") {
+          this.employeeService.findEmployeeById(resp.data.id)
+            .then(response => {
+              this.username.next(response.firstName + " " + response.lastName);
+            })
           this.router.navigate(["employee/home/" + resp.data.id])
         } else if (resp.data.roles[0] === "ROLE_COMPANY") {
+          this.companyService.findCompanyById(resp.data.id)
+            .then(response => {
+              this.username.next(response.companyName);
+            })
           this.router.navigate(["company/home/" + resp.data.id])
         }
     }).catch(error => {

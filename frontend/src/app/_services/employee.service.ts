@@ -23,11 +23,7 @@ export class EmployeeService {
           lastName: lastName,
           phoneNumber: phoneNumber,
           githubUsername: githubUsername
-        }).then(resp => {
-          this.toastr.success("Successfully created account, redirecting to profile page...", "Success")
-      }).catch(error => {
-          this.toastr.error(error.response.data.message, "Error")
-      })
+        })
   }
 
   async findEmployeeById(id: string): Promise<Employee> {

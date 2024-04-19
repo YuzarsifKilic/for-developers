@@ -18,7 +18,7 @@ public record CreateEmployeeRequest(
         String firstName,
         @NotBlank @Size(min = 3, max = 32)
         String lastName,
-        @NotBlank @Size(min = 12, max = 14)
+        @NotBlank @Size(min = 10, max = 14)
         String phoneNumber,
         @NotBlank @Size(min = 3, max = 64)
         String githubUsername

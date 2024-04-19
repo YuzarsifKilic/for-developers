@@ -7,18 +7,17 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "github")
+@ConfigurationProperties(prefix = "google")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class GithubProperties {
+public class GoogleProperties {
 
-    private String apiUrl;
-    private String token;
-    private String authorizeUrl;
-    private String accessTokenUrl;
     private String clientId;
     private String clientSecret;
-    private String htmlUrl;
+    private String apiUrl;
+    private String authorizeUrl;
+    private String accessTokenUrl;
     private String redirectUri;
+    private String tokenUrl;
 }

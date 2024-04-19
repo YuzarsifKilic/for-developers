@@ -1,24 +1,24 @@
-<div class="bg-gradient-to-r from-sky-400 to-sky-600 rounded-xl hover:shadow-2xl font-quicksand">
+<div class="bg-white rounded-xl hover:shadow-2xl font-quicksand">
   <div class="divide-y-2">
     <!-- Üst kısım -->
     <div class="flex justify-between items-center p-4">
       <!-- Sol kısım -->
-      <div class="text-white">
+      <div class="">
         <h2 class="text-3xl">{{advertisement.company.companyName}}</h2>
-        <p>{{advertisement.company.location.city.cityName}}/{{advertisement.company.location.districtName}}</p>
+        <p class="text-blue-400">{{advertisement.company.location.city.cityName}}/{{advertisement.company.location.districtName}}</p>
       </div>
       <!-- Sağ kısım -->
-      <div class="text-white">
+      <div class="">
         <h2>{{advertisement.jobTitle.replace("_", " ")}}</h2>
-        <p>{{advertisement.workType.replace("_", " ")}}</p>
+        <p>{{advertisement.workType.replace("_", " ").toLowerCase()}}</p>
       </div>
     </div>
     <!-- Alt kısım -->
-    <div class="p-4 text-white">
+    <div class="p-4 ">
       <h1 class="text-3xl">{{advertisement.advertisementTitle}}</h1>
       <p class="text-lg">{{advertisement.advertisementContent}}</p>
-      <div class="flex text-black justify-center">
-        <button (click)="saveApply()" class="p-2 bg-white rounded-md w-24 hover:shadow-2xl">
+      <div class="flex text-white justify-center">
+        <button (click)="saveApply()" class="p-2 bg-gradient-to-r from-sky-400 to-sky-500 rounded-md w-24 hover:shadow-2xl">
           Apply
         </button>
       </div>
